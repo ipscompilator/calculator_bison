@@ -113,6 +113,9 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(Filename).cpp;%(Filename).hpp</Outputs>
     </CustomBuild>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="parser.hpp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

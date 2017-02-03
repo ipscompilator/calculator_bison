@@ -36,4 +36,9 @@
       <Filter>Bison Flex Files</Filter>
     </CustomBuild>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="parser.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>
