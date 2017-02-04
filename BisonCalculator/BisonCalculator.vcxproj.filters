@@ -24,15 +24,12 @@
     <ClCompile Include="parser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="lexer.cpp">
+    <ClCompile Include="Scanner.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="parser.y">
-      <Filter>Bison Flex Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="lexer.l">
       <Filter>Bison Flex Files</Filter>
     </CustomBuild>
   </ItemGroup>
@@ -41,6 +38,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="stack.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Scanner.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

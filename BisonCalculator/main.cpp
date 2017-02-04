@@ -1,14 +1,13 @@
 #include "parser.hpp"
+#include "Scanner.h"
 #include <iostream>
 
-double calcResult = 0.0;
 
 int main()
 {
-    //yyparse();
-    yy::Parser parser;
+    yy::Scanner scanner;
+    yy::Parser parser(scanner);
     parser.parse();
 
-    std::cout << "Final result: " << calcResult << std::endl;
     return 0;
 }
