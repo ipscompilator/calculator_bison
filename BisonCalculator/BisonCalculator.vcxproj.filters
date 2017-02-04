@@ -29,15 +29,18 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="lexer.l">
+    <CustomBuild Include="parser.y">
       <Filter>Bison Flex Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="parser.y">
+    <CustomBuild Include="lexer.l">
       <Filter>Bison Flex Files</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="parser.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stack.hh">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -7,10 +7,13 @@
 %{
     #include <cstdlib>
     #include "parser.hpp"
-    
-    // this function will be generating by bison
-    extern int yyparse();
+
+	/* import the parser's token type into a local typedef */
+	typedef yy::Parser::token token;
+	//typedef yy::Parser::token_type token_type;
 %}
+
+%option c++
 
 digits		[0-9]+|[0-9]+\.[0-9]+
 binopr		[-+*/]
@@ -18,8 +21,8 @@ parenthesis	[()]
 
 %%
 {digits}    { 
-                yylval.dbl = atof(yytext); 
-                return LITERAL_DBL;
+                yylval->dbl = atof(yytext); 
+                return token::LITERAL_DBL;
             }
 
 {binopr}		{ return yytext[0]; }

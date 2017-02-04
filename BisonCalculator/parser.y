@@ -2,8 +2,14 @@
 
 %defines
 
+// Skeleton implementation for Bison LALR(1) parsers in C++
+%skeleton "lalr1.cc"
+%define parser_class_name {Parser}
+
+/* verbose error messages */
+%error-verbose
+
 %{
-    #pragma once
     #pragma warning(disable:4996)
     #include <iostream>
     #include <cmath>
@@ -16,6 +22,8 @@
     extern double calcResult;
 
 %}
+
+
 
 %union
 {
