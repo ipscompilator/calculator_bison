@@ -16,6 +16,7 @@
 %error-verbose
 
 %{
+    #include "stdafx.h"
     #include "Driver.h"
 
     #undef yylex

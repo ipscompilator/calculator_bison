@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "Driver.h"
 #include "Scanner.h"
 #include <sstream>

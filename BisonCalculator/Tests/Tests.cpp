@@ -10,5 +10,5 @@ BOOST_AUTO_TEST_CASE(CheckTrue)
     string expr = "5";
     bool result = driver.parseString(expr);
     BOOST_CHECK(result);
-    BOOST_CHECK_EQUAL(driver.resultValue, 5);
+    BOOST_CHECK_EQUAL(driver.resultValue, 4);
 }

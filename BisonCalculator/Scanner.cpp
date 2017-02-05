@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include <cctype>
 #include "Scanner.h"
 
