@@ -1,15 +1,20 @@
-#include "parser.hpp"
+#pragma once
+
+#include "Parser.hpp"
 
 namespace yy {
 
     class Scanner
     {
     public:
-        Scanner();
+        Scanner(std::istream &inStream);
         ~Scanner();
         yy::Parser::symbol_type lex();
     private:
-        int count;
+        void yy::Scanner::skipSpaces();
+
+        std::istream &m_inStream;
+        char currentChar;
     };
 
 }

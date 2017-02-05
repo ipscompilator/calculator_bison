@@ -16,9 +16,6 @@
 %error-verbose
 
 %{
-    #pragma warning(disable:4996)
-    #include <iostream>
-    #include <cmath>
     #include "Scanner.h"
 
     #undef yylex
@@ -48,6 +45,7 @@
 
 program: /* empty */
     | program sum_expr EOL      { std::cout << $2 << std::endl; }
+    | program sum_expr END      { std::cout << $2 << std::endl; }
     ;
 
 sum_expr: mul_expr              { $$ = $1; }

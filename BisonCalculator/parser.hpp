@@ -31,7 +31,7 @@
 // version 2.2 of Bison.
 
 /**
- ** \file parser.hpp
+ ** \file Parser.hpp
  ** Define the yy::parser class.
  */
 
@@ -115,7 +115,7 @@
 
 
 namespace yy {
-#line 119 "parser.hpp" // lalr1.cc:377
+#line 119 "Parser.hpp" // lalr1.cc:377
 
 
 
@@ -638,7 +638,7 @@ namespace yy {
     enum
     {
       yyeof_ = 0,
-      yylast_ = 26,     ///< Last index in yytable_.
+      yylast_ = 27,     ///< Last index in yytable_.
       yynnts_ = 6,  ///< Number of nonterminal symbols.
       yyfinal_ = 2, ///< Termination state number.
       yyterror_ = 1,
@@ -953,7 +953,7 @@ namespace yy {
 
 
 } // yy
-#line 957 "parser.hpp" // lalr1.cc:377
+#line 957 "Parser.hpp" // lalr1.cc:377
 
 
 

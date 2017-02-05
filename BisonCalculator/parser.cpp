@@ -32,18 +32,14 @@
 
 
 // First part of user declarations.
-#line 19 "parser.y" // lalr1.cc:404
+#line 18 "parser.y" // lalr1.cc:404
 
-    #pragma warning(disable:4996)
-    #include <iostream>
-    #include <cmath>
-	#include "Scanner.h"
+    #include "Scanner.h"
 
-	#undef yylex
-	#define yylex scanner.lex
+    #undef yylex
+    #define yylex scanner.lex
 
-
-#line 47 "parser.cpp" // lalr1.cc:404
+#line 43 "Parser.cpp" // lalr1.cc:404
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -53,11 +49,11 @@
 #  endif
 # endif
 
-#include "parser.hpp"
+#include "Parser.hpp"
 
 // User implementation prologue.
 
-#line 61 "parser.cpp" // lalr1.cc:412
+#line 57 "Parser.cpp" // lalr1.cc:412
 
 
 #ifndef YY_
@@ -124,7 +120,7 @@
 
 
 namespace yy {
-#line 128 "parser.cpp" // lalr1.cc:479
+#line 124 "Parser.cpp" // lalr1.cc:479
 
   /* Return YYSTR after stripping away unnecessary quotes and
      backslashes, so that it's suitable for yyerror.  The heuristic is
@@ -511,79 +507,85 @@ namespace yy {
           switch (yyn)
             {
   case 3:
-#line 53 "parser.y" // lalr1.cc:859
+#line 47 "parser.y" // lalr1.cc:859
     { std::cout << yystack_[1].value.as< double > () << std::endl; }
-#line 517 "parser.cpp" // lalr1.cc:859
+#line 513 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 4:
-#line 56 "parser.y" // lalr1.cc:859
-    { yylhs.value.as< double > () = yystack_[0].value.as< double > (); }
-#line 523 "parser.cpp" // lalr1.cc:859
+#line 48 "parser.y" // lalr1.cc:859
+    { std::cout << yystack_[1].value.as< double > () << std::endl; }
+#line 519 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 5:
-#line 57 "parser.y" // lalr1.cc:859
-    { yylhs.value.as< double > () = yystack_[2].value.as< double > () + yystack_[0].value.as< double > (); }
-#line 529 "parser.cpp" // lalr1.cc:859
+#line 51 "parser.y" // lalr1.cc:859
+    { yylhs.value.as< double > () = yystack_[0].value.as< double > (); }
+#line 525 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 6:
-#line 58 "parser.y" // lalr1.cc:859
-    { yylhs.value.as< double > () = yystack_[2].value.as< double > () - yystack_[0].value.as< double > (); }
-#line 535 "parser.cpp" // lalr1.cc:859
+#line 52 "parser.y" // lalr1.cc:859
+    { yylhs.value.as< double > () = yystack_[2].value.as< double > () + yystack_[0].value.as< double > (); }
+#line 531 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 7:
-#line 61 "parser.y" // lalr1.cc:859
-    { yylhs.value.as< double > () = yystack_[0].value.as< double > (); }
-#line 541 "parser.cpp" // lalr1.cc:859
+#line 53 "parser.y" // lalr1.cc:859
+    { yylhs.value.as< double > () = yystack_[2].value.as< double > () - yystack_[0].value.as< double > (); }
+#line 537 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 8:
-#line 62 "parser.y" // lalr1.cc:859
-    { yylhs.value.as< double > () = yystack_[2].value.as< double > () * yystack_[0].value.as< double > (); }
-#line 547 "parser.cpp" // lalr1.cc:859
+#line 56 "parser.y" // lalr1.cc:859
+    { yylhs.value.as< double > () = yystack_[0].value.as< double > (); }
+#line 543 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 9:
-#line 63 "parser.y" // lalr1.cc:859
-    { yylhs.value.as< double > () = yystack_[2].value.as< double > () / yystack_[0].value.as< double > (); }
-#line 553 "parser.cpp" // lalr1.cc:859
+#line 57 "parser.y" // lalr1.cc:859
+    { yylhs.value.as< double > () = yystack_[2].value.as< double > () * yystack_[0].value.as< double > (); }
+#line 549 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 10:
-#line 66 "parser.y" // lalr1.cc:859
-    { yylhs.value.as< double > () = yystack_[0].value.as< double > (); }
-#line 559 "parser.cpp" // lalr1.cc:859
+#line 58 "parser.y" // lalr1.cc:859
+    { yylhs.value.as< double > () = yystack_[2].value.as< double > () / yystack_[0].value.as< double > (); }
+#line 555 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 11:
-#line 67 "parser.y" // lalr1.cc:859
+#line 61 "parser.y" // lalr1.cc:859
     { yylhs.value.as< double > () = yystack_[0].value.as< double > (); }
-#line 565 "parser.cpp" // lalr1.cc:859
+#line 561 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 12:
-#line 68 "parser.y" // lalr1.cc:859
-    { yylhs.value.as< double > () = -yystack_[0].value.as< double > (); }
-#line 571 "parser.cpp" // lalr1.cc:859
+#line 62 "parser.y" // lalr1.cc:859
+    { yylhs.value.as< double > () = yystack_[0].value.as< double > (); }
+#line 567 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 13:
-#line 71 "parser.y" // lalr1.cc:859
-    { yylhs.value.as< double > () = yystack_[0].value.as< double > (); }
-#line 577 "parser.cpp" // lalr1.cc:859
+#line 63 "parser.y" // lalr1.cc:859
+    { yylhs.value.as< double > () = -yystack_[0].value.as< double > (); }
+#line 573 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 14:
-#line 72 "parser.y" // lalr1.cc:859
+#line 66 "parser.y" // lalr1.cc:859
+    { yylhs.value.as< double > () = yystack_[0].value.as< double > (); }
+#line 579 "Parser.cpp" // lalr1.cc:859
+    break;
+
+  case 15:
+#line 67 "parser.y" // lalr1.cc:859
     { yylhs.value.as< double > () = yystack_[1].value.as< double > (); }
-#line 583 "parser.cpp" // lalr1.cc:859
+#line 585 "Parser.cpp" // lalr1.cc:859
     break;
 
 
-#line 587 "parser.cpp" // lalr1.cc:859
+#line 589 "Parser.cpp" // lalr1.cc:859
             default:
               break;
             }
@@ -833,30 +835,30 @@ namespace yy {
   }
 
 
-  const signed char Parser::yypact_ninf_ = -6;
+  const signed char Parser::yypact_ninf_ = -5;
 
   const signed char Parser::yytable_ninf_ = -1;
 
   const signed char
   Parser::yypact_[] =
   {
-      -6,     0,    -6,    -6,     5,    13,    13,    -5,    10,    -6,
-      -6,     8,    -6,    -6,     5,     5,    -6,     5,     5,    -6,
-      10,    10,    -6,    -6
+      -5,     5,    -5,    -5,    10,    15,    15,     0,    12,    -5,
+      -5,    -4,    -5,    -5,    -5,    10,    10,    -5,    10,    10,
+      -5,    12,    12,    -5,    -5
   };
 
   const unsigned char
   Parser::yydefact_[] =
   {
-       2,     0,     1,    13,     0,     0,     0,     0,     4,     7,
-      10,     0,    11,    12,     0,     0,     3,     0,     0,    14,
-       5,     6,     8,     9
+       2,     0,     1,    14,     0,     0,     0,     0,     5,     8,
+      11,     0,    12,    13,     4,     0,     0,     3,     0,     0,
+      15,     6,     7,     9,    10
   };
 
   const signed char
   Parser::yypgoto_[] =
   {
-      -6,    -6,    22,     6,     7,    17
+      -5,    -5,    11,     7,     6,    21
   };
 
   const signed char
@@ -868,39 +870,39 @@ namespace yy {
   const unsigned char
   Parser::yytable_[] =
   {
-       2,    14,    15,     3,     4,    16,     5,     6,     3,     4,
-       0,     5,     6,    19,    14,    15,     3,     4,    17,    18,
-      20,    21,    12,    13,    22,    23,    11
+      14,    20,    15,    16,     0,     2,    15,    16,     3,     4,
+      17,     5,     6,     3,     4,    11,     5,     6,     3,     4,
+      18,    19,    21,    22,    23,    24,    12,    13
   };
 
   const signed char
   Parser::yycheck_[] =
   {
-       0,     6,     7,     3,     4,    10,     6,     7,     3,     4,
-      -1,     6,     7,     5,     6,     7,     3,     4,     8,     9,
-      14,    15,     5,     6,    17,    18,     4
+       0,     5,     6,     7,    -1,     0,     6,     7,     3,     4,
+      10,     6,     7,     3,     4,     4,     6,     7,     3,     4,
+       8,     9,    15,    16,    18,    19,     5,     6
   };
 
   const unsigned char
   Parser::yystos_[] =
   {
        0,    12,     0,     3,     4,     6,     7,    13,    14,    15,
-      16,    13,    16,    16,     6,     7,    10,     8,     9,     5,
-      14,    14,    15,    15
+      16,    13,    16,    16,     0,     6,     7,    10,     8,     9,
+       5,    14,    14,    15,    15
   };
 
   const unsigned char
   Parser::yyr1_[] =
   {
-       0,    11,    12,    12,    13,    13,    13,    14,    14,    14,
-      15,    15,    15,    16,    16
+       0,    11,    12,    12,    12,    13,    13,    13,    14,    14,
+      14,    15,    15,    15,    16,    16
   };
 
   const unsigned char
   Parser::yyr2_[] =
   {
-       0,     2,     0,     3,     1,     3,     3,     1,     3,     3,
-       1,     2,     2,     1,     3
+       0,     2,     0,     3,     3,     1,     3,     3,     1,     3,
+       3,     1,     2,     2,     1,     3
   };
 
 
@@ -919,8 +921,8 @@ namespace yy {
   const unsigned char
   Parser::yyrline_[] =
   {
-       0,    52,    52,    53,    56,    57,    58,    61,    62,    63,
-      66,    67,    68,    71,    72
+       0,    46,    46,    47,    48,    51,    52,    53,    56,    57,
+      58,    61,    62,    63,    66,    67
   };
 
   // Print the state stack on the debug stream.
@@ -955,11 +957,9 @@ namespace yy {
 
 
 } // yy
-#line 959 "parser.cpp" // lalr1.cc:1167
-#line 75 "parser.y" // lalr1.cc:1168
+#line 961 "Parser.cpp" // lalr1.cc:1167
+#line 70 "parser.y" // lalr1.cc:1168
 
-
-/* epilogue */
 
 void yy::Parser::error(const std::string& msg)
 {
