@@ -436,7 +436,7 @@ namespace yy {
 
 
     /// Build a parser object.
-    Parser (class Scanner& scanner_yyarg);
+    Parser (class Driver& driver_yyarg);
     virtual ~Parser ();
 
     /// Parse.
@@ -648,7 +648,7 @@ namespace yy {
 
 
     // User arguments.
-    class Scanner& scanner;
+    class Driver& driver;
   };
 
   // Symbol number corresponding to token number t.

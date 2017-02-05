@@ -34,10 +34,10 @@
 // First part of user declarations.
 #line 18 "parser.y" // lalr1.cc:404
 
-    #include "Scanner.h"
+    #include "Driver.h"
 
     #undef yylex
-    #define yylex scanner.lex
+    #define yylex driver.scanner->lex
 
 #line 43 "Parser.cpp" // lalr1.cc:404
 
@@ -161,13 +161,13 @@ namespace yy {
 
 
   /// Build a parser object.
-  Parser::Parser (class Scanner& scanner_yyarg)
+  Parser::Parser (class Driver& driver_yyarg)
     :
 #if YYDEBUG
       yydebug_ (false),
       yycdebug_ (&std::cerr),
 #endif
-      scanner (scanner_yyarg)
+      driver (driver_yyarg)
   {}
 
   Parser::~Parser ()
@@ -508,13 +508,13 @@ namespace yy {
             {
   case 3:
 #line 47 "parser.y" // lalr1.cc:859
-    { std::cout << yystack_[1].value.as< double > () << std::endl; }
+    { driver.resultValue = yystack_[1].value.as< double > (); }
 #line 513 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 4:
 #line 48 "parser.y" // lalr1.cc:859
-    { std::cout << yystack_[1].value.as< double > () << std::endl; }
+    { driver.resultValue = yystack_[1].value.as< double > (); }
 #line 519 "Parser.cpp" // lalr1.cc:859
     break;
 
@@ -963,5 +963,5 @@ namespace yy {
 
 void yy::Parser::error(const std::string& msg)
 {
-    std::cout << "Error: " << msg << std::endl;
+    driver.error(msg);
 }

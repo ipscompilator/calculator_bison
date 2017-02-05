@@ -2,14 +2,23 @@
 #include <iostream>
 #pragma warning(push)
 
+using namespace std;
+
 int main()
 {
     yy::Driver driver;
     
-    /*std::string expr = "(-5.5+6)*-1";
-    std::cout << expr << std::endl;
-    driver.parseString(expr);
-    */
-    driver.parseStream(std::cin);
+    string expr = "(-5.5+6)*-1";
+    cout << expr <<endl;
+    if (driver.parseString(expr))
+    {
+        cout << "Result: " << driver.resultValue << endl;
+    }
+    
+    cout << endl << "Enter expression: ";
+    if (driver.parseStream(std::cin))
+    {
+        cout << "Result: " << driver.resultValue << endl;
+    }
     return 0;
 }

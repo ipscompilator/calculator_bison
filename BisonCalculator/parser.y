@@ -10,16 +10,16 @@
 %define api.token.constructor
 %define api.token.prefix {TOK_}
 
-%parse-param { class Scanner& scanner }
+%parse-param { class Driver& driver }
 
 /* verbose error messages */
 %error-verbose
 
 %{
-    #include "Scanner.h"
+    #include "Driver.h"
 
     #undef yylex
-    #define yylex scanner.lex
+    #define yylex driver.scanner->lex
 %}
 
 %token<double>  DOUBLE
@@ -44,8 +44,8 @@
 /* rules section */
 
 program: /* empty */
-    | program sum_expr EOL      { std::cout << $2 << std::endl; }
-    | program sum_expr END      { std::cout << $2 << std::endl; }
+    | program sum_expr EOL      { driver.resultValue = $2; }
+    | program sum_expr END      { driver.resultValue = $2; }
     ;
 
 sum_expr: mul_expr              { $$ = $1; }
@@ -71,5 +71,5 @@ symbol: DOUBLE                  { $$ = $1; }
 
 void yy::Parser::error(const std::string& msg)
 {
-    std::cout << "Error: " << msg << std::endl;
+    driver.error(msg);
 }

@@ -14,7 +14,6 @@ namespace yy {
         void yy::Scanner::skipSpaces();
 
         std::istream &m_inStream;
-        char currentChar;
     };
 
 }
