@@ -67,7 +67,8 @@ namespace yy {
                 std::cout << "  Return )" << std::endl;
                 return yy::Parser::make_RIGHT_P();
             }
-            // error?
+            
+            throw yy::Parser::syntax_error("Unexpected symbol.");
         } 
         else 
         {
