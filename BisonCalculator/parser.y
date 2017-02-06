@@ -45,8 +45,8 @@
 /* rules section */
 
 program: /* empty */
-    | program sum_expr EOL      { driver.resultValue = $2; }
-    | program sum_expr END      { driver.resultValue = $2; }
+    | program sum_expr EOL      { driver.setResultValue($2); }
+    | program sum_expr END      { driver.setResultValue($2); }
     ;
 
 sum_expr: mul_expr              { $$ = $1; }

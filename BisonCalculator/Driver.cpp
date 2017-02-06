@@ -4,12 +4,23 @@
 #include <sstream>
 
 yy::Driver::Driver()
-    :resultValue(0)
+    :m_resultValue(0)
 {
 }
 
 yy::Driver::~Driver()
 {
+}
+
+double yy::Driver::getResultValue()
+{
+    return m_resultValue;
+}
+
+void yy::Driver::setResultValue(double resultValue)
+{
+    m_resultValue = resultValue;
+    std::cout << "Result: " << resultValue << std::endl;
 }
 
 bool yy::Driver::parseStream(std::istream &inStream)

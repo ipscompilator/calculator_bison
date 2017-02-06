@@ -13,13 +13,13 @@ int main()
     cout << expr <<endl;
     if (driver.parseString(expr))
     {
-        cout << "Result: " << driver.resultValue << endl;
+        cout << "Result: " << driver.getResultValue() << endl;
     }
     
     cout << endl << "Enter expression: ";
     if (driver.parseStream(std::cin))
     {
-        cout << "Result: " << driver.resultValue << endl;
+        cout << "Result: " << driver.getResultValue() << endl;
     }
     return 0;
 }

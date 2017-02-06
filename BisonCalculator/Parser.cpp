@@ -509,13 +509,13 @@ namespace yy {
             {
   case 3:
 #line 48 "parser.y" // lalr1.cc:859
-    { driver.resultValue = yystack_[1].value.as< double > (); }
+    { driver.setResultValue(yystack_[1].value.as< double > ()); }
 #line 514 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 4:
 #line 49 "parser.y" // lalr1.cc:859
-    { driver.resultValue = yystack_[1].value.as< double > (); }
+    { driver.setResultValue(yystack_[1].value.as< double > ()); }
 #line 520 "Parser.cpp" // lalr1.cc:859
     break;
 

@@ -12,12 +12,17 @@ namespace yy {
         ~Driver();
 
         Scanner *scanner;
-        double resultValue;
+
+        double getResultValue();
+        void setResultValue(double resultValue);
 
         bool parseStream(std::istream &inStream);
         bool parseString(const std::string &inString);
 
         void error(const std::string &msg);
+
+    private:
+        double m_resultValue;
     };
 
 }
