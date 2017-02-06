@@ -263,10 +263,7 @@ namespace yy {
     union union_type
     {
       // DOUBLE
-      // sum_expr
-      // mul_expr
-      // unary_expr
-      // symbol
+      // expr
       char dummy1[sizeof(double)];
 };
 
@@ -289,12 +286,12 @@ namespace yy {
       {
         TOK_END = 0,
         TOK_DOUBLE = 258,
-        TOK_LEFT_P = 259,
-        TOK_RIGHT_P = 260,
-        TOK_PLUS = 261,
-        TOK_MINUS = 262,
-        TOK_MULTIPLY = 263,
-        TOK_DIVIDE = 264,
+        TOK_PLUS = 259,
+        TOK_MINUS = 260,
+        TOK_MULTIPLY = 261,
+        TOK_DIVIDE = 262,
+        TOK_LEFT_P = 263,
+        TOK_RIGHT_P = 264,
         TOK_EOL = 265
       };
     };
@@ -408,14 +405,6 @@ namespace yy {
 
     static inline
     symbol_type
-    make_LEFT_P ();
-
-    static inline
-    symbol_type
-    make_RIGHT_P ();
-
-    static inline
-    symbol_type
     make_PLUS ();
 
     static inline
@@ -429,6 +418,14 @@ namespace yy {
     static inline
     symbol_type
     make_DIVIDE ();
+
+    static inline
+    symbol_type
+    make_LEFT_P ();
+
+    static inline
+    symbol_type
+    make_RIGHT_P ();
 
     static inline
     symbol_type
@@ -638,8 +635,8 @@ namespace yy {
     enum
     {
       yyeof_ = 0,
-      yylast_ = 27,     ///< Last index in yytable_.
-      yynnts_ = 6,  ///< Number of nonterminal symbols.
+      yylast_ = 40,     ///< Last index in yytable_.
+      yynnts_ = 3,  ///< Number of nonterminal symbols.
       yyfinal_ = 2, ///< Termination state number.
       yyterror_ = 1,
       yyerrcode_ = 256,
@@ -720,10 +717,7 @@ namespace yy {
       switch (other.type_get ())
     {
       case 3: // DOUBLE
-      case 13: // sum_expr
-      case 14: // mul_expr
-      case 15: // unary_expr
-      case 16: // symbol
+      case 13: // expr
         value.copy< double > (other.value);
         break;
 
@@ -744,10 +738,7 @@ namespace yy {
       switch (this->type_get ())
     {
       case 3: // DOUBLE
-      case 13: // sum_expr
-      case 14: // mul_expr
-      case 15: // unary_expr
-      case 16: // symbol
+      case 13: // expr
         value.copy< double > (v);
         break;
 
@@ -798,10 +789,7 @@ namespace yy {
     switch (yytype)
     {
       case 3: // DOUBLE
-      case 13: // sum_expr
-      case 14: // mul_expr
-      case 15: // unary_expr
-      case 16: // symbol
+      case 13: // expr
         value.template destroy< double > ();
         break;
 
@@ -829,10 +817,7 @@ namespace yy {
       switch (this->type_get ())
     {
       case 3: // DOUBLE
-      case 13: // sum_expr
-      case 14: // mul_expr
-      case 15: // unary_expr
-      case 16: // symbol
+      case 13: // expr
         value.move< double > (s.value);
         break;
 
@@ -909,18 +894,6 @@ namespace yy {
   }
 
   Parser::symbol_type
-  Parser::make_LEFT_P ()
-  {
-    return symbol_type (token::TOK_LEFT_P);
-  }
-
-  Parser::symbol_type
-  Parser::make_RIGHT_P ()
-  {
-    return symbol_type (token::TOK_RIGHT_P);
-  }
-
-  Parser::symbol_type
   Parser::make_PLUS ()
   {
     return symbol_type (token::TOK_PLUS);
@@ -945,6 +918,18 @@ namespace yy {
   }
 
   Parser::symbol_type
+  Parser::make_LEFT_P ()
+  {
+    return symbol_type (token::TOK_LEFT_P);
+  }
+
+  Parser::symbol_type
+  Parser::make_RIGHT_P ()
+  {
+    return symbol_type (token::TOK_RIGHT_P);
+  }
+
+  Parser::symbol_type
   Parser::make_EOL ()
   {
     return symbol_type (token::TOK_EOL);
@@ -953,7 +938,7 @@ namespace yy {
 
 
 } // yy
-#line 957 "Parser.hpp" // lalr1.cc:377
+#line 942 "Parser.hpp" // lalr1.cc:377
 
 
 

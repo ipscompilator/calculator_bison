@@ -35,7 +35,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="parser.y">
+    <CustomBuild Include="parser2.y">
       <Filter>Bison Flex Files</Filter>
     </CustomBuild>
   </ItemGroup>
