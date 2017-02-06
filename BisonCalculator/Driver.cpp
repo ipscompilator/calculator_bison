@@ -12,7 +12,7 @@ yy::Driver::~Driver()
 {
 }
 
-double yy::Driver::getResultValue()
+double yy::Driver::getResultValue() const
 {
     return m_resultValue;
 }
@@ -23,9 +23,14 @@ void yy::Driver::setResultValue(double resultValue)
     std::cout << "Result: " << resultValue << std::endl;
 }
 
+yy::Scanner &yy::Driver::getScanner() const
+{
+    return *m_scanner;
+}
+
 bool yy::Driver::parseStream(std::istream &inStream)
 {
-    scanner = &Scanner(inStream);
+    m_scanner = std::make_unique<Scanner>(inStream);
     yy::Parser parser(*this);
     return (parser.parse() == 0);
 }
@@ -38,5 +43,5 @@ bool yy::Driver::parseString(const std::string &inString)
 
 void yy::Driver::error(const std::string &msg)
 {
-    std::cout << "Error: " << msg << std::endl;
+    std::cerr << "Error: " << msg << std::endl;
 }

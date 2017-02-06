@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <iostream>
+#include <memory>
 #include "Scanner.h"
 
 namespace yy {
@@ -11,10 +12,10 @@ namespace yy {
         Driver();
         ~Driver();
 
-        Scanner *scanner;
-
-        double getResultValue();
+        double getResultValue() const;
         void setResultValue(double resultValue);
+
+        Scanner &getScanner() const;
 
         bool parseStream(std::istream &inStream);
         bool parseString(const std::string &inString);
@@ -23,6 +24,7 @@ namespace yy {
 
     private:
         double m_resultValue;
+        std::unique_ptr<Scanner> m_scanner;
     };
 
 }

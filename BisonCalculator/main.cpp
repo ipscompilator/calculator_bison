@@ -10,16 +10,11 @@ int main()
     yy::Driver driver;
     
     string expr = "(-5.5+6)*-1";
-    cout << expr <<endl;
-    if (driver.parseString(expr))
-    {
-        cout << "Result: " << driver.getResultValue() << endl;
-    }
+    cout << expr << endl;
+    driver.parseString(expr);
     
     cout << endl << "Enter expression: ";
-    if (driver.parseStream(std::cin))
-    {
-        cout << "Result: " << driver.getResultValue() << endl;
-    }
+    driver.parseStream(std::cin);
+
     return 0;
 }

@@ -20,7 +20,7 @@
     #include "Driver.h"
 
     #undef yylex
-    #define yylex driver.scanner->lex
+    #define yylex driver.getScanner().lex
 %}
 
 %token<double>  DOUBLE
@@ -39,6 +39,7 @@
 /* rules section */
 
 program: /* empty */
+    | program EOL
     | program expr EOL      { driver.setResultValue($2); }
     | program expr END      { driver.setResultValue($2); }
     ;
