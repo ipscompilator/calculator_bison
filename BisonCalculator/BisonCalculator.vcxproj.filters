@@ -35,11 +35,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="parser2.y">
-      <Filter>Bison Flex Files</Filter>
-    </CustomBuild>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="stack.hh">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -55,5 +50,10 @@
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="Parser.y">
+      <Filter>Bison Flex Files</Filter>
+    </CustomBuild>
   </ItemGroup>
 </Project>

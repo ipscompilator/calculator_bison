@@ -20,23 +20,17 @@
     #include "Driver.h"
 
     #undef yylex
-    #define yylex driver.scanner->lex
+    #define yylex driver.getScanner().lex
 %}
 
 %token<double>  DOUBLE
-%token          LEFT_P
-%token          RIGHT_P
-%token          PLUS
-%token          MINUS
-%token          MULTIPLY
-%token          DIVIDE
-%token          END     0   "end of file"
-%token          EOL     "end of line"
+%left PLUS MINUS
+%left MULTIPLY DIVIDE
+%left LEFT_P RIGHT_P
+%token END     0   "end of file"
+%token EOL     "end of line"
 
-%type<double>   sum_expr
-%type<double>   mul_expr
-%type<double>   unary_expr
-%type<double>   symbol
+%type<double>   expr
 
 %start program
 
@@ -45,27 +39,19 @@
 /* rules section */
 
 program: /* empty */
-    | program sum_expr EOL      { driver.setResultValue($2); }
-    | program sum_expr END      { driver.setResultValue($2); }
+    | program EOL
+    | program expr EOL      { driver.setResultValue($2); }
+    | program expr END      { driver.setResultValue($2); }
     ;
 
-sum_expr: mul_expr              { $$ = $1; }
-    | sum_expr PLUS mul_expr    { $$ = $1 + $3; }
-    | sum_expr MINUS mul_expr   { $$ = $1 - $3; }
-    ;
-
-mul_expr: unary_expr                { $$ = $1; }
-    | mul_expr MULTIPLY unary_expr  { $$ = $1 * $3; }
-    | mul_expr DIVIDE unary_expr    { $$ = $1 / $3; }
-    ;
-
-unary_expr: symbol  { $$ = $1; }
-    | PLUS symbol   { $$ = $2; }
-    | MINUS symbol  { $$ = -$2; }
-    ;
-
-symbol: DOUBLE                  { $$ = $1; }
-    | LEFT_P sum_expr RIGHT_P   { $$ = $2; }
+expr: DOUBLE              { $$ = $1; }
+    | expr PLUS expr      { $$ = $1 + $3; }
+    | expr MINUS expr     { $$ = $1 - $3; }
+    | expr MULTIPLY expr  { $$ = $1 * $3; }
+    | expr DIVIDE expr    { $$ = $1 / $3; }
+    | PLUS expr           { $$ = $2; }
+    | MINUS expr          { $$ = -$2; }
+    | LEFT_P expr RIGHT_P { $$ = $2; }
     ;
 
 %%

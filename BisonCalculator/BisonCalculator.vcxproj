@@ -111,14 +111,14 @@
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="parser2.y">
+    <CustomBuild Include="Parser.y">
       <FileType>Document</FileType>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">bison -o%Parser.cpp parser2.y</Command>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Generating %Parser.cpp</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%Parser.cpp;%Parser.hpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">bison -o%Parser.cpp parser.y</Command>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Generating %Parser.cpp</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%Parser.cpp;%Parser.hpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">bison -oParser.cpp Parser.y</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Generating Parser.cpp</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Parser.cpp;Parser.hpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">bison -oParser.cpp Parser.y</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Generating Parser.cpp</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Parser.cpp;Parser.hpp</Outputs>
     </CustomBuild>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
