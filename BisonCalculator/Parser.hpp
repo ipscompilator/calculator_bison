@@ -56,7 +56,7 @@ union YYSTYPE
 {
 #line 21 "parser.y" /* yacc.c:1909  */
 
-	double dbl;
+    double dbl;
 
 #line 62 "parser.hpp" /* yacc.c:1909  */
 };

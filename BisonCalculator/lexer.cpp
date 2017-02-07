@@ -1,5 +1,5 @@
 #line 1 "lexer.cpp"
-	#pragma warning(disable:4996)
+    #pragma warning(disable:4996)
 
 #line 4 "lexer.cpp"
 
@@ -521,11 +521,11 @@ char *yytext;
 #line 1 "lexer.l"
 
 #line 8 "lexer.l"
-	#include <cstdlib>
-	#include "parser.hpp"
-	
-	// this function will be generating by bison
-	extern int yyparse();
+    #include <cstdlib>
+    #include "parser.hpp"
+    
+    // this function will be generating by bison
+    extern int yyparse();
 #line 529 "lexer.cpp"
 #line 530 "lexer.cpp"
 
@@ -812,9 +812,9 @@ case 1:
 YY_RULE_SETUP
 #line 20 "lexer.l"
 { 
-				yylval.dbl = atof(yytext); 
-				return LITERAL_DBL;
-			}
+                yylval.dbl = atof(yytext); 
+                return LITERAL_DBL;
+            }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
