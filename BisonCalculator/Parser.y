@@ -6,6 +6,7 @@
 %skeleton "lalr1.cc"
 %define parser_class_name {Parser}
 
+%define api.namespace {calc}
 %define api.value.type variant
 %define api.token.constructor
 %define api.token.prefix {TOK_}
@@ -56,7 +57,7 @@ expr: DOUBLE              { $$ = $1; }
 
 %%
 
-void yy::Parser::error(const std::string& msg)
+void calc::Parser::error(const std::string& msg)
 {
     driver.error(msg);
 }

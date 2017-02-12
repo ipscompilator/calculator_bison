@@ -3,7 +3,7 @@
 #include "Scanner.h"
 
 
-namespace yy {
+namespace calc {
 
     Scanner::Scanner(std::istream &inStream)
         : m_inStream(inStream)

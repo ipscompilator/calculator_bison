@@ -4,7 +4,7 @@
 #include <memory>
 #include "Scanner.h"
 
-namespace yy {
+namespace calc {
 
     class Driver
     {

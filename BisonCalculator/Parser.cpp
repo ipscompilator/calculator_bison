@@ -32,7 +32,7 @@
 
 
 // First part of user declarations.
-#line 18 "Parser.y" // lalr1.cc:404
+#line 19 "Parser.y" // lalr1.cc:404
 
     #include "stdafx.h"
     #include "Driver.h"
@@ -119,8 +119,8 @@
 #define YYERROR         goto yyerrorlab
 #define YYRECOVERING()  (!!yyerrstatus_)
 
-
-namespace yy {
+#line 9 "Parser.y" // lalr1.cc:479
+namespace calc {
 #line 125 "Parser.cpp" // lalr1.cc:479
 
   /* Return YYSTR after stripping away unnecessary quotes and
@@ -499,61 +499,61 @@ namespace yy {
           switch (yyn)
             {
   case 4:
-#line 43 "Parser.y" // lalr1.cc:859
+#line 44 "Parser.y" // lalr1.cc:859
     { driver.setResultValue(yystack_[1].value.as< double > ()); }
 #line 505 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 5:
-#line 44 "Parser.y" // lalr1.cc:859
+#line 45 "Parser.y" // lalr1.cc:859
     { driver.setResultValue(yystack_[1].value.as< double > ()); }
 #line 511 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 6:
-#line 47 "Parser.y" // lalr1.cc:859
+#line 48 "Parser.y" // lalr1.cc:859
     { yylhs.value.as< double > () = yystack_[0].value.as< double > (); }
 #line 517 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 7:
-#line 48 "Parser.y" // lalr1.cc:859
+#line 49 "Parser.y" // lalr1.cc:859
     { yylhs.value.as< double > () = yystack_[2].value.as< double > () + yystack_[0].value.as< double > (); }
 #line 523 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 8:
-#line 49 "Parser.y" // lalr1.cc:859
+#line 50 "Parser.y" // lalr1.cc:859
     { yylhs.value.as< double > () = yystack_[2].value.as< double > () - yystack_[0].value.as< double > (); }
 #line 529 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 9:
-#line 50 "Parser.y" // lalr1.cc:859
+#line 51 "Parser.y" // lalr1.cc:859
     { yylhs.value.as< double > () = yystack_[2].value.as< double > () * yystack_[0].value.as< double > (); }
 #line 535 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 10:
-#line 51 "Parser.y" // lalr1.cc:859
+#line 52 "Parser.y" // lalr1.cc:859
     { yylhs.value.as< double > () = yystack_[2].value.as< double > () / yystack_[0].value.as< double > (); }
 #line 541 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 11:
-#line 52 "Parser.y" // lalr1.cc:859
+#line 53 "Parser.y" // lalr1.cc:859
     { yylhs.value.as< double > () = yystack_[0].value.as< double > (); }
 #line 547 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 12:
-#line 53 "Parser.y" // lalr1.cc:859
+#line 54 "Parser.y" // lalr1.cc:859
     { yylhs.value.as< double > () = -yystack_[0].value.as< double > (); }
 #line 553 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 13:
-#line 54 "Parser.y" // lalr1.cc:859
+#line 55 "Parser.y" // lalr1.cc:859
     { yylhs.value.as< double > () = yystack_[1].value.as< double > (); }
 #line 559 "Parser.cpp" // lalr1.cc:859
     break;
@@ -897,8 +897,8 @@ namespace yy {
   const unsigned char
   Parser::yyrline_[] =
   {
-       0,    41,    41,    42,    43,    44,    47,    48,    49,    50,
-      51,    52,    53,    54
+       0,    42,    42,    43,    44,    45,    48,    49,    50,    51,
+      52,    53,    54,    55
   };
 
   // Print the state stack on the debug stream.
@@ -931,13 +931,13 @@ namespace yy {
 #endif // YYDEBUG
 
 
-
-} // yy
+#line 9 "Parser.y" // lalr1.cc:1167
+} // calc
 #line 937 "Parser.cpp" // lalr1.cc:1167
-#line 57 "Parser.y" // lalr1.cc:1168
+#line 58 "Parser.y" // lalr1.cc:1168
 
 
-void yy::Parser::error(const std::string& msg)
+void calc::Parser::error(const std::string& msg)
 {
     driver.error(msg);
 }

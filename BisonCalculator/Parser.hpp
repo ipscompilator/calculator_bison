@@ -32,7 +32,7 @@
 
 /**
  ** \file Parser.hpp
- ** Define the yy::parser class.
+ ** Define the calc::parser class.
  */
 
 // C++ LALR(1) parser skeleton written by Akim Demaille.
@@ -113,8 +113,8 @@
 # define YYDEBUG 0
 #endif
 
-
-namespace yy {
+#line 9 "Parser.y" // lalr1.cc:377
+namespace calc {
 #line 119 "Parser.hpp" // lalr1.cc:377
 
 
@@ -936,8 +936,8 @@ namespace yy {
   }
 
 
-
-} // yy
+#line 9 "Parser.y" // lalr1.cc:377
+} // calc
 #line 942 "Parser.hpp" // lalr1.cc:377
 
 

@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Driver.h"
 
-using namespace yy;
+using namespace calc;
 using namespace std;
 
 double maxDiff = 0.0001;

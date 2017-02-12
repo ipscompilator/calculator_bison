@@ -1,7 +1,7 @@
 #pragma once
 #include "Parser.hpp"
 
-namespace yy {
+namespace calc {
 
     class Scanner
     {
