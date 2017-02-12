@@ -52,6 +52,7 @@ calc::CalcNode* calc::Driver::getCalcNode() const
 
 void calc::Driver::setCalcNode(CalcNode* calcNode)
 {
+    delete m_calcNode;
     m_calcNode = calcNode;
     printResult();
 }

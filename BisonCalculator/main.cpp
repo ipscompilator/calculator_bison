@@ -13,14 +13,12 @@ int main()
 {
     Driver driver;
     
-    /*string expr = "(-5.5+6)*-1";
+    string expr = "(-5.5+6)*-1";
     cout << expr << endl;
-    driver.parseString(expr);*/
-    
+    driver.parseString(expr);
     
     cout << endl << "Enter expression: ";
     driver.parseStream(std::cin);
     
-
     return 0;
 }

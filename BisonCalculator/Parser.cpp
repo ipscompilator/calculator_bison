@@ -513,25 +513,25 @@ namespace calc {
             {
   case 4:
 #line 48 "Parser.y" // lalr1.cc:859
-    { driver.setCalcNode(yystack_[1].value.as< class CalcNode * > ()); driver.printResult(); }
+    { driver.setCalcNode(yystack_[1].value.as< class CalcNode * > ()); }
 #line 518 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 5:
 #line 49 "Parser.y" // lalr1.cc:859
-    { driver.setCalcNode(yystack_[1].value.as< class CalcNode * > ()); driver.printResult(); }
+    { driver.setCalcNode(yystack_[1].value.as< class CalcNode * > ()); }
 #line 524 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 6:
 #line 52 "Parser.y" // lalr1.cc:859
-    { yylhs.value.as< class CalcNode * > () = new TermCalcNode(yystack_[0].value.as< double > ()); std::cout << "double "; }
+    { yylhs.value.as< class CalcNode * > () = new TermCalcNode(yystack_[0].value.as< double > ()); }
 #line 530 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 7:
 #line 53 "Parser.y" // lalr1.cc:859
-    { yylhs.value.as< class CalcNode * > () = new BinaryCalcNode(yystack_[2].value.as< class CalcNode * > (), yystack_[0].value.as< class CalcNode * > (), Operation::ADD); std::cout << "plus "; }
+    { yylhs.value.as< class CalcNode * > () = new BinaryCalcNode(yystack_[2].value.as< class CalcNode * > (), yystack_[0].value.as< class CalcNode * > (), Operation::ADD); }
 #line 536 "Parser.cpp" // lalr1.cc:859
     break;
 
@@ -543,7 +543,7 @@ namespace calc {
 
   case 9:
 #line 55 "Parser.y" // lalr1.cc:859
-    { yylhs.value.as< class CalcNode * > () = new BinaryCalcNode(yystack_[2].value.as< class CalcNode * > (), yystack_[0].value.as< class CalcNode * > (), Operation::MUL); std::cout << "mult "; }
+    { yylhs.value.as< class CalcNode * > () = new BinaryCalcNode(yystack_[2].value.as< class CalcNode * > (), yystack_[0].value.as< class CalcNode * > (), Operation::MUL); }
 #line 548 "Parser.cpp" // lalr1.cc:859
     break;
 
@@ -561,7 +561,7 @@ namespace calc {
 
   case 12:
 #line 58 "Parser.y" // lalr1.cc:859
-    { yylhs.value.as< class CalcNode * > () = new UnaryCalcNode(yystack_[0].value.as< class CalcNode * > (), Operation::SUB); std::cout << "unary ";}
+    { yylhs.value.as< class CalcNode * > () = new UnaryCalcNode(yystack_[0].value.as< class CalcNode * > (), Operation::SUB); }
 #line 566 "Parser.cpp" // lalr1.cc:859
     break;
 
