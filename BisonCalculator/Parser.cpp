@@ -36,11 +36,15 @@
 
     #include "stdafx.h"
     #include "Driver.h"
+    #include "CalcNode.h"
+    #include "UnaryCalcNode.h"
+    #include "BinaryCalcNode.h"
+    #include "TermCalcNode.h"
 
     #undef yylex
     #define yylex driver.getScanner().lex
 
-#line 44 "Parser.cpp" // lalr1.cc:404
+#line 48 "Parser.cpp" // lalr1.cc:404
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -54,7 +58,7 @@
 
 // User implementation prologue.
 
-#line 58 "Parser.cpp" // lalr1.cc:412
+#line 62 "Parser.cpp" // lalr1.cc:412
 
 
 #ifndef YY_
@@ -121,7 +125,7 @@
 
 #line 9 "Parser.y" // lalr1.cc:479
 namespace calc {
-#line 125 "Parser.cpp" // lalr1.cc:479
+#line 129 "Parser.cpp" // lalr1.cc:479
 
   /* Return YYSTR after stripping away unnecessary quotes and
      backslashes, so that it's suitable for yyerror.  The heuristic is
@@ -233,8 +237,11 @@ namespace calc {
   {
       switch (that.type_get ())
     {
-      case 3: // DOUBLE
       case 13: // expr
+        value.move< class CalcNode * > (that.value);
+        break;
+
+      case 3: // DOUBLE
         value.move< double > (that.value);
         break;
 
@@ -253,8 +260,11 @@ namespace calc {
     state = that.state;
       switch (that.type_get ())
     {
-      case 3: // DOUBLE
       case 13: // expr
+        value.copy< class CalcNode * > (that.value);
+        break;
+
+      case 3: // DOUBLE
         value.copy< double > (that.value);
         break;
 
@@ -481,8 +491,11 @@ namespace calc {
          when using variants.  */
         switch (yyr1_[yyn])
     {
-      case 3: // DOUBLE
       case 13: // expr
+        yylhs.value.build< class CalcNode * > ();
+        break;
+
+      case 3: // DOUBLE
         yylhs.value.build< double > ();
         break;
 
@@ -499,67 +512,67 @@ namespace calc {
           switch (yyn)
             {
   case 4:
-#line 44 "Parser.y" // lalr1.cc:859
-    { driver.setResultValue(yystack_[1].value.as< double > ()); }
-#line 505 "Parser.cpp" // lalr1.cc:859
+#line 48 "Parser.y" // lalr1.cc:859
+    { driver.setCalcNode(yystack_[1].value.as< class CalcNode * > ()); driver.printResult(); }
+#line 518 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 5:
-#line 45 "Parser.y" // lalr1.cc:859
-    { driver.setResultValue(yystack_[1].value.as< double > ()); }
-#line 511 "Parser.cpp" // lalr1.cc:859
+#line 49 "Parser.y" // lalr1.cc:859
+    { driver.setCalcNode(yystack_[1].value.as< class CalcNode * > ()); driver.printResult(); }
+#line 524 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 6:
-#line 48 "Parser.y" // lalr1.cc:859
-    { yylhs.value.as< double > () = yystack_[0].value.as< double > (); }
-#line 517 "Parser.cpp" // lalr1.cc:859
+#line 52 "Parser.y" // lalr1.cc:859
+    { yylhs.value.as< class CalcNode * > () = new TermCalcNode(yystack_[0].value.as< double > ()); std::cout << "double "; }
+#line 530 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 7:
-#line 49 "Parser.y" // lalr1.cc:859
-    { yylhs.value.as< double > () = yystack_[2].value.as< double > () + yystack_[0].value.as< double > (); }
-#line 523 "Parser.cpp" // lalr1.cc:859
+#line 53 "Parser.y" // lalr1.cc:859
+    { yylhs.value.as< class CalcNode * > () = new BinaryCalcNode(yystack_[2].value.as< class CalcNode * > (), yystack_[0].value.as< class CalcNode * > (), Operation::ADD); std::cout << "plus "; }
+#line 536 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 8:
-#line 50 "Parser.y" // lalr1.cc:859
-    { yylhs.value.as< double > () = yystack_[2].value.as< double > () - yystack_[0].value.as< double > (); }
-#line 529 "Parser.cpp" // lalr1.cc:859
+#line 54 "Parser.y" // lalr1.cc:859
+    { yylhs.value.as< class CalcNode * > () = new BinaryCalcNode(yystack_[2].value.as< class CalcNode * > (), yystack_[0].value.as< class CalcNode * > (), Operation::SUB); }
+#line 542 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 9:
-#line 51 "Parser.y" // lalr1.cc:859
-    { yylhs.value.as< double > () = yystack_[2].value.as< double > () * yystack_[0].value.as< double > (); }
-#line 535 "Parser.cpp" // lalr1.cc:859
+#line 55 "Parser.y" // lalr1.cc:859
+    { yylhs.value.as< class CalcNode * > () = new BinaryCalcNode(yystack_[2].value.as< class CalcNode * > (), yystack_[0].value.as< class CalcNode * > (), Operation::MUL); std::cout << "mult "; }
+#line 548 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 10:
-#line 52 "Parser.y" // lalr1.cc:859
-    { yylhs.value.as< double > () = yystack_[2].value.as< double > () / yystack_[0].value.as< double > (); }
-#line 541 "Parser.cpp" // lalr1.cc:859
+#line 56 "Parser.y" // lalr1.cc:859
+    { yylhs.value.as< class CalcNode * > () = new BinaryCalcNode(yystack_[2].value.as< class CalcNode * > (), yystack_[0].value.as< class CalcNode * > (), Operation::DIV); }
+#line 554 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 11:
-#line 53 "Parser.y" // lalr1.cc:859
-    { yylhs.value.as< double > () = yystack_[0].value.as< double > (); }
-#line 547 "Parser.cpp" // lalr1.cc:859
+#line 57 "Parser.y" // lalr1.cc:859
+    { yylhs.value.as< class CalcNode * > () = new UnaryCalcNode(yystack_[0].value.as< class CalcNode * > (), Operation::ADD); }
+#line 560 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 12:
-#line 54 "Parser.y" // lalr1.cc:859
-    { yylhs.value.as< double > () = -yystack_[0].value.as< double > (); }
-#line 553 "Parser.cpp" // lalr1.cc:859
+#line 58 "Parser.y" // lalr1.cc:859
+    { yylhs.value.as< class CalcNode * > () = new UnaryCalcNode(yystack_[0].value.as< class CalcNode * > (), Operation::SUB); std::cout << "unary ";}
+#line 566 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 13:
-#line 55 "Parser.y" // lalr1.cc:859
-    { yylhs.value.as< double > () = yystack_[1].value.as< double > (); }
-#line 559 "Parser.cpp" // lalr1.cc:859
+#line 59 "Parser.y" // lalr1.cc:859
+    { yylhs.value.as< class CalcNode * > () = yystack_[1].value.as< class CalcNode * > (); }
+#line 572 "Parser.cpp" // lalr1.cc:859
     break;
 
 
-#line 563 "Parser.cpp" // lalr1.cc:859
+#line 576 "Parser.cpp" // lalr1.cc:859
             default:
               break;
             }
@@ -897,8 +910,8 @@ namespace calc {
   const unsigned char
   Parser::yyrline_[] =
   {
-       0,    42,    42,    43,    44,    45,    48,    49,    50,    51,
-      52,    53,    54,    55
+       0,    46,    46,    47,    48,    49,    52,    53,    54,    55,
+      56,    57,    58,    59
   };
 
   // Print the state stack on the debug stream.
@@ -933,8 +946,8 @@ namespace calc {
 
 #line 9 "Parser.y" // lalr1.cc:1167
 } // calc
-#line 937 "Parser.cpp" // lalr1.cc:1167
-#line 58 "Parser.y" // lalr1.cc:1168
+#line 950 "Parser.cpp" // lalr1.cc:1167
+#line 62 "Parser.y" // lalr1.cc:1168
 
 
 void calc::Parser::error(const std::string& msg)

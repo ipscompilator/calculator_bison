@@ -262,9 +262,11 @@ namespace calc {
     /// An auxiliary type to compute the largest semantic type.
     union union_type
     {
-      // DOUBLE
       // expr
-      char dummy1[sizeof(double)];
+      char dummy1[sizeof(class CalcNode *)];
+
+      // DOUBLE
+      char dummy2[sizeof(double)];
 };
 
     /// Symbol semantic values.
@@ -329,6 +331,8 @@ namespace calc {
       /// Constructor for valueless symbols, and symbols from each type.
 
   basic_symbol (typename Base::kind_type t);
+
+  basic_symbol (typename Base::kind_type t, const class CalcNode * v);
 
   basic_symbol (typename Base::kind_type t, const double v);
 
@@ -716,8 +720,11 @@ namespace calc {
   {
       switch (other.type_get ())
     {
-      case 3: // DOUBLE
       case 13: // expr
+        value.copy< class CalcNode * > (other.value);
+        break;
+
+      case 3: // DOUBLE
         value.copy< double > (other.value);
         break;
 
@@ -737,8 +744,11 @@ namespace calc {
     (void) v;
       switch (this->type_get ())
     {
-      case 3: // DOUBLE
       case 13: // expr
+        value.copy< class CalcNode * > (v);
+        break;
+
+      case 3: // DOUBLE
         value.copy< double > (v);
         break;
 
@@ -754,6 +764,12 @@ namespace calc {
   Parser::basic_symbol<Base>::basic_symbol (typename Base::kind_type t)
     : Base (t)
     , value ()
+  {}
+
+  template <typename Base>
+  Parser::basic_symbol<Base>::basic_symbol (typename Base::kind_type t, const class CalcNode * v)
+    : Base (t)
+    , value (v)
   {}
 
   template <typename Base>
@@ -788,8 +804,11 @@ namespace calc {
     // Type destructor.
     switch (yytype)
     {
-      case 3: // DOUBLE
       case 13: // expr
+        value.template destroy< class CalcNode * > ();
+        break;
+
+      case 3: // DOUBLE
         value.template destroy< double > ();
         break;
 
@@ -816,8 +835,11 @@ namespace calc {
     super_type::move(s);
       switch (this->type_get ())
     {
-      case 3: // DOUBLE
       case 13: // expr
+        value.move< class CalcNode * > (s.value);
+        break;
+
+      case 3: // DOUBLE
         value.move< double > (s.value);
         break;
 
@@ -938,7 +960,7 @@ namespace calc {
 
 #line 9 "Parser.y" // lalr1.cc:377
 } // calc
-#line 942 "Parser.hpp" // lalr1.cc:377
+#line 964 "Parser.hpp" // lalr1.cc:377
 
 
 

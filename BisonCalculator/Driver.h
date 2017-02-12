@@ -3,8 +3,10 @@
 #include <iostream>
 #include <memory>
 #include "Scanner.h"
+#include "CalcNode.h"
 
-namespace calc {
+namespace calc
+{
 
     class Driver
     {
@@ -13,18 +15,22 @@ namespace calc {
         ~Driver();
 
         double getResultValue() const;
-        void setResultValue(double resultValue);
 
         Scanner &getScanner() const;
+
+        CalcNode* getCalcNode() const;
+        void setCalcNode(CalcNode* calcNode);
 
         bool parseStream(std::istream &inStream);
         bool parseString(const std::string &inString);
 
         void error(const std::string &msg);
 
+        void printResult();
+
     private:
-        double m_resultValue;
         std::unique_ptr<Scanner> m_scanner;
+        CalcNode *m_calcNode;
     };
 
 }

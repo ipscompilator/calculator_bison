@@ -19,6 +19,10 @@
 %{
     #include "stdafx.h"
     #include "Driver.h"
+    #include "CalcNode.h"
+    #include "UnaryCalcNode.h"
+    #include "BinaryCalcNode.h"
+    #include "TermCalcNode.h"
 
     #undef yylex
     #define yylex driver.getScanner().lex
@@ -31,7 +35,7 @@
 %token END     0   "end of file"
 %token EOL     "end of line"
 
-%type<double>   expr
+%type<class CalcNode *>   expr
 
 %start program
 
@@ -41,17 +45,17 @@
 
 program: /* empty */
     | program EOL
-    | program expr EOL      { driver.setResultValue($2); }
-    | program expr END      { driver.setResultValue($2); }
+    | program expr EOL      { driver.setCalcNode($2); driver.printResult(); }
+    | program expr END      { driver.setCalcNode($2); driver.printResult(); }
     ;
 
-expr: DOUBLE              { $$ = $1; }
-    | expr PLUS expr      { $$ = $1 + $3; }
-    | expr MINUS expr     { $$ = $1 - $3; }
-    | expr MULTIPLY expr  { $$ = $1 * $3; }
-    | expr DIVIDE expr    { $$ = $1 / $3; }
-    | PLUS expr           { $$ = $2; }
-    | MINUS expr          { $$ = -$2; }
+expr: DOUBLE              { $$ = new TermCalcNode($1); std::cout << "double "; }
+    | expr PLUS expr      { $$ = new BinaryCalcNode($1, $3, Operation::ADD); std::cout << "plus "; }
+    | expr MINUS expr     { $$ = new BinaryCalcNode($1, $3, Operation::SUB); }
+    | expr MULTIPLY expr  { $$ = new BinaryCalcNode($1, $3, Operation::MUL); std::cout << "mult "; }
+    | expr DIVIDE expr    { $$ = new BinaryCalcNode($1, $3, Operation::DIV); }
+    | PLUS expr           { $$ = new UnaryCalcNode($2, Operation::ADD); }
+    | MINUS expr          { $$ = new UnaryCalcNode($2, Operation::SUB); std::cout << "unary ";}
     | LEFT_P expr RIGHT_P { $$ = $2; }
     ;
 

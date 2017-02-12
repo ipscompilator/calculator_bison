@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Calc">
+      <UniqueIdentifier>{6c3c578c-3be8-4dc4-baae-7a26ec88bf4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Calc">
+      <UniqueIdentifier>{efb49148-128d-44fc-b053-3130c9fb767f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -24,14 +30,26 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\BinaryCalcNode.h">
+      <Filter>Header Files\Calc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CalcNode.h">
+      <Filter>Header Files\Calc</Filter>
+    </ClInclude>
     <ClInclude Include="..\Driver.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Calc</Filter>
     </ClInclude>
     <ClInclude Include="..\Parser.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Calc</Filter>
     </ClInclude>
     <ClInclude Include="..\Scanner.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Calc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TermCalcNode.h">
+      <Filter>Header Files\Calc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\UnaryCalcNode.h">
+      <Filter>Header Files\Calc</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -41,14 +59,26 @@
     <ClCompile Include="Tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\BinaryCalcNode.cpp">
+      <Filter>Source Files\Calc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CalcNode.cpp">
+      <Filter>Source Files\Calc</Filter>
+    </ClCompile>
     <ClCompile Include="..\Driver.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Calc</Filter>
     </ClCompile>
     <ClCompile Include="..\Parser.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Calc</Filter>
     </ClCompile>
     <ClCompile Include="..\Scanner.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Calc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TermCalcNode.cpp">
+      <Filter>Source Files\Calc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\UnaryCalcNode.cpp">
+      <Filter>Source Files\Calc</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

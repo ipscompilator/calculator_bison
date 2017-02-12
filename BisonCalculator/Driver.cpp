@@ -4,23 +4,17 @@
 #include <sstream>
 
 calc::Driver::Driver()
-    :m_resultValue(0)
 {
 }
 
 calc::Driver::~Driver()
 {
+    delete m_calcNode;
 }
 
 double calc::Driver::getResultValue() const
 {
-    return m_resultValue;
-}
-
-void calc::Driver::setResultValue(double resultValue)
-{
-    m_resultValue = resultValue;
-    std::cout << "Result: " << resultValue << std::endl;
+    return m_calcNode->Evaluate();
 }
 
 calc::Scanner &calc::Driver::getScanner() const
@@ -44,4 +38,20 @@ bool calc::Driver::parseString(const std::string &inString)
 void calc::Driver::error(const std::string &msg)
 {
     std::cerr << "Error: " << msg << std::endl;
+}
+
+void calc::Driver::printResult()
+{
+    std::cout << "Node result: " << m_calcNode->Evaluate() << std::endl;
+}
+
+calc::CalcNode* calc::Driver::getCalcNode() const
+{
+    return m_calcNode;
+}
+
+void calc::Driver::setCalcNode(CalcNode* calcNode)
+{
+    m_calcNode = calcNode;
+    printResult();
 }

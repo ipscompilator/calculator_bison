@@ -82,6 +82,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BinaryCalcNode.cpp" />
+    <ClCompile Include="CalcNode.cpp" />
     <ClCompile Include="Driver.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
@@ -102,13 +104,19 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="TermCalcNode.cpp" />
+    <ClCompile Include="UnaryCalcNode.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BinaryCalcNode.h" />
+    <ClInclude Include="CalcNode.h" />
     <ClInclude Include="Driver.h" />
     <ClInclude Include="Parser.hpp" />
     <ClInclude Include="Scanner.h" />
     <ClInclude Include="stack.hh" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="TermCalcNode.h" />
+    <ClInclude Include="UnaryCalcNode.h" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="Parser.y">
