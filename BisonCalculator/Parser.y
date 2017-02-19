@@ -36,7 +36,7 @@
 %token END     0   "end of file"
 %token EOL     "end of line"
 
-%type<class CalcNode *>   expr
+%type<class CalcNode *> sum_expr mul_expr unary_expr symbol 
 
 %start program
 
@@ -46,19 +46,27 @@
 
 program: /* empty */
     | program EOL
-    | program expr EOL      { driver.setCalcNode(Extract($2)); }
-    | program expr END      { driver.setCalcNode(Extract($2)); }
+    | program sum_expr EOL      { driver.setCalcNode(Extract($2)); }
+    | program sum_expr END      { driver.setCalcNode(Extract($2)); }
     ;
 
-expr: DOUBLE              { $$ = new TermCalcNode($1); }
-    | expr PLUS expr      { Emplace<BinaryCalcNode>($$, Extract($1), Extract($3), Operation::ADD); }
-    | expr MINUS expr     { Emplace<BinaryCalcNode>($$, Extract($1), Extract($3), Operation::SUB); }
-    | expr MULTIPLY expr  { Emplace<BinaryCalcNode>($$, Extract($1), Extract($3), Operation::MUL); }
-    | expr DIVIDE expr    { Emplace<BinaryCalcNode>($$, Extract($1), Extract($3), Operation::DIV); }
-    | PLUS expr           { Emplace<UnaryCalcNode>($$, Extract($2), Operation::ADD); }
-    | MINUS expr          { Emplace<UnaryCalcNode>($$, Extract($2), Operation::SUB); }
-    //| MINUS expr          { $$ = new UnaryCalcNode(std::unique_ptr<CalcNode>($2), Operation::SUB); }
-    | LEFT_P expr RIGHT_P { $$ = $2; }
+sum_expr: mul_expr              { $$ = $1; }
+    | sum_expr PLUS mul_expr    { Emplace<BinaryCalcNode>($$, Extract($1), Extract($3), Operation::ADD); }
+    | sum_expr MINUS mul_expr   { Emplace<BinaryCalcNode>($$, Extract($1), Extract($3), Operation::SUB); }
+    ;
+
+mul_expr: unary_expr                { $$ = $1; }
+    | mul_expr MULTIPLY unary_expr  { Emplace<BinaryCalcNode>($$, Extract($1), Extract($3), Operation::MUL); }
+    | mul_expr DIVIDE unary_expr    { Emplace<BinaryCalcNode>($$, Extract($1), Extract($3), Operation::DIV); }
+    ;
+
+unary_expr: symbol  { $$ = $1; }
+    | PLUS symbol   { Emplace<UnaryCalcNode>($$, Extract($2), Operation::ADD); }
+    | MINUS symbol  { Emplace<UnaryCalcNode>($$, Extract($2), Operation::SUB); }
+    ;
+  
+symbol: DOUBLE                  { $$ = new TermCalcNode($1); }
+    | LEFT_P sum_expr RIGHT_P   { $$ = $2; }
     ;
 
 %%

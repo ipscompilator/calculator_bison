@@ -262,7 +262,10 @@ namespace calc {
     /// An auxiliary type to compute the largest semantic type.
     union union_type
     {
-      // expr
+      // sum_expr
+      // mul_expr
+      // unary_expr
+      // symbol
       char dummy1[sizeof(class CalcNode *)];
 
       // DOUBLE
@@ -647,8 +650,8 @@ namespace calc {
     enum
     {
       yyeof_ = 0,
-      yylast_ = 36,     ///< Last index in yytable_.
-      yynnts_ = 3,  ///< Number of nonterminal symbols.
+      yylast_ = 30,     ///< Last index in yytable_.
+      yynnts_ = 6,  ///< Number of nonterminal symbols.
       yyfinal_ = 2, ///< Termination state number.
       yyterror_ = 1,
       yyerrcode_ = 256,
@@ -730,7 +733,10 @@ namespace calc {
   {
       switch (other.type_get ())
     {
-      case 13: // expr
+      case 13: // sum_expr
+      case 14: // mul_expr
+      case 15: // unary_expr
+      case 16: // symbol
         value.copy< class CalcNode * > (other.value);
         break;
 
@@ -755,7 +761,10 @@ namespace calc {
     (void) v;
       switch (this->type_get ())
     {
-      case 13: // expr
+      case 13: // sum_expr
+      case 14: // mul_expr
+      case 15: // unary_expr
+      case 16: // symbol
         value.copy< class CalcNode * > (v);
         break;
 
@@ -818,7 +827,10 @@ namespace calc {
     // Type destructor.
     switch (yytype)
     {
-      case 13: // expr
+      case 13: // sum_expr
+      case 14: // mul_expr
+      case 15: // unary_expr
+      case 16: // symbol
         value.template destroy< class CalcNode * > ();
         break;
 
@@ -849,7 +861,10 @@ namespace calc {
     super_type::move(s);
       switch (this->type_get ())
     {
-      case 13: // expr
+      case 13: // sum_expr
+      case 14: // mul_expr
+      case 15: // unary_expr
+      case 16: // symbol
         value.move< class CalcNode * > (s.value);
         break;
 
@@ -975,7 +990,7 @@ namespace calc {
 
 #line 10 "Parser.y" // lalr1.cc:377
 } // calc
-#line 979 "Parser.hpp" // lalr1.cc:377
+#line 994 "Parser.hpp" // lalr1.cc:377
 
 
 
