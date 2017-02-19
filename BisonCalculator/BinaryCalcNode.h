@@ -7,14 +7,13 @@ namespace calc
     class BinaryCalcNode : public CalcNode
     {
     public:
-        BinaryCalcNode(CalcNode* left, CalcNode* right, Operation operation);
+        BinaryCalcNode(std::unique_ptr<CalcNode> && left, std::unique_ptr<CalcNode> && right, Operation operation);
         ~BinaryCalcNode();
         double Evaluate() const override;
 
     private:
-        CalcNode* m_left;
-        CalcNode* m_right;
+		std::unique_ptr<CalcNode> m_left;
+		std::unique_ptr<CalcNode> m_right;
         Operation m_operation;
     };
-
 }

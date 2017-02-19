@@ -513,13 +513,13 @@ namespace calc {
             {
   case 4:
 #line 48 "Parser.y" // lalr1.cc:859
-    { driver.setCalcNode(yystack_[1].value.as< class CalcNode * > ()); }
+    { driver.setCalcNode(Extract(yystack_[1].value.as< class CalcNode * > ())); }
 #line 518 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 5:
 #line 49 "Parser.y" // lalr1.cc:859
-    { driver.setCalcNode(yystack_[1].value.as< class CalcNode * > ()); }
+    { driver.setCalcNode(Extract(yystack_[1].value.as< class CalcNode * > ())); }
 #line 524 "Parser.cpp" // lalr1.cc:859
     break;
 
@@ -531,42 +531,42 @@ namespace calc {
 
   case 7:
 #line 53 "Parser.y" // lalr1.cc:859
-    { yylhs.value.as< class CalcNode * > () = new BinaryCalcNode(yystack_[2].value.as< class CalcNode * > (), yystack_[0].value.as< class CalcNode * > (), Operation::ADD); }
+    { Emplace<BinaryCalcNode>(yylhs.value.as< class CalcNode * > (), Extract(yystack_[2].value.as< class CalcNode * > ()), Extract(yystack_[0].value.as< class CalcNode * > ()), Operation::ADD); }
 #line 536 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 8:
 #line 54 "Parser.y" // lalr1.cc:859
-    { yylhs.value.as< class CalcNode * > () = new BinaryCalcNode(yystack_[2].value.as< class CalcNode * > (), yystack_[0].value.as< class CalcNode * > (), Operation::SUB); }
+    { Emplace<BinaryCalcNode>(yylhs.value.as< class CalcNode * > (), Extract(yystack_[2].value.as< class CalcNode * > ()), Extract(yystack_[0].value.as< class CalcNode * > ()), Operation::SUB); }
 #line 542 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 9:
 #line 55 "Parser.y" // lalr1.cc:859
-    { yylhs.value.as< class CalcNode * > () = new BinaryCalcNode(yystack_[2].value.as< class CalcNode * > (), yystack_[0].value.as< class CalcNode * > (), Operation::MUL); }
+    { Emplace<BinaryCalcNode>(yylhs.value.as< class CalcNode * > (), Extract(yystack_[2].value.as< class CalcNode * > ()), Extract(yystack_[0].value.as< class CalcNode * > ()), Operation::MUL); }
 #line 548 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 10:
 #line 56 "Parser.y" // lalr1.cc:859
-    { yylhs.value.as< class CalcNode * > () = new BinaryCalcNode(yystack_[2].value.as< class CalcNode * > (), yystack_[0].value.as< class CalcNode * > (), Operation::DIV); }
+    { Emplace<BinaryCalcNode>(yylhs.value.as< class CalcNode * > (), Extract(yystack_[2].value.as< class CalcNode * > ()), Extract(yystack_[0].value.as< class CalcNode * > ()), Operation::DIV); }
 #line 554 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 11:
 #line 57 "Parser.y" // lalr1.cc:859
-    { yylhs.value.as< class CalcNode * > () = new UnaryCalcNode(yystack_[0].value.as< class CalcNode * > (), Operation::ADD); }
+    { Emplace<UnaryCalcNode>(yylhs.value.as< class CalcNode * > (), Extract(yystack_[0].value.as< class CalcNode * > ()), Operation::ADD); }
 #line 560 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 12:
 #line 58 "Parser.y" // lalr1.cc:859
-    { yylhs.value.as< class CalcNode * > () = new UnaryCalcNode(yystack_[0].value.as< class CalcNode * > (), Operation::SUB); }
+    { Emplace<UnaryCalcNode>(yylhs.value.as< class CalcNode * > (), Extract(yystack_[0].value.as< class CalcNode * > ()), Operation::SUB); }
 #line 566 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 13:
-#line 59 "Parser.y" // lalr1.cc:859
+#line 60 "Parser.y" // lalr1.cc:859
     { yylhs.value.as< class CalcNode * > () = yystack_[1].value.as< class CalcNode * > (); }
 #line 572 "Parser.cpp" // lalr1.cc:859
     break;
@@ -911,7 +911,7 @@ namespace calc {
   Parser::yyrline_[] =
   {
        0,    46,    46,    47,    48,    49,    52,    53,    54,    55,
-      56,    57,    58,    59
+      56,    57,    58,    60
   };
 
   // Print the state stack on the debug stream.
@@ -947,7 +947,7 @@ namespace calc {
 #line 9 "Parser.y" // lalr1.cc:1167
 } // calc
 #line 950 "Parser.cpp" // lalr1.cc:1167
-#line 62 "Parser.y" // lalr1.cc:1168
+#line 63 "Parser.y" // lalr1.cc:1168
 
 
 void calc::Parser::error(const std::string& msg)

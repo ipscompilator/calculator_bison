@@ -16,10 +16,10 @@ namespace calc
 
         double getResultValue() const;
 
-        Scanner &getScanner() const;
+        Scanner & getScanner() const;
 
-        CalcNode* getCalcNode() const;
-        void setCalcNode(CalcNode* calcNode);
+        CalcNode & getCalcNode() const;
+		void setCalcNode(std::unique_ptr<CalcNode> && calcNode);
 
         bool parseStream(std::istream &inStream);
         bool parseString(const std::string &inString);
@@ -30,7 +30,7 @@ namespace calc
 
     private:
         std::unique_ptr<Scanner> m_scanner;
-        CalcNode *m_calcNode;
+        std::unique_ptr<CalcNode> m_calcNode;
     };
 
 }

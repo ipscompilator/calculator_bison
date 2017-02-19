@@ -3,15 +3,13 @@
 
 using namespace calc;
 
-BinaryCalcNode::BinaryCalcNode(CalcNode* left, CalcNode* right, Operation operation)
-:m_left(left), m_right(right), m_operation(operation)
+BinaryCalcNode::BinaryCalcNode(std::unique_ptr<CalcNode> && left, std::unique_ptr<CalcNode> && right, Operation operation)
+:m_left(move(left)), m_right(move(right)), m_operation(operation)
 {
 }
 
 BinaryCalcNode::~BinaryCalcNode()
 {
-    delete m_left;
-    delete m_right;
 }
 
 double BinaryCalcNode::Evaluate() const

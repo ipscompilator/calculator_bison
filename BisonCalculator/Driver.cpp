@@ -9,7 +9,6 @@ calc::Driver::Driver()
 
 calc::Driver::~Driver()
 {
-    delete m_calcNode;
 }
 
 double calc::Driver::getResultValue() const
@@ -17,7 +16,7 @@ double calc::Driver::getResultValue() const
     return m_calcNode->Evaluate();
 }
 
-calc::Scanner &calc::Driver::getScanner() const
+calc::Scanner & calc::Driver::getScanner() const
 {
     return *m_scanner;
 }
@@ -45,14 +44,13 @@ void calc::Driver::printResult()
     std::cout << "Node result: " << m_calcNode->Evaluate() << std::endl;
 }
 
-calc::CalcNode* calc::Driver::getCalcNode() const
+calc::CalcNode & calc::Driver::getCalcNode() const
 {
-    return m_calcNode;
+    return *m_calcNode;
 }
 
-void calc::Driver::setCalcNode(CalcNode* calcNode)
+void calc::Driver::setCalcNode(std::unique_ptr<CalcNode> && calcNode)
 {
-    delete m_calcNode;
-    m_calcNode = calcNode;
+    m_calcNode = move(calcNode);
     printResult();
 }

@@ -3,14 +3,13 @@
 
 using namespace calc;
 
-UnaryCalcNode::UnaryCalcNode(CalcNode* node, Operation operation)
-:m_node(node), m_operation(operation)
+UnaryCalcNode::UnaryCalcNode(std::unique_ptr<CalcNode> && node, Operation operation)
+:m_node(std::move(node)), m_operation(operation)
 {
 }
 
 UnaryCalcNode::~UnaryCalcNode()
 {
-    delete m_node;
 }
 
 double UnaryCalcNode::Evaluate() const

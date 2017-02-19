@@ -45,17 +45,18 @@
 
 program: /* empty */
     | program EOL
-    | program expr EOL      { driver.setCalcNode($2); }
-    | program expr END      { driver.setCalcNode($2); }
+    | program expr EOL      { driver.setCalcNode(Extract($2)); }
+    | program expr END      { driver.setCalcNode(Extract($2)); }
     ;
 
 expr: DOUBLE              { $$ = new TermCalcNode($1); }
-    | expr PLUS expr      { $$ = new BinaryCalcNode($1, $3, Operation::ADD); }
-    | expr MINUS expr     { $$ = new BinaryCalcNode($1, $3, Operation::SUB); }
-    | expr MULTIPLY expr  { $$ = new BinaryCalcNode($1, $3, Operation::MUL); }
-    | expr DIVIDE expr    { $$ = new BinaryCalcNode($1, $3, Operation::DIV); }
-    | PLUS expr           { $$ = new UnaryCalcNode($2, Operation::ADD); }
-    | MINUS expr          { $$ = new UnaryCalcNode($2, Operation::SUB); }
+    | expr PLUS expr      { Emplace<BinaryCalcNode>($$, Extract($1), Extract($3), Operation::ADD); }
+    | expr MINUS expr     { Emplace<BinaryCalcNode>($$, Extract($1), Extract($3), Operation::SUB); }
+    | expr MULTIPLY expr  { Emplace<BinaryCalcNode>($$, Extract($1), Extract($3), Operation::MUL); }
+    | expr DIVIDE expr    { Emplace<BinaryCalcNode>($$, Extract($1), Extract($3), Operation::DIV); }
+    | PLUS expr           { Emplace<UnaryCalcNode>($$, Extract($2), Operation::ADD); }
+    | MINUS expr          { Emplace<UnaryCalcNode>($$, Extract($2), Operation::SUB); }
+    //| MINUS expr          { $$ = new UnaryCalcNode(std::unique_ptr<CalcNode>($2), Operation::SUB); }
     | LEFT_P expr RIGHT_P { $$ = $2; }
     ;
 
