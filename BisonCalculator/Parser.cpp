@@ -32,7 +32,7 @@
 
 
 // First part of user declarations.
-#line 19 "Parser.y" // lalr1.cc:404
+#line 20 "Parser.y" // lalr1.cc:404
 
     #include "stdafx.h"
     #include "Driver.h"
@@ -73,6 +73,25 @@
 # endif
 #endif
 
+#define YYRHSLOC(Rhs, K) ((Rhs)[K].location)
+/* YYLLOC_DEFAULT -- Set CURRENT to span from RHS[1] to RHS[N].
+   If N is 0, then set CURRENT to the empty location which ends
+   the previous symbol: RHS[0] (always defined).  */
+
+# ifndef YYLLOC_DEFAULT
+#  define YYLLOC_DEFAULT(Current, Rhs, N)                               \
+    do                                                                  \
+      if (N)                                                            \
+        {                                                               \
+          (Current).begin  = YYRHSLOC (Rhs, 1).begin;                   \
+          (Current).end    = YYRHSLOC (Rhs, N).end;                     \
+        }                                                               \
+      else                                                              \
+        {                                                               \
+          (Current).begin = (Current).end = YYRHSLOC (Rhs, 0).end;      \
+        }                                                               \
+    while (/*CONSTCOND*/ false)
+# endif
 
 
 // Suppress unused-variable warnings by "using" E.
@@ -123,9 +142,9 @@
 #define YYERROR         goto yyerrorlab
 #define YYRECOVERING()  (!!yyerrstatus_)
 
-#line 9 "Parser.y" // lalr1.cc:479
+#line 10 "Parser.y" // lalr1.cc:479
 namespace calc {
-#line 129 "Parser.cpp" // lalr1.cc:479
+#line 148 "Parser.cpp" // lalr1.cc:479
 
   /* Return YYSTR after stripping away unnecessary quotes and
      backslashes, so that it's suitable for yyerror.  The heuristic is
@@ -233,7 +252,7 @@ namespace calc {
 
   inline
   Parser::stack_symbol_type::stack_symbol_type (state_type s, symbol_type& that)
-    : super_type (s)
+    : super_type (s, that.location)
   {
       switch (that.type_get ())
     {
@@ -272,6 +291,7 @@ namespace calc {
         break;
     }
 
+    location = that.location;
     return *this;
   }
 
@@ -299,7 +319,8 @@ namespace calc {
     if (yysym.empty ())
       std::abort ();
     yyo << (yytype < yyntokens_ ? "token" : "nterm")
-        << ' ' << yytname_[yytype] << " (";
+        << ' ' << yytname_[yytype] << " ("
+        << yysym.location << ": ";
     YYUSE (yytype);
     yyo << ')';
   }
@@ -392,6 +413,9 @@ namespace calc {
 
     /// The lookahead symbol.
     symbol_type yyla;
+
+    /// The locations where the error started and ended.
+    stack_symbol_type yyerror_range[3];
 
     /// The return value of parse ().
     int yyresult;
@@ -504,6 +528,11 @@ namespace calc {
     }
 
 
+      // Compute the default @$.
+      {
+        slice<stack_symbol_type, stack_type> slice (yystack_, yylen);
+        YYLLOC_DEFAULT (yylhs.location, slice, yylen);
+      }
 
       // Perform the reduction.
       YY_REDUCE_PRINT (yyn);
@@ -512,67 +541,67 @@ namespace calc {
           switch (yyn)
             {
   case 4:
-#line 48 "Parser.y" // lalr1.cc:859
+#line 49 "Parser.y" // lalr1.cc:859
     { driver.setCalcNode(Extract(yystack_[1].value.as< class CalcNode * > ())); }
-#line 518 "Parser.cpp" // lalr1.cc:859
+#line 547 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 5:
-#line 49 "Parser.y" // lalr1.cc:859
+#line 50 "Parser.y" // lalr1.cc:859
     { driver.setCalcNode(Extract(yystack_[1].value.as< class CalcNode * > ())); }
-#line 524 "Parser.cpp" // lalr1.cc:859
+#line 553 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 6:
-#line 52 "Parser.y" // lalr1.cc:859
+#line 53 "Parser.y" // lalr1.cc:859
     { yylhs.value.as< class CalcNode * > () = new TermCalcNode(yystack_[0].value.as< double > ()); }
-#line 530 "Parser.cpp" // lalr1.cc:859
+#line 559 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 7:
-#line 53 "Parser.y" // lalr1.cc:859
+#line 54 "Parser.y" // lalr1.cc:859
     { Emplace<BinaryCalcNode>(yylhs.value.as< class CalcNode * > (), Extract(yystack_[2].value.as< class CalcNode * > ()), Extract(yystack_[0].value.as< class CalcNode * > ()), Operation::ADD); }
-#line 536 "Parser.cpp" // lalr1.cc:859
+#line 565 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 8:
-#line 54 "Parser.y" // lalr1.cc:859
+#line 55 "Parser.y" // lalr1.cc:859
     { Emplace<BinaryCalcNode>(yylhs.value.as< class CalcNode * > (), Extract(yystack_[2].value.as< class CalcNode * > ()), Extract(yystack_[0].value.as< class CalcNode * > ()), Operation::SUB); }
-#line 542 "Parser.cpp" // lalr1.cc:859
+#line 571 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 9:
-#line 55 "Parser.y" // lalr1.cc:859
+#line 56 "Parser.y" // lalr1.cc:859
     { Emplace<BinaryCalcNode>(yylhs.value.as< class CalcNode * > (), Extract(yystack_[2].value.as< class CalcNode * > ()), Extract(yystack_[0].value.as< class CalcNode * > ()), Operation::MUL); }
-#line 548 "Parser.cpp" // lalr1.cc:859
+#line 577 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 10:
-#line 56 "Parser.y" // lalr1.cc:859
+#line 57 "Parser.y" // lalr1.cc:859
     { Emplace<BinaryCalcNode>(yylhs.value.as< class CalcNode * > (), Extract(yystack_[2].value.as< class CalcNode * > ()), Extract(yystack_[0].value.as< class CalcNode * > ()), Operation::DIV); }
-#line 554 "Parser.cpp" // lalr1.cc:859
+#line 583 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 11:
-#line 57 "Parser.y" // lalr1.cc:859
+#line 58 "Parser.y" // lalr1.cc:859
     { Emplace<UnaryCalcNode>(yylhs.value.as< class CalcNode * > (), Extract(yystack_[0].value.as< class CalcNode * > ()), Operation::ADD); }
-#line 560 "Parser.cpp" // lalr1.cc:859
+#line 589 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 12:
-#line 58 "Parser.y" // lalr1.cc:859
+#line 59 "Parser.y" // lalr1.cc:859
     { Emplace<UnaryCalcNode>(yylhs.value.as< class CalcNode * > (), Extract(yystack_[0].value.as< class CalcNode * > ()), Operation::SUB); }
-#line 566 "Parser.cpp" // lalr1.cc:859
+#line 595 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 13:
-#line 60 "Parser.y" // lalr1.cc:859
+#line 61 "Parser.y" // lalr1.cc:859
     { yylhs.value.as< class CalcNode * > () = yystack_[1].value.as< class CalcNode * > (); }
-#line 572 "Parser.cpp" // lalr1.cc:859
+#line 601 "Parser.cpp" // lalr1.cc:859
     break;
 
 
-#line 576 "Parser.cpp" // lalr1.cc:859
+#line 605 "Parser.cpp" // lalr1.cc:859
             default:
               break;
             }
@@ -600,10 +629,11 @@ namespace calc {
     if (!yyerrstatus_)
       {
         ++yynerrs_;
-        error (yysyntax_error_ (yystack_[0].state, yyla));
+        error (yyla.location, yysyntax_error_ (yystack_[0].state, yyla));
       }
 
 
+    yyerror_range[1].location = yyla.location;
     if (yyerrstatus_ == 3)
       {
         /* If just tried and failed to reuse lookahead token after an
@@ -633,6 +663,7 @@ namespace calc {
        code.  */
     if (false)
       goto yyerrorlab;
+    yyerror_range[1].location = yystack_[yylen - 1].location;
     /* Do not reclaim the symbols of the rule whose action triggered
        this YYERROR.  */
     yypop_ (yylen);
@@ -664,11 +695,14 @@ namespace calc {
           if (yystack_.size () == 1)
             YYABORT;
 
+          yyerror_range[1].location = yystack_[0].location;
           yy_destroy_ ("Error: popping", yystack_[0]);
           yypop_ ();
           YY_STACK_PRINT ();
         }
 
+      yyerror_range[2].location = yyla.location;
+      YYLLOC_DEFAULT (error_token.location, yyerror_range, 2);
 
       // Shift the error token.
       error_token.state = yyn;
@@ -722,7 +756,7 @@ namespace calc {
   void
   Parser::error (const syntax_error& yyexc)
   {
-    error (yyexc.what());
+    error (yyexc.location, yyexc.what());
   }
 
   // Generate an error message.
@@ -910,8 +944,8 @@ namespace calc {
   const unsigned char
   Parser::yyrline_[] =
   {
-       0,    46,    46,    47,    48,    49,    52,    53,    54,    55,
-      56,    57,    58,    60
+       0,    47,    47,    48,    49,    50,    53,    54,    55,    56,
+      57,    58,    59,    61
   };
 
   // Print the state stack on the debug stream.
@@ -944,13 +978,13 @@ namespace calc {
 #endif // YYDEBUG
 
 
-#line 9 "Parser.y" // lalr1.cc:1167
+#line 10 "Parser.y" // lalr1.cc:1167
 } // calc
-#line 950 "Parser.cpp" // lalr1.cc:1167
-#line 63 "Parser.y" // lalr1.cc:1168
+#line 984 "Parser.cpp" // lalr1.cc:1167
+#line 64 "Parser.y" // lalr1.cc:1168
 
 
-void calc::Parser::error(const std::string& msg)
+void calc::Parser::error(const location & l, const std::string& msg)
 {
-    driver.error(msg);
+    driver.error(msg, l);
 }

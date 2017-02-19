@@ -5,6 +5,7 @@
 /* Skeleton implementation for Bison LALR(1) parsers in C++ */
 %skeleton "lalr1.cc"
 %define parser_class_name {Parser}
+%locations
 
 %define api.namespace {calc}
 %define api.value.type variant
@@ -62,7 +63,7 @@ expr: DOUBLE              { $$ = new TermCalcNode($1); }
 
 %%
 
-void calc::Parser::error(const std::string& msg)
+void calc::Parser::error(const location & l, const std::string& msg)
 {
-    driver.error(msg);
+    driver.error(msg, l);
 }

@@ -47,7 +47,7 @@
 # include <string>
 # include <vector>
 # include "stack.hh"
-
+# include "location.hh"
 
 #ifndef YYASSERT
 # include <cassert>
@@ -113,7 +113,7 @@
 # define YYDEBUG 0
 #endif
 
-#line 9 "Parser.y" // lalr1.cc:377
+#line 10 "Parser.y" // lalr1.cc:377
 namespace calc {
 #line 119 "Parser.hpp" // lalr1.cc:377
 
@@ -274,11 +274,14 @@ namespace calc {
 #else
     typedef YYSTYPE semantic_type;
 #endif
+    /// Symbol locations.
+    typedef location location_type;
 
     /// Syntax errors thrown from user actions.
     struct syntax_error : std::runtime_error
     {
-      syntax_error (const std::string& m);
+      syntax_error (const location_type& l, const std::string& m);
+      location_type location;
     };
 
     /// Tokens.
@@ -315,7 +318,7 @@ namespace calc {
     /// Expects its Base type to provide access to the symbol type
     /// via type_get().
     ///
-    /// Provide access to semantic value.
+    /// Provide access to semantic value and location.
     template <typename Base>
     struct basic_symbol : Base
     {
@@ -330,16 +333,17 @@ namespace calc {
 
       /// Constructor for valueless symbols, and symbols from each type.
 
-  basic_symbol (typename Base::kind_type t);
+  basic_symbol (typename Base::kind_type t, const location_type& l);
 
-  basic_symbol (typename Base::kind_type t, const class CalcNode * v);
+  basic_symbol (typename Base::kind_type t, const class CalcNode * v, const location_type& l);
 
-  basic_symbol (typename Base::kind_type t, const double v);
+  basic_symbol (typename Base::kind_type t, const double v, const location_type& l);
 
 
       /// Constructor for symbols with semantic value.
       basic_symbol (typename Base::kind_type t,
-                    const semantic_type& v);
+                    const semantic_type& v,
+                    const location_type& l);
 
       /// Destroy the symbol.
       ~basic_symbol ();
@@ -355,6 +359,9 @@ namespace calc {
 
       /// The semantic value.
       semantic_type value;
+
+      /// The location.
+      location_type location;
 
     private:
       /// Assignment operator.
@@ -401,39 +408,39 @@ namespace calc {
     // Symbol constructors declarations.
     static inline
     symbol_type
-    make_END ();
+    make_END (const location_type& l);
 
     static inline
     symbol_type
-    make_DOUBLE (const double& v);
+    make_DOUBLE (const double& v, const location_type& l);
 
     static inline
     symbol_type
-    make_PLUS ();
+    make_PLUS (const location_type& l);
 
     static inline
     symbol_type
-    make_MINUS ();
+    make_MINUS (const location_type& l);
 
     static inline
     symbol_type
-    make_MULTIPLY ();
+    make_MULTIPLY (const location_type& l);
 
     static inline
     symbol_type
-    make_DIVIDE ();
+    make_DIVIDE (const location_type& l);
 
     static inline
     symbol_type
-    make_LEFT_P ();
+    make_LEFT_P (const location_type& l);
 
     static inline
     symbol_type
-    make_RIGHT_P ();
+    make_RIGHT_P (const location_type& l);
 
     static inline
     symbol_type
-    make_EOL ();
+    make_EOL (const location_type& l);
 
 
     /// Build a parser object.
@@ -459,8 +466,9 @@ namespace calc {
 #endif
 
     /// Report a syntax error.
+    /// \param loc    where the syntax error is found.
     /// \param msg    a description of the syntax error.
-    virtual void error (const std::string& msg);
+    virtual void error (const location_type& loc, const std::string& msg);
 
     /// Report a syntax error.
     void error (const syntax_error& err);
@@ -701,8 +709,9 @@ namespace calc {
   }
 
   inline
-  Parser::syntax_error::syntax_error (const std::string& m)
+  Parser::syntax_error::syntax_error (const location_type& l, const std::string& m)
     : std::runtime_error (m)
+    , location (l)
   {}
 
   // basic_symbol.
@@ -717,6 +726,7 @@ namespace calc {
   Parser::basic_symbol<Base>::basic_symbol (const basic_symbol& other)
     : Base (other)
     , value ()
+    , location (other.location)
   {
       switch (other.type_get ())
     {
@@ -737,9 +747,10 @@ namespace calc {
 
   template <typename Base>
   inline
-  Parser::basic_symbol<Base>::basic_symbol (typename Base::kind_type t, const semantic_type& v)
+  Parser::basic_symbol<Base>::basic_symbol (typename Base::kind_type t, const semantic_type& v, const location_type& l)
     : Base (t)
     , value ()
+    , location (l)
   {
     (void) v;
       switch (this->type_get ())
@@ -761,21 +772,24 @@ namespace calc {
   // Implementation of basic_symbol constructor for each type.
 
   template <typename Base>
-  Parser::basic_symbol<Base>::basic_symbol (typename Base::kind_type t)
+  Parser::basic_symbol<Base>::basic_symbol (typename Base::kind_type t, const location_type& l)
     : Base (t)
     , value ()
+    , location (l)
   {}
 
   template <typename Base>
-  Parser::basic_symbol<Base>::basic_symbol (typename Base::kind_type t, const class CalcNode * v)
+  Parser::basic_symbol<Base>::basic_symbol (typename Base::kind_type t, const class CalcNode * v, const location_type& l)
     : Base (t)
     , value (v)
+    , location (l)
   {}
 
   template <typename Base>
-  Parser::basic_symbol<Base>::basic_symbol (typename Base::kind_type t, const double v)
+  Parser::basic_symbol<Base>::basic_symbol (typename Base::kind_type t, const double v, const location_type& l)
     : Base (t)
     , value (v)
+    , location (l)
   {}
 
 
@@ -847,6 +861,7 @@ namespace calc {
         break;
     }
 
+    location = s.location;
   }
 
   // by_type.
@@ -904,63 +919,63 @@ namespace calc {
   }
   // Implementation of make_symbol for each symbol type.
   Parser::symbol_type
-  Parser::make_END ()
+  Parser::make_END (const location_type& l)
   {
-    return symbol_type (token::TOK_END);
+    return symbol_type (token::TOK_END, l);
   }
 
   Parser::symbol_type
-  Parser::make_DOUBLE (const double& v)
+  Parser::make_DOUBLE (const double& v, const location_type& l)
   {
-    return symbol_type (token::TOK_DOUBLE, v);
+    return symbol_type (token::TOK_DOUBLE, v, l);
   }
 
   Parser::symbol_type
-  Parser::make_PLUS ()
+  Parser::make_PLUS (const location_type& l)
   {
-    return symbol_type (token::TOK_PLUS);
+    return symbol_type (token::TOK_PLUS, l);
   }
 
   Parser::symbol_type
-  Parser::make_MINUS ()
+  Parser::make_MINUS (const location_type& l)
   {
-    return symbol_type (token::TOK_MINUS);
+    return symbol_type (token::TOK_MINUS, l);
   }
 
   Parser::symbol_type
-  Parser::make_MULTIPLY ()
+  Parser::make_MULTIPLY (const location_type& l)
   {
-    return symbol_type (token::TOK_MULTIPLY);
+    return symbol_type (token::TOK_MULTIPLY, l);
   }
 
   Parser::symbol_type
-  Parser::make_DIVIDE ()
+  Parser::make_DIVIDE (const location_type& l)
   {
-    return symbol_type (token::TOK_DIVIDE);
+    return symbol_type (token::TOK_DIVIDE, l);
   }
 
   Parser::symbol_type
-  Parser::make_LEFT_P ()
+  Parser::make_LEFT_P (const location_type& l)
   {
-    return symbol_type (token::TOK_LEFT_P);
+    return symbol_type (token::TOK_LEFT_P, l);
   }
 
   Parser::symbol_type
-  Parser::make_RIGHT_P ()
+  Parser::make_RIGHT_P (const location_type& l)
   {
-    return symbol_type (token::TOK_RIGHT_P);
+    return symbol_type (token::TOK_RIGHT_P, l);
   }
 
   Parser::symbol_type
-  Parser::make_EOL ()
+  Parser::make_EOL (const location_type& l)
   {
-    return symbol_type (token::TOK_EOL);
+    return symbol_type (token::TOK_EOL, l);
   }
 
 
-#line 9 "Parser.y" // lalr1.cc:377
+#line 10 "Parser.y" // lalr1.cc:377
 } // calc
-#line 964 "Parser.hpp" // lalr1.cc:377
+#line 979 "Parser.hpp" // lalr1.cc:377
 
 
 

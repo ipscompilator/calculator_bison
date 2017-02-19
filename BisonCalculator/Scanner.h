@@ -1,5 +1,6 @@
 #pragma once
 #include "Parser.hpp"
+#include "location.hh"
 
 namespace calc {
 
@@ -12,7 +13,9 @@ namespace calc {
 
     private:
         void Scanner::skipSpaces();
-                
+		double Scanner::parseDouble();
+
+		std::unique_ptr<location> m_location;
         std::istream &m_inStream;
     };
     

@@ -22,6 +22,12 @@
     <Filter Include="Header Files\CalcNode">
       <UniqueIdentifier>{e64e6914-489c-423d-90e2-6b89053040ab}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Generated files">
+      <UniqueIdentifier>{1162659a-4a3e-4879-933e-9f5fc653ee29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Generated files">
+      <UniqueIdentifier>{5732f516-58e3-43c7-a203-ba951fb205fa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -31,9 +37,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Driver.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Parser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
@@ -51,18 +54,15 @@
     <ClCompile Include="UnaryCalcNode.cpp">
       <Filter>Source Files\CalcNode</Filter>
     </ClCompile>
+    <ClCompile Include="Parser.cpp">
+      <Filter>Source Files\Generated files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stack.hh">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Driver.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Parser.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Scanner.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="stdafx.h">
@@ -79,6 +79,18 @@
     </ClInclude>
     <ClInclude Include="UnaryCalcNode.h">
       <Filter>Header Files\CalcNode</Filter>
+    </ClInclude>
+    <ClInclude Include="location.hh">
+      <Filter>Header Files\Generated files</Filter>
+    </ClInclude>
+    <ClInclude Include="position.hh">
+      <Filter>Header Files\Generated files</Filter>
+    </ClInclude>
+    <ClInclude Include="Parser.hpp">
+      <Filter>Header Files\Generated files</Filter>
+    </ClInclude>
+    <ClInclude Include="Scanner.h">
+      <Filter>Header Files\Generated files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

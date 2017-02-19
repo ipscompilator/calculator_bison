@@ -21,10 +21,10 @@ namespace calc
         CalcNode & getCalcNode() const;
 		void setCalcNode(std::unique_ptr<CalcNode> && calcNode);
 
-        bool parseStream(std::istream &inStream);
-        bool parseString(const std::string &inString);
+        bool parseStream(std::istream & inStream);
+        bool parseString(const std::string & inString);
 
-        void error(const std::string &msg);
+		void error(const std::string & msg, const location & location);
 
         void printResult();
 

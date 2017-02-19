@@ -21,22 +21,22 @@ calc::Scanner & calc::Driver::getScanner() const
     return *m_scanner;
 }
 
-bool calc::Driver::parseStream(std::istream &inStream)
+bool calc::Driver::parseStream(std::istream & inStream)
 {
     m_scanner = std::make_unique<Scanner>(inStream);
     calc::Parser parser(*this);
     return (parser.parse() == 0);
 }
 
-bool calc::Driver::parseString(const std::string &inString)
+bool calc::Driver::parseString(const std::string & inString)
 {
     std::istringstream iss(inString);
     return parseStream(iss);
 }
 
-void calc::Driver::error(const std::string &msg)
+void calc::Driver::error(const std::string & msg, const location & location)
 {
-    std::cerr << "Error: " << msg << std::endl;
+	std::cerr << "{" << location << "} Error: " << msg << std::endl;
 }
 
 void calc::Driver::printResult()

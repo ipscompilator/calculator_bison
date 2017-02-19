@@ -28,7 +28,7 @@ namespace calc
         ADD, // +
         SUB, // -
         MUL, // *
-        DIV, // /
+        DIV // /
     };
 
     class CalcNode
