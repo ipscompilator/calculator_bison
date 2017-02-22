@@ -1,9 +1,9 @@
 #pragma once
-#include <string>
-#include <iostream>
+
 #include <memory>
 #include "Scanner.h"
 #include "CalcNode.h"
+#include "IContext.h"
 
 namespace calc
 {
@@ -11,7 +11,7 @@ namespace calc
     class Driver
     {
     public:
-        Driver();
+		Driver(std::shared_ptr<IContext> context);
         ~Driver();
 
         double getResultValue() const;
@@ -31,6 +31,7 @@ namespace calc
     private:
         std::unique_ptr<Scanner> m_scanner;
         std::unique_ptr<CalcNode> m_calcNode;
+		std::shared_ptr<IContext> m_context;
     };
 
 }

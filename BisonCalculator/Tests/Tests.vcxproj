@@ -97,10 +97,12 @@
     <ClInclude Include="..\BinaryCalcNode.h" />
     <ClInclude Include="..\CalcNode.h" />
     <ClInclude Include="..\Driver.h" />
+    <ClInclude Include="..\IContext.h" />
     <ClInclude Include="..\Parser.hpp" />
     <ClInclude Include="..\Scanner.h" />
     <ClInclude Include="..\TermCalcNode.h" />
     <ClInclude Include="..\UnaryCalcNode.h" />
+    <ClInclude Include="MockContext.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>

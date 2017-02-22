@@ -51,6 +51,12 @@
     <ClInclude Include="..\UnaryCalcNode.h">
       <Filter>Header Files\Calc</Filter>
     </ClInclude>
+    <ClInclude Include="..\IContext.h">
+      <Filter>Header Files\Calc</Filter>
+    </ClInclude>
+    <ClInclude Include="MockContext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

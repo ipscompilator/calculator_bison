@@ -84,6 +84,7 @@
   <ItemGroup>
     <ClCompile Include="BinaryCalcNode.cpp" />
     <ClCompile Include="CalcNode.cpp" />
+    <ClCompile Include="Context.cpp" />
     <ClCompile Include="Driver.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
@@ -110,7 +111,9 @@
   <ItemGroup>
     <ClInclude Include="BinaryCalcNode.h" />
     <ClInclude Include="CalcNode.h" />
+    <ClInclude Include="Context.h" />
     <ClInclude Include="Driver.h" />
+    <ClInclude Include="IContext.h" />
     <ClInclude Include="location.hh" />
     <ClInclude Include="Parser.hpp" />
     <ClInclude Include="position.hh" />

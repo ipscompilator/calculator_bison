@@ -9,7 +9,7 @@
 
 #include <stdio.h>
 #include <tchar.h>
-
+#include <memory>
 
 ///=======================================
 #define BOOST_TEST_MODULE CalculatorTests

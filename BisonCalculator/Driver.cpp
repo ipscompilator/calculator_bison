@@ -3,54 +3,67 @@
 #include "Scanner.h"
 #include <sstream>
 
-calc::Driver::Driver()
+using namespace calc;
+
+Driver::Driver(std::shared_ptr<IContext> context)
+	: m_context(context)
 {
 }
 
-calc::Driver::~Driver()
+Driver::~Driver()
 {
 }
 
-double calc::Driver::getResultValue() const
+double Driver::getResultValue() const
 {
-    return m_calcNode->Evaluate();
+	if (m_calcNode)
+	{
+		return m_calcNode->Evaluate();
+	}
+	else
+	{
+		return 0;
+	}
 }
 
-calc::Scanner & calc::Driver::getScanner() const
+Scanner & Driver::getScanner() const
 {
-    return *m_scanner;
+	return *m_scanner;
 }
 
-bool calc::Driver::parseStream(std::istream & inStream)
+bool Driver::parseStream(std::istream & inStream)
 {
-    m_scanner = std::make_unique<Scanner>(inStream);
-    calc::Parser parser(*this);
-    return (parser.parse() == 0);
+	m_scanner = std::make_unique<Scanner>(inStream);
+	Parser parser(*this);
+	return (parser.parse() == 0);
 }
 
-bool calc::Driver::parseString(const std::string & inString)
+bool Driver::parseString(const std::string & inString)
 {
-    std::istringstream iss(inString);
-    return parseStream(iss);
+	std::istringstream iss(inString);
+	return parseStream(iss);
 }
 
-void calc::Driver::error(const std::string & msg, const location & location)
+void Driver::error(const std::string & msg, const location & location)
 {
-	std::cerr << "{" << location << "} Error: " << msg << std::endl;
+	m_context->ReportIssue(msg, location);
 }
 
-void calc::Driver::printResult()
+void Driver::printResult()
 {
-    std::cout << "Node result: " << m_calcNode->Evaluate() << std::endl;
+	if (m_calcNode)
+	{
+		m_context->PrintResult(m_calcNode->Evaluate());
+	}
 }
 
-calc::CalcNode & calc::Driver::getCalcNode() const
+CalcNode & Driver::getCalcNode() const
 {
-    return *m_calcNode;
+	return *m_calcNode;
 }
 
-void calc::Driver::setCalcNode(std::unique_ptr<CalcNode> && calcNode)
+void Driver::setCalcNode(std::unique_ptr<CalcNode> && calcNode)
 {
-    m_calcNode = move(calcNode);
-    printResult();
+	m_calcNode = move(calcNode);
+	printResult();
 }
