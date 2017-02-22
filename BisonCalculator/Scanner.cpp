@@ -9,34 +9,32 @@ namespace calc {
     Scanner::Scanner(std::istream &inStream)
         : m_inStream(inStream)
     {
-		m_location = make_unique<location>();
     }
 
     Scanner::~Scanner()
     {
     }
 
-    Parser::symbol_type Scanner::lex()
+	Parser::token_type Scanner::lex(Parser::semantic_type *val, Parser::location_type *loc)
     {
-		m_location->step();
+		loc->step();
 		if (m_inStream.peek() == ' ')
         {
-            skipSpaces();
+            skipSpaces(loc);
         }
 
         if (m_inStream.peek() == '\n')
         {
-			m_location->lines(1);
+			loc->lines(1);
 			m_inStream.get();
 			
-			return Parser::make_EOL(*m_location);
+			return Parser::token_type::TOK_EOL;
         }
 
         if (std::isdigit(m_inStream.peek()))
         {
-            double val(0);
-			val = parseDouble();
-			return Parser::make_DOUBLE(val, *m_location);
+			val->doubleVal = parseDouble(loc);
+			return Parser::token_type::TOK_DOUBLE;
         }
 
         char currentChar;
@@ -44,55 +42,53 @@ namespace calc {
         {
             if (currentChar == '+')
             {
-				m_location->columns(1);
-				return Parser::make_PLUS(*m_location);
+				loc->columns(1);
+				return Parser::token_type::TOK_PLUS;
             }
             if (currentChar == '-')
             {
-				m_location->columns(1);
-				return Parser::make_MINUS(*m_location);
+				loc->columns(1);
+				return Parser::token_type::TOK_MINUS;
             }
             if (currentChar == '*')
             {
-				m_location->columns(1);
-				return Parser::make_MULTIPLY(*m_location);
+				loc->columns(1);
+				return Parser::token_type::TOK_MULTIPLY;
             }
             if (currentChar == '/')
             {
-				m_location->columns(1);
-				return Parser::make_DIVIDE(*m_location);
+				loc->columns(1);
+				return Parser::token_type::TOK_DIVIDE;
             }
             if (currentChar == '(')
             {
-				m_location->columns(1);
-				return Parser::make_LEFT_P(*m_location);
+				loc->columns(1);
+				return Parser::token_type::TOK_LEFT_P;
             }
             if (currentChar == ')')
             {
-				m_location->columns(1);
-				return Parser::make_RIGHT_P(*m_location);
+				loc->columns(1);
+				return Parser::token_type::TOK_RIGHT_P;
             }
-            
-            throw Parser::syntax_error(*m_location, "Unexpected symbol.");
         } 
         else 
         {
-			return Parser::make_END(*m_location);
+			return Parser::token_type::TOK_END;
         }
         
     }
 
-    void Scanner::skipSpaces()
+	void Scanner::skipSpaces(Parser::location_type *loc)
     {
         while (m_inStream.get() == ' ')
         {
-			m_location->columns(1);
+			loc->columns(1);
         }
-		m_location->step();
+		loc->step();
         m_inStream.unget();
     }
 
-	double Scanner::parseDouble()
+	double Scanner::parseDouble(Parser::location_type *loc)
 	{
 		double value = 0;
 		char currentChar;
@@ -102,7 +98,7 @@ namespace calc {
 			currentChar = m_inStream.get();
 			if (isdigit(currentChar))
 			{
-				m_location->columns(1);
+				loc->columns(1);
 				const int digit = currentChar - '0';
 				value = value * 10.0f + double(digit);
 			}
@@ -117,7 +113,7 @@ namespace calc {
 			return value;
 		}
 
-		m_location->columns(1); // consume .
+		loc->columns(1); // consume .
 
 		double factor = 1;
 		while (m_inStream.good())
@@ -125,7 +121,7 @@ namespace calc {
 			currentChar = m_inStream.get();
 			if (isdigit(currentChar))
 			{
-				m_location->columns(1);
+				loc->columns(1);
 				const int digit = currentChar - '0';
 				factor *= 0.1;
 				value += factor * double(digit);

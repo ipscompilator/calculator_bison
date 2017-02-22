@@ -9,15 +9,12 @@ namespace calc {
     public:
         Scanner(std::istream &inStream);
         ~Scanner();
-        Parser::symbol_type lex();
+		Parser::token_type lex(Parser::semantic_type *val, Parser::location_type *loc);
 
     private:
-        void Scanner::skipSpaces();
-		double Scanner::parseDouble();
-
-		std::unique_ptr<location> m_location;
+		void Scanner::skipSpaces(Parser::location_type *loc);
+		double Scanner::parseDouble(Parser::location_type *loc);
         std::istream &m_inStream;
     };
-    
-        
+
 }
