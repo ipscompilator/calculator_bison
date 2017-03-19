@@ -16,32 +16,34 @@
 %error-verbose
 
 %{
-    #include "stdafx.h"
-    #include "Driver.h"
-    #include "CalcNode.h"
-    #include "UnaryCalcNode.h"
-    #include "BinaryCalcNode.h"
-    #include "TermCalcNode.h"
+	#include "stdafx.h"
+	#include "ParserHeaders.h"
 
-    #undef yylex
-    #define yylex driver.getScanner().lex
+	#undef yylex
+	#define yylex driver.GetScanner().Lex
 %}
 
 %union {
-    class CalcNode * calcNode;
-    double  doubleVal;
+	class CalcNode * calcNode;
+	class StatementNode * statementNode;
+	double doubleVal;
+	unsigned stringId;
 }
 
-%destructor { delete $$; } sum_expr mul_expr unary_expr symbol
+%destructor { delete $$; } expr mul_expr unary_expr symbol
 
-%token<doubleVal>  DOUBLE
+%token<doubleVal> DOUBLE
+%token<stringId> IDENTIFIER
+%left PRINT
 %left PLUS MINUS
 %left MULTIPLY DIVIDE
 %left LEFT_P RIGHT_P
-%token END     0   "end of file"
-%token EOL     "end of line"
+%right ASSIGN
+%token END	 0	"end of file"
+%token EOL	"end of line"
 
-%type<calcNode> sum_expr mul_expr unary_expr symbol 
+%type<calcNode> expr mul_expr unary_expr symbol 
+%type<statementNode> statement statement_list
 
 %start program
 
@@ -50,33 +52,41 @@
 /* rules section */
 
 program: /* empty */
-    | program EOL
-    | program sum_expr EOL      { driver.setCalcNode(Extract($2)); }
-    | program sum_expr END      { driver.setCalcNode(Extract($2)); }
-    ;
+	| program EOL
+	| program statement_list END
+	;
 
-sum_expr: mul_expr              { std::swap($$, $1); }
-    | sum_expr PLUS mul_expr    { Emplace<BinaryCalcNode>($$, Extract($1), Extract($3), Operation::ADD); }
-    | sum_expr MINUS mul_expr   { Emplace<BinaryCalcNode>($$, Extract($1), Extract($3), Operation::SUB); }
-    ;
+statement_list: statement
+	| statement_list EOL statement
+	;
 
-mul_expr: unary_expr                { std::swap($$, $1); }
-    | mul_expr MULTIPLY unary_expr  { Emplace<BinaryCalcNode>($$, Extract($1), Extract($3), Operation::MUL); }
-    | mul_expr DIVIDE unary_expr    { Emplace<BinaryCalcNode>($$, Extract($1), Extract($3), Operation::DIV); }
-    ;
+statement: IDENTIFIER ASSIGN expr	{ Emplace<AssignNode>($$, $1, Extract($3)); }
+	| PRINT expr					{ Emplace<PrintNode>($$, Extract($2)); }
+	;
 
-unary_expr: symbol  { std::swap($$, $1); }
-    | PLUS symbol   { Emplace<UnaryCalcNode>($$, Extract($2), Operation::ADD); }
-    | MINUS symbol  { Emplace<UnaryCalcNode>($$, Extract($2), Operation::SUB); }
-    ;
+expr: mul_expr				{ std::swap($$, $1); }
+	| expr PLUS mul_expr	{ Emplace<BinaryCalcNode>($$, Extract($1), Extract($3), Operation::ADD); }
+	| expr MINUS mul_expr	{ Emplace<BinaryCalcNode>($$, Extract($1), Extract($3), Operation::SUB); }
+	;
+
+mul_expr: unary_expr				{ std::swap($$, $1); }
+	| mul_expr MULTIPLY unary_expr	{ Emplace<BinaryCalcNode>($$, Extract($1), Extract($3), Operation::MUL); }
+	| mul_expr DIVIDE unary_expr	{ Emplace<BinaryCalcNode>($$, Extract($1), Extract($3), Operation::DIV); }
+	;
+
+unary_expr: symbol		{ std::swap($$, $1); }
+	| PLUS symbol		{ Emplace<UnaryCalcNode>($$, Extract($2), Operation::ADD); }
+	| MINUS symbol		{ Emplace<UnaryCalcNode>($$, Extract($2), Operation::SUB); }
+	;
   
-symbol: DOUBLE                  { $$ = new TermCalcNode($1); }
-    | LEFT_P sum_expr RIGHT_P   { std::swap($$, $2); }
-    ;
+symbol: DOUBLE					{ $$ = new TermCalcNode($1); }
+	| IDENTIFIER				{ $$ = new VariableRefNode($1); }
+	| LEFT_P expr RIGHT_P		{ std::swap($$, $2); }
+	;
 
 %%
 
 void calc::Parser::error (const calc::Parser::location_type& loc, const std::string& msg) 
 {
-    driver.error(msg, loc);
+	driver.Error(msg, loc);
 }

@@ -1,94 +1,96 @@
 #include "stdafx.h"
 #include <cctype>
 #include "Scanner.h"
+#include "PointerHelpers.h"
 
 using namespace std;
 
 namespace calc {
 
-    Scanner::Scanner(std::istream &inStream)
-        : m_inStream(inStream)
-    {
-    }
+	Scanner::Scanner(std::istream &inStream, CStringPool & stringPool)
+		: m_inStream(inStream)
+		, m_stringPool(stringPool)
+	{
+	}
 
-    Scanner::~Scanner()
-    {
-    }
+	Scanner::~Scanner()
+	{
+	}
 
-	Parser::token_type Scanner::lex(Parser::semantic_type *val, Parser::location_type *loc)
-    {
+	Parser::token_type Scanner::Lex(Parser::semantic_type *val, Parser::location_type *loc)
+	{
 		loc->step();
 		if (m_inStream.peek() == ' ')
-        {
-            skipSpaces(loc);
-        }
+		{
+			SkipSpaces(loc);
+		}
 
-        if (m_inStream.peek() == '\n')
-        {
+		if (m_inStream.peek() == '\n')
+		{
 			loc->lines(1);
 			m_inStream.get();
 			
 			return Parser::token_type::TOK_EOL;
-        }
+		}
 
-        if (std::isdigit(m_inStream.peek()))
-        {
-			val->doubleVal = parseDouble(loc);
+		if (isdigit(m_inStream.peek()))
+		{
+			val->doubleVal = ParseDouble(loc);
 			return Parser::token_type::TOK_DOUBLE;
-        }
+		}
 
-        char currentChar;
-        if (m_inStream >> currentChar)
-        {
-            if (currentChar == '+')
-            {
+		if (isalnum(m_inStream.peek()))
+		{
+			string identifier = ParseIdentifier(loc);
+			val->stringId = m_stringPool.Insert(identifier);
+			return Parser::token_type::TOK_IDENTIFIER;
+		}
+
+		char currentChar;
+		if (m_inStream >> currentChar)
+		{
+			switch (currentChar)
+			{
+			case '+':
 				loc->columns(1);
 				return Parser::token_type::TOK_PLUS;
-            }
-            if (currentChar == '-')
-            {
+			case '-':
 				loc->columns(1);
 				return Parser::token_type::TOK_MINUS;
-            }
-            if (currentChar == '*')
-            {
+			case '*':
 				loc->columns(1);
 				return Parser::token_type::TOK_MULTIPLY;
-            }
-            if (currentChar == '/')
-            {
+			case '/':
 				loc->columns(1);
 				return Parser::token_type::TOK_DIVIDE;
-            }
-            if (currentChar == '(')
-            {
+			case '(':
 				loc->columns(1);
 				return Parser::token_type::TOK_LEFT_P;
-            }
-            if (currentChar == ')')
-            {
+			case ')':
 				loc->columns(1);
 				return Parser::token_type::TOK_RIGHT_P;
-            }
-        } 
-        else 
-        {
+			case '=':
+				loc->columns(1);
+				return Parser::token_type::TOK_ASSIGN;
+			}
+		} 
+		else 
+		{
 			return Parser::token_type::TOK_END;
-        }
-        
-    }
+		}
+	}
 
-	void Scanner::skipSpaces(Parser::location_type *loc)
-    {
-        while (m_inStream.get() == ' ')
-        {
+	void Scanner::SkipSpaces(Parser::location_type *loc)
+	{
+		while (m_inStream.get() == ' ')
+		{
 			loc->columns(1);
-        }
+		}
 		loc->step();
-        m_inStream.unget();
-    }
+		m_inStream.unget();
+	}
 
-	double Scanner::parseDouble(Parser::location_type *loc)
+	double Scanner::ParseDouble(Parser::location_type *loc)
 	{
 		double value = 0;
 		char currentChar;
@@ -136,4 +138,36 @@ namespace calc {
 		return value;
 	}
 
+	string Scanner::ParseIdentifier(Parser::location_type *loc)
+	{
+		string identifier;
+		char currentChar;
+
+		if (isalnum(m_inStream.peek()))
+		{
+			identifier += m_inStream.get();
+			loc->columns(1);
+		}
+		else
+		{
+			return identifier;
+		}
+
+		while (m_inStream.good())
+		{
+			currentChar = m_inStream.get();
+			if (isalnum(currentChar))
+			{
+				loc->columns(1);
+				identifier += currentChar;
+			}
+			else
+			{
+				break;
+			}
+		}
+
+		m_inStream.unget();
+		return identifier;
+	}
 }

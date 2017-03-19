@@ -1,24 +1,28 @@
 #include "stdafx.h"
 #include "Driver.h"
 #include "Scanner.h"
-#include <sstream>
+#include "CalcNode.h"
+#include "StatementNode.h"
+#include "StringPool.h"
+#include "CalcContext.h"
 
 using namespace calc;
 
-Driver::Driver(std::shared_ptr<IContext> context)
-	: m_context(context)
+Driver::Driver(std::shared_ptr<IOutputContext> context)
+	: m_outputContext(context)
 {
+	m_calcContext = std::make_shared<CalcContext>(m_stringPool, context);
 }
 
 Driver::~Driver()
 {
 }
 
-double Driver::getResultValue() const
+double Driver::GetResultValue() const
 {
 	if (m_calcNode)
 	{
-		return m_calcNode->Evaluate();
+		return m_calcNode->Evaluate(*m_calcContext);
 	}
 	else
 	{
@@ -26,44 +30,53 @@ double Driver::getResultValue() const
 	}
 }
 
-Scanner & Driver::getScanner() const
+calc::Scanner & Driver::GetScanner() const
 {
 	return *m_scanner;
 }
 
-bool Driver::parseStream(std::istream & inStream)
+bool Driver::ParseStream(std::istream & inStream)
 {
-	m_scanner = std::make_unique<Scanner>(inStream);
+	m_scanner = std::make_unique<Scanner>(inStream, m_stringPool);
 	Parser parser(*this);
 	return (parser.parse() == 0);
 }
 
-bool Driver::parseString(const std::string & inString)
+bool Driver::ParseString(const std::string & inString)
 {
 	std::istringstream iss(inString);
-	return parseStream(iss);
+	return ParseStream(iss);
 }
 
-void Driver::error(const std::string & msg, const location & location)
+void Driver::Error(const std::string & msg, const location & location)
 {
-	m_context->ReportIssue(msg, location);
+	m_outputContext->ReportIssue(msg, location);
 }
 
-void Driver::printResult()
+void Driver::PrintResult()
 {
 	if (m_calcNode)
 	{
-		m_context->PrintResult(m_calcNode->Evaluate());
+		m_outputContext->PrintResult(m_calcNode->Evaluate(*m_calcContext));
 	}
 }
 
-CalcNode & Driver::getCalcNode() const
+CalcNode & Driver::GetCalcNode() const
 {
 	return *m_calcNode;
 }
 
-void Driver::setCalcNode(std::unique_ptr<CalcNode> && calcNode)
+void Driver::SetCalcNode(std::unique_ptr<CalcNode> && calcNode)
 {
 	m_calcNode = move(calcNode);
-	printResult();
+	PrintResult();
+}
+
+void calc::Driver::AddStatement(StatementPtr && statementNode)
+{
+	if (statementNode)
+	{
+		statementNode->Execute(*m_calcContext);
+		m_statements.push_back(move(statementNode));
+	}
 }

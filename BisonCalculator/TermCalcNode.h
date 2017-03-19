@@ -4,14 +4,14 @@
 namespace calc
 {
 
-    class TermCalcNode : public CalcNode
-    {
-    public:
-        TermCalcNode(double value);
-        double Evaluate() const override;
+	class TermCalcNode : public CalcNode
+	{
+	public:
+		TermCalcNode(double value);
+		double Evaluate(CalcContext & context) const override;
 
-    private:
-        double m_value;
-    };
+	private:
+		double m_value;
+	};
 
 }

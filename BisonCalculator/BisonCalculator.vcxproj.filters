@@ -16,17 +16,41 @@
     <Filter Include="Bison Flex Files">
       <UniqueIdentifier>{ac9194c2-fcf5-4d42-842a-5e19cf399e54}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\CalcNode">
-      <UniqueIdentifier>{8513854b-597a-4b87-a08d-08b94c4e8c4e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\CalcNode">
-      <UniqueIdentifier>{e64e6914-489c-423d-90e2-6b89053040ab}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Generated files">
       <UniqueIdentifier>{1162659a-4a3e-4879-933e-9f5fc653ee29}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Generated files">
       <UniqueIdentifier>{5732f516-58e3-43c7-a203-ba951fb205fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Context">
+      <UniqueIdentifier>{ccfa1975-a4af-4367-9776-9997cfa58525}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utils">
+      <UniqueIdentifier>{8abf8ec4-fdd5-4590-8767-6d0fba020f69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Context">
+      <UniqueIdentifier>{e8e2a0fa-0892-4a26-bd5e-b10b9ae32302}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utils">
+      <UniqueIdentifier>{beee6927-d898-485a-b546-1d76c74ae2ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\AST">
+      <UniqueIdentifier>{9a5530cb-f4be-488f-8e9a-e2390ce6f5dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\AST\CalcNode">
+      <UniqueIdentifier>{8513854b-597a-4b87-a08d-08b94c4e8c4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\AST\StatementNode">
+      <UniqueIdentifier>{9b4bf569-7706-4d8e-92b6-912cbc95c152}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\AST">
+      <UniqueIdentifier>{14637002-f536-4479-aad3-3f6651f1bcad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\AST\CalcNode">
+      <UniqueIdentifier>{e64e6914-489c-423d-90e2-6b89053040ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\AST\StatementNode">
+      <UniqueIdentifier>{1b255c94-e5ff-45ba-9f56-81a800a059eb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -43,28 +67,37 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BinaryCalcNode.cpp">
-      <Filter>Source Files\CalcNode</Filter>
-    </ClCompile>
-    <ClCompile Include="CalcNode.cpp">
-      <Filter>Source Files\CalcNode</Filter>
+      <Filter>Source Files\AST\CalcNode</Filter>
     </ClCompile>
     <ClCompile Include="TermCalcNode.cpp">
-      <Filter>Source Files\CalcNode</Filter>
+      <Filter>Source Files\AST\CalcNode</Filter>
     </ClCompile>
     <ClCompile Include="UnaryCalcNode.cpp">
-      <Filter>Source Files\CalcNode</Filter>
+      <Filter>Source Files\AST\CalcNode</Filter>
     </ClCompile>
     <ClCompile Include="Parser.cpp">
       <Filter>Source Files\Generated files</Filter>
     </ClCompile>
-    <ClCompile Include="Context.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="VariableRefNode.cpp">
+      <Filter>Source Files\AST\CalcNode</Filter>
+    </ClCompile>
+    <ClCompile Include="AssignNode.cpp">
+      <Filter>Source Files\AST\StatementNode</Filter>
+    </ClCompile>
+    <ClCompile Include="PrintNode.cpp">
+      <Filter>Source Files\AST\StatementNode</Filter>
+    </ClCompile>
+    <ClCompile Include="StringPool.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="CalcContext.cpp">
+      <Filter>Source Files\Context</Filter>
+    </ClCompile>
+    <ClCompile Include="OutputContext.cpp">
+      <Filter>Source Files\Context</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stack.hh">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Driver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -72,16 +105,16 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BinaryCalcNode.h">
-      <Filter>Header Files\CalcNode</Filter>
+      <Filter>Header Files\AST\CalcNode</Filter>
     </ClInclude>
     <ClInclude Include="CalcNode.h">
-      <Filter>Header Files\CalcNode</Filter>
+      <Filter>Header Files\AST\CalcNode</Filter>
     </ClInclude>
     <ClInclude Include="TermCalcNode.h">
-      <Filter>Header Files\CalcNode</Filter>
+      <Filter>Header Files\AST\CalcNode</Filter>
     </ClInclude>
     <ClInclude Include="UnaryCalcNode.h">
-      <Filter>Header Files\CalcNode</Filter>
+      <Filter>Header Files\AST\CalcNode</Filter>
     </ClInclude>
     <ClInclude Include="location.hh">
       <Filter>Header Files\Generated files</Filter>
@@ -93,12 +126,42 @@
       <Filter>Header Files\Generated files</Filter>
     </ClInclude>
     <ClInclude Include="Scanner.h">
-      <Filter>Header Files\Generated files</Filter>
-    </ClInclude>
-    <ClInclude Include="IContext.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Context.h">
+    <ClInclude Include="StatementNode.h">
+      <Filter>Header Files\AST\StatementNode</Filter>
+    </ClInclude>
+    <ClInclude Include="VariableRefNode.h">
+      <Filter>Header Files\AST\CalcNode</Filter>
+    </ClInclude>
+    <ClInclude Include="AssignNode.h">
+      <Filter>Header Files\AST\StatementNode</Filter>
+    </ClInclude>
+    <ClInclude Include="INode.h">
+      <Filter>Header Files\AST</Filter>
+    </ClInclude>
+    <ClInclude Include="StringPool.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="PointerHelpers.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="stack.hh">
+      <Filter>Header Files\Generated files</Filter>
+    </ClInclude>
+    <ClInclude Include="PrintNode.h">
+      <Filter>Header Files\AST\StatementNode</Filter>
+    </ClInclude>
+    <ClInclude Include="CalcContext.h">
+      <Filter>Header Files\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="IOutputContext.h">
+      <Filter>Header Files\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="OutputContext.h">
+      <Filter>Header Files\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="ParserHeaders.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

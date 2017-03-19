@@ -4,16 +4,15 @@
 namespace calc
 {
 
-    class UnaryCalcNode : public CalcNode
-    {
-    public:
+	class UnaryCalcNode : public CalcNode
+	{
+	public:
 		UnaryCalcNode(std::unique_ptr<CalcNode> && node, Operation operation);
-        ~UnaryCalcNode();
-        double Evaluate() const override;
+		double Evaluate(CalcContext & context) const override;
 
 	private:
 		std::unique_ptr<CalcNode> m_node;
-        Operation m_operation;
-    };
+		Operation m_operation;
+	};
 
 }
