@@ -18,18 +18,6 @@ Driver::~Driver()
 {
 }
 
-double Driver::GetResultValue() const
-{
-	if (m_calcNode)
-	{
-		return m_calcNode->Evaluate(*m_calcContext);
-	}
-	else
-	{
-		return 0;
-	}
-}
-
 calc::Scanner & Driver::GetScanner() const
 {
 	return *m_scanner;
@@ -51,25 +39,6 @@ bool Driver::ParseString(const std::string & inString)
 void Driver::Error(const std::string & msg, const location & location)
 {
 	m_outputContext->ReportIssue(msg, location);
-}
-
-void Driver::PrintResult()
-{
-	if (m_calcNode)
-	{
-		m_outputContext->PrintResult(m_calcNode->Evaluate(*m_calcContext));
-	}
-}
-
-CalcNode & Driver::GetCalcNode() const
-{
-	return *m_calcNode;
-}
-
-void Driver::SetCalcNode(std::unique_ptr<CalcNode> && calcNode)
-{
-	m_calcNode = move(calcNode);
-	PrintResult();
 }
 
 void calc::Driver::AddStatement(StatementPtr && statementNode)

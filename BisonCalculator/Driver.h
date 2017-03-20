@@ -15,25 +15,14 @@ namespace calc
 		~Driver();
 
 		using StatementPtr = std::unique_ptr<StatementNode>;
-
-		double GetResultValue() const;
-
-		Scanner & GetScanner() const;
-
-		CalcNode & GetCalcNode() const;
-		void SetCalcNode(std::unique_ptr<CalcNode> && calcNode);
 		void AddStatement(StatementPtr && statementNode);
-
+		Scanner & GetScanner() const;
 		bool ParseStream(std::istream & inStream);
 		bool ParseString(const std::string & inString);
-
 		void Error(const std::string & msg, const location & location);
-
-		void PrintResult();
 
 	private:
 		std::unique_ptr<Scanner> m_scanner;
-		std::unique_ptr<CalcNode> m_calcNode;
 		std::shared_ptr<IOutputContext> m_outputContext;
 		
 		std::vector<StatementPtr> m_statements;
