@@ -11,10 +11,12 @@ namespace calc
 	class Driver
 	{
 	public:
-		Driver(std::shared_ptr<IOutputContext> context);
+		using StatementPtr = std::unique_ptr<StatementNode>;
+		using OutputContextPtr = std::shared_ptr<IOutputContext>;
+
+		Driver(OutputContextPtr context);
 		~Driver();
 
-		using StatementPtr = std::unique_ptr<StatementNode>;
 		void AddStatement(StatementPtr && statementNode);
 		Scanner & GetScanner() const;
 		bool ParseStream(std::istream & inStream);
@@ -23,10 +25,9 @@ namespace calc
 
 	private:
 		std::unique_ptr<Scanner> m_scanner;
-		std::shared_ptr<IOutputContext> m_outputContext;
-		
 		std::vector<StatementPtr> m_statements;
 		CStringPool m_stringPool;
+		OutputContextPtr m_outputContext;
 		std::shared_ptr<CalcContext> m_calcContext;
 	};
 }

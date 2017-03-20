@@ -43,7 +43,7 @@
 %token EOL	"end of line"
 
 %type<calcNode> expr mul_expr unary_expr symbol 
-%type<statementNode> statement statement_list
+%type<statementNode> statement statement_line statement_line_list
 
 %start program
 
@@ -52,13 +52,15 @@
 /* rules section */
 
 program: /* empty */
-	| program EOL
-	| program statement_list END
-	| program statement_list EOL END
+	| program statement_line_list END
 	;
 
-statement_list: statement
-	| statement_list EOL statement
+statement_line_list: statement_line
+	| statement_line_list statement_line
+	;
+
+statement_line: statement EOL
+	| error EOL
 	;
 
 statement: IDENTIFIER ASSIGN expr	{ auto node = std::make_unique<AssignNode>($1, Extract($3)); driver.AddStatement(std::move(node)); }
