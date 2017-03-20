@@ -11,13 +11,11 @@ int main()
 {
 	Driver driver(make_shared<OutputContext>());
 
-	//string expr = "(-5.5+6)*-1";
-	string expr = "alice";
+	string expr = "print (-5.5+6)*-1";
 	cout << expr << endl;
 	driver.ParseString(expr);
-#if 0
+	
 	cout << endl << "Enter expression: ";
-	driver.ParseStream(std::cin);
-#endif
+	driver.ParseStream(cin);
 	return 0;
 }

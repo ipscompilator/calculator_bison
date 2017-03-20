@@ -3,8 +3,8 @@
 #include "location.hh"
 #include "StringPool.h"
 
-namespace calc {
-
+namespace calc
+{
 	class Scanner
 	{
 	public:
@@ -19,5 +19,4 @@ namespace calc {
 		std::istream &m_inStream;
 		CStringPool & m_stringPool;
 	};
-
 }

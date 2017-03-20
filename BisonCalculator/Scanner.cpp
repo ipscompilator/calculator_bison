@@ -42,8 +42,15 @@ namespace calc {
 		if (isalnum(m_inStream.peek()))
 		{
 			string identifier = ParseIdentifier(loc);
-			val->stringId = m_stringPool.Insert(identifier);
-			return Parser::token_type::TOK_IDENTIFIER;
+			if (identifier == "print")
+			{
+				return Parser::token_type::TOK_PRINT;
+			}
+			else
+			{
+				val->stringId = m_stringPool.Insert(identifier);
+				return Parser::token_type::TOK_IDENTIFIER;
+			}
 		}
 
 		char currentChar;

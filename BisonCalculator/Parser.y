@@ -54,14 +54,15 @@
 program: /* empty */
 	| program EOL
 	| program statement_list END
+	| program statement_list EOL END
 	;
 
 statement_list: statement
 	| statement_list EOL statement
 	;
 
-statement: IDENTIFIER ASSIGN expr	{ Emplace<AssignNode>($$, $1, Extract($3)); }
-	| PRINT expr					{ Emplace<PrintNode>($$, Extract($2)); }
+statement: IDENTIFIER ASSIGN expr	{ auto node = std::make_unique<AssignNode>($1, Extract($3)); driver.AddStatement(std::move(node)); }
+	| PRINT expr					{ auto node = std::make_unique<PrintNode>(Extract($2)); driver.AddStatement(std::move(node)); }
 	;
 
 expr: mul_expr				{ std::swap($$, $1); }
