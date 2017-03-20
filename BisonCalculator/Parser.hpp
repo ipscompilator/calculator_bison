@@ -126,8 +126,8 @@ namespace calc {
     {
     #line 26 "Parser.y" // lalr1.cc:377
 
-	class CalcNode * calcNode;
-	class StatementNode * statementNode;
+	class ICalcNode * calcNode;
+	class IStatementNode * statementNode;
 	double doubleVal;
 	unsigned stringId;
 

@@ -4,7 +4,7 @@
 using namespace calc;
 using namespace std;
 
-PrintNode::PrintNode(std::unique_ptr<CalcNode> && node)
+PrintNode::PrintNode(std::unique_ptr<ICalcNode> && node)
 	: m_node(move(node))
 {
 }

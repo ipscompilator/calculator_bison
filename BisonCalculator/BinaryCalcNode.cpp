@@ -3,7 +3,7 @@
 
 using namespace calc;
 
-BinaryCalcNode::BinaryCalcNode(std::unique_ptr<CalcNode> && left, std::unique_ptr<CalcNode> && right, Operation operation)
+BinaryCalcNode::BinaryCalcNode(std::unique_ptr<ICalcNode> && left, std::unique_ptr<ICalcNode> && right, Operation operation)
 	: m_left(move(left))
 	, m_right(move(right))
 	, m_operation(operation)

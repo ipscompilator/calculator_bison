@@ -119,7 +119,7 @@
     <ClInclude Include="AssignNode.h" />
     <ClInclude Include="BinaryCalcNode.h" />
     <ClInclude Include="CalcContext.h" />
-    <ClInclude Include="CalcNode.h" />
+    <ClInclude Include="ICalcNode.h" />
     <ClInclude Include="OutputContext.h" />
     <ClInclude Include="Driver.h" />
     <ClInclude Include="IOutputContext.h" />
@@ -132,7 +132,7 @@
     <ClInclude Include="PrintNode.h" />
     <ClInclude Include="Scanner.h" />
     <ClInclude Include="stack.hh" />
-    <ClInclude Include="StatementNode.h" />
+    <ClInclude Include="IStatementNode.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="StringPool.h" />
     <ClInclude Include="TermCalcNode.h" />

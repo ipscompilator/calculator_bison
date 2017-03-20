@@ -1,9 +1,9 @@
 #pragma once
-#include "CalcNode.h"
+#include "ICalcNode.h"
 
 namespace calc
 {
-	class VariableRefNode : public CalcNode
+	class VariableRefNode : public ICalcNode
 	{
 	public:
 		VariableRefNode(unsigned stringId);

@@ -1,16 +1,16 @@
 #pragma once
-#include "StatementNode.h"
-#include "CalcNode.h"
+#include "IStatementNode.h"
+#include "ICalcNode.h"
 
 namespace calc
 {
-	class AssignNode : public StatementNode
+	class AssignNode : public IStatementNode
 	{
 	public:
-		AssignNode(unsigned nameId, std::unique_ptr<CalcNode> && node);
+		AssignNode(unsigned nameId, std::unique_ptr<ICalcNode> && node);
 		void Execute(CalcContext & context)const override;
 	private:
 		unsigned m_nameId;
-		std::unique_ptr<CalcNode> m_node;
+		std::unique_ptr<ICalcNode> m_node;
 	};
 }

@@ -1,8 +1,6 @@
 #include "stdafx.h"
 #include "OutputContext.h"
 #include "Driver.h"
-#include "CalcNode.h"
-#include "TermCalcNode.h"
 
 using namespace std;
 using namespace calc;

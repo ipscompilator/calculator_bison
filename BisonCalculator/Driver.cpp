@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "Driver.h"
 #include "Scanner.h"
-#include "CalcNode.h"
-#include "StatementNode.h"
+#include "ICalcNode.h"
+#include "IStatementNode.h"
 #include "StringPool.h"
 #include "CalcContext.h"
 

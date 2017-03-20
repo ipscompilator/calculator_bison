@@ -1,10 +1,10 @@
 #pragma once
-#include "CalcNode.h"
+#include "ICalcNode.h"
 
 namespace calc
 {
 
-	class TermCalcNode : public CalcNode
+	class TermCalcNode : public ICalcNode
 	{
 	public:
 		TermCalcNode(double value);

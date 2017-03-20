@@ -107,9 +107,6 @@
     <ClInclude Include="BinaryCalcNode.h">
       <Filter>Header Files\AST\CalcNode</Filter>
     </ClInclude>
-    <ClInclude Include="CalcNode.h">
-      <Filter>Header Files\AST\CalcNode</Filter>
-    </ClInclude>
     <ClInclude Include="TermCalcNode.h">
       <Filter>Header Files\AST\CalcNode</Filter>
     </ClInclude>
@@ -127,9 +124,6 @@
     </ClInclude>
     <ClInclude Include="Scanner.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StatementNode.h">
-      <Filter>Header Files\AST\StatementNode</Filter>
     </ClInclude>
     <ClInclude Include="VariableRefNode.h">
       <Filter>Header Files\AST\CalcNode</Filter>
@@ -163,6 +157,12 @@
     </ClInclude>
     <ClInclude Include="ParserHeaders.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ICalcNode.h">
+      <Filter>Header Files\AST\CalcNode</Filter>
+    </ClInclude>
+    <ClInclude Include="IStatementNode.h">
+      <Filter>Header Files\AST\StatementNode</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

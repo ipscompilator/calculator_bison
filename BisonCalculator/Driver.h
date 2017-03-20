@@ -1,17 +1,16 @@
 #pragma once
 #include "StringPool.h"
 #include "CalcContext.h"
-#include "CalcNode.h"
 #include "IOutputContext.h"
 #include "Scanner.h"
-#include "StatementNode.h"
+#include "IStatementNode.h"
 
 namespace calc
 {
 	class Driver
 	{
 	public:
-		using StatementPtr = std::unique_ptr<StatementNode>;
+		using StatementPtr = std::unique_ptr<IStatementNode>;
 		using OutputContextPtr = std::shared_ptr<IOutputContext>;
 
 		Driver(OutputContextPtr context);

@@ -4,7 +4,7 @@
 using namespace calc;
 using namespace std;
 
-AssignNode::AssignNode(unsigned nameId, std::unique_ptr<CalcNode> && node)
+AssignNode::AssignNode(unsigned nameId, std::unique_ptr<ICalcNode> && node)
 	: m_nameId(nameId)
 	, m_node(move(node))
 {

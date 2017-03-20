@@ -3,7 +3,7 @@
 
 using namespace calc;
 
-UnaryCalcNode::UnaryCalcNode(std::unique_ptr<CalcNode> && node, Operation operation)
+UnaryCalcNode::UnaryCalcNode(std::unique_ptr<ICalcNode> && node, Operation operation)
 	: m_node(std::move(node))
 	, m_operation(operation)
 {
