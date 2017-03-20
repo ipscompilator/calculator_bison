@@ -9,7 +9,7 @@ int main()
 {
 	Driver driver(make_shared<OutputContext>());
 
-	string expr = "print (-5.5+6)*-1";
+	string expr = "print (-5.5+6)*-1\n";
 	cout << expr << endl;
 	driver.ParseString(expr);
 	

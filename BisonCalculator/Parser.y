@@ -20,12 +20,12 @@
 	#include "ParserHeaders.h"
 
 	#undef yylex
-	#define yylex driver.GetScanner().Lex
+	#define yylex driver.Advance
 %}
 
 %union {
-	class CalcNode * calcNode;
-	class StatementNode * statementNode;
+	class ICalcNode * calcNode;
+	class IStatementNode * statementNode;
 	double doubleVal;
 	unsigned stringId;
 }
@@ -65,6 +65,7 @@ statement_line: statement EOL
 
 statement: IDENTIFIER ASSIGN expr	{ auto node = std::make_unique<AssignNode>($1, Extract($3)); driver.AddStatement(std::move(node)); }
 	| PRINT expr					{ auto node = std::make_unique<PrintNode>(Extract($2)); driver.AddStatement(std::move(node)); }
+	| /* empty */
 	;
 
 expr: mul_expr				{ std::swap($$, $1); }

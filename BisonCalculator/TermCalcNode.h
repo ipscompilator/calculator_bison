@@ -3,7 +3,6 @@
 
 namespace calc
 {
-
 	class TermCalcNode : public ICalcNode
 	{
 	public:
@@ -13,5 +12,4 @@ namespace calc
 	private:
 		double m_value;
 	};
-
 }

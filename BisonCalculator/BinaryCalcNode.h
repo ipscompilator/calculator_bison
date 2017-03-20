@@ -3,7 +3,6 @@
 
 namespace calc
 {
-
 	class BinaryCalcNode : public ICalcNode
 	{
 	public:

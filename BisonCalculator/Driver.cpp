@@ -19,11 +19,6 @@ Driver::~Driver()
 {
 }
 
-Scanner & Driver::GetScanner() const
-{
-	return *m_scanner;
-}
-
 bool Driver::ParseStream(istream & inStream)
 {
 	m_scanner = make_unique<Scanner>(inStream, m_stringPool);
@@ -42,11 +37,16 @@ void Driver::Error(const string & msg, const location & location)
 	m_outputContext->ReportIssue(msg, location);
 }
 
+Parser::token_type Driver::Advance(Parser::semantic_type * val, Parser::location_type * loc)
+{
+	return m_scanner->Lex(val, loc);
+}
+
 void Driver::AddStatement(StatementPtr && statementNode)
 {
 	if (statementNode)
 	{
+		//m_program.AddStatement(move(statementNode));
 		statementNode->Execute(*m_calcContext);
-		m_statements.push_back(move(statementNode));
 	}
 }

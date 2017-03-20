@@ -84,6 +84,12 @@
     <ClInclude Include="..\VariableRefNode.h">
       <Filter>Header Files\Calc</Filter>
     </ClInclude>
+    <ClInclude Include="..\BlockNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\IBlockNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -126,6 +132,9 @@
       <Filter>Source Files\Calc</Filter>
     </ClCompile>
     <ClCompile Include="..\VariableRefNode.cpp">
+      <Filter>Source Files\Calc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\BlockNode.cpp">
       <Filter>Source Files\Calc</Filter>
     </ClCompile>
   </ItemGroup>

@@ -3,7 +3,6 @@
 
 namespace calc
 {
-
 	class UnaryCalcNode : public ICalcNode
 	{
 	public:
@@ -14,5 +13,4 @@ namespace calc
 		std::unique_ptr<ICalcNode> m_node;
 		Operation m_operation;
 	};
-
 }

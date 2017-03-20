@@ -100,9 +100,11 @@
   <ItemGroup>
     <ClInclude Include="..\AssignNode.h" />
     <ClInclude Include="..\BinaryCalcNode.h" />
+    <ClInclude Include="..\BlockNode.h" />
     <ClInclude Include="..\CalcContext.h" />
     <ClInclude Include="..\CalcNode.h" />
     <ClInclude Include="..\Driver.h" />
+    <ClInclude Include="..\IBlockNode.h" />
     <ClInclude Include="..\IContext.h" />
     <ClInclude Include="..\INode.h" />
     <ClInclude Include="..\IOutputContext.h" />
@@ -122,6 +124,7 @@
   <ItemGroup>
     <ClCompile Include="..\AssignNode.cpp" />
     <ClCompile Include="..\BinaryCalcNode.cpp" />
+    <ClCompile Include="..\BlockNode.cpp" />
     <ClCompile Include="..\CalcContext.cpp" />
     <ClCompile Include="..\Driver.cpp" />
     <ClCompile Include="..\OutputContext.cpp" />

@@ -4,6 +4,7 @@
 #include "IOutputContext.h"
 #include "Scanner.h"
 #include "IStatementNode.h"
+#include "BlockNode.h"
 
 namespace calc
 {
@@ -16,17 +17,17 @@ namespace calc
 		Driver(OutputContextPtr context);
 		~Driver();
 
+		Parser::token_type Advance(Parser::semantic_type *val, Parser::location_type *loc);
 		void AddStatement(StatementPtr && statementNode);
-		Scanner & GetScanner() const;
 		bool ParseStream(std::istream & inStream);
 		bool ParseString(const std::string & inString);
 		void Error(const std::string & msg, const location & location);
 
 	private:
 		std::unique_ptr<Scanner> m_scanner;
-		std::vector<StatementPtr> m_statements;
 		CStringPool m_stringPool;
 		OutputContextPtr m_outputContext;
 		std::shared_ptr<CalcContext> m_calcContext;
+		//BlockNode m_program;
 	};
 }

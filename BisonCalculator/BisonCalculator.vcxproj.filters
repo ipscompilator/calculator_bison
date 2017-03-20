@@ -52,6 +52,12 @@
     <Filter Include="Header Files\AST\StatementNode">
       <UniqueIdentifier>{1b255c94-e5ff-45ba-9f56-81a800a059eb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\AST\BlockNode">
+      <UniqueIdentifier>{d97bef31-04be-4a44-a11d-8918facf4a79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\AST\BlockNode">
+      <UniqueIdentifier>{4f488de7-16b7-43a0-8226-c92a792c43e2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -95,6 +101,9 @@
     </ClCompile>
     <ClCompile Include="OutputContext.cpp">
       <Filter>Source Files\Context</Filter>
+    </ClCompile>
+    <ClCompile Include="BlockNode.cpp">
+      <Filter>Source Files\AST\BlockNode</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -163,6 +172,12 @@
     </ClInclude>
     <ClInclude Include="IStatementNode.h">
       <Filter>Header Files\AST\StatementNode</Filter>
+    </ClInclude>
+    <ClInclude Include="IBlockNode.h">
+      <Filter>Header Files\AST\BlockNode</Filter>
+    </ClInclude>
+    <ClInclude Include="BlockNode.h">
+      <Filter>Header Files\AST\BlockNode</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

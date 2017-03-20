@@ -38,7 +38,7 @@
 	#include "ParserHeaders.h"
 
 	#undef yylex
-	#define yylex driver.GetScanner().Lex
+	#define yylex driver.Advance
 
 #line 44 "Parser.cpp" // lalr1.cc:404
 
@@ -662,74 +662,74 @@ namespace calc {
 #line 663 "Parser.cpp" // lalr1.cc:859
     break;
 
-  case 10:
-#line 70 "Parser.y" // lalr1.cc:859
+  case 11:
+#line 71 "Parser.y" // lalr1.cc:859
     { std::swap((yylhs.value.calcNode), (yystack_[0].value.calcNode)); }
 #line 669 "Parser.cpp" // lalr1.cc:859
     break;
 
-  case 11:
-#line 71 "Parser.y" // lalr1.cc:859
+  case 12:
+#line 72 "Parser.y" // lalr1.cc:859
     { Emplace<BinaryCalcNode>((yylhs.value.calcNode), Extract((yystack_[2].value.calcNode)), Extract((yystack_[0].value.calcNode)), Operation::ADD); }
 #line 675 "Parser.cpp" // lalr1.cc:859
     break;
 
-  case 12:
-#line 72 "Parser.y" // lalr1.cc:859
+  case 13:
+#line 73 "Parser.y" // lalr1.cc:859
     { Emplace<BinaryCalcNode>((yylhs.value.calcNode), Extract((yystack_[2].value.calcNode)), Extract((yystack_[0].value.calcNode)), Operation::SUB); }
 #line 681 "Parser.cpp" // lalr1.cc:859
     break;
 
-  case 13:
-#line 75 "Parser.y" // lalr1.cc:859
+  case 14:
+#line 76 "Parser.y" // lalr1.cc:859
     { std::swap((yylhs.value.calcNode), (yystack_[0].value.calcNode)); }
 #line 687 "Parser.cpp" // lalr1.cc:859
     break;
 
-  case 14:
-#line 76 "Parser.y" // lalr1.cc:859
+  case 15:
+#line 77 "Parser.y" // lalr1.cc:859
     { Emplace<BinaryCalcNode>((yylhs.value.calcNode), Extract((yystack_[2].value.calcNode)), Extract((yystack_[0].value.calcNode)), Operation::MUL); }
 #line 693 "Parser.cpp" // lalr1.cc:859
     break;
 
-  case 15:
-#line 77 "Parser.y" // lalr1.cc:859
+  case 16:
+#line 78 "Parser.y" // lalr1.cc:859
     { Emplace<BinaryCalcNode>((yylhs.value.calcNode), Extract((yystack_[2].value.calcNode)), Extract((yystack_[0].value.calcNode)), Operation::DIV); }
 #line 699 "Parser.cpp" // lalr1.cc:859
     break;
 
-  case 16:
-#line 80 "Parser.y" // lalr1.cc:859
+  case 17:
+#line 81 "Parser.y" // lalr1.cc:859
     { std::swap((yylhs.value.calcNode), (yystack_[0].value.calcNode)); }
 #line 705 "Parser.cpp" // lalr1.cc:859
     break;
 
-  case 17:
-#line 81 "Parser.y" // lalr1.cc:859
+  case 18:
+#line 82 "Parser.y" // lalr1.cc:859
     { Emplace<UnaryCalcNode>((yylhs.value.calcNode), Extract((yystack_[0].value.calcNode)), Operation::ADD); }
 #line 711 "Parser.cpp" // lalr1.cc:859
     break;
 
-  case 18:
-#line 82 "Parser.y" // lalr1.cc:859
+  case 19:
+#line 83 "Parser.y" // lalr1.cc:859
     { Emplace<UnaryCalcNode>((yylhs.value.calcNode), Extract((yystack_[0].value.calcNode)), Operation::SUB); }
 #line 717 "Parser.cpp" // lalr1.cc:859
     break;
 
-  case 19:
-#line 85 "Parser.y" // lalr1.cc:859
+  case 20:
+#line 86 "Parser.y" // lalr1.cc:859
     { (yylhs.value.calcNode) = new TermCalcNode((yystack_[0].value.doubleVal)); }
 #line 723 "Parser.cpp" // lalr1.cc:859
     break;
 
-  case 20:
-#line 86 "Parser.y" // lalr1.cc:859
+  case 21:
+#line 87 "Parser.y" // lalr1.cc:859
     { (yylhs.value.calcNode) = new VariableRefNode((yystack_[0].value.stringId)); }
 #line 729 "Parser.cpp" // lalr1.cc:859
     break;
 
-  case 21:
-#line 87 "Parser.y" // lalr1.cc:859
+  case 22:
+#line 88 "Parser.y" // lalr1.cc:859
     { std::swap((yylhs.value.calcNode), (yystack_[1].value.calcNode)); }
 #line 735 "Parser.cpp" // lalr1.cc:859
     break;
@@ -990,32 +990,32 @@ namespace calc {
   }
 
 
-  const signed char Parser::yypact_ninf_ = -12;
+  const signed char Parser::yypact_ninf_ = -6;
 
-  const signed char Parser::yytable_ninf_ = -1;
+  const signed char Parser::yytable_ninf_ = -11;
 
   const signed char
   Parser::yypact_[] =
   {
-     -12,     9,   -12,   -11,    -4,    -3,    15,   -12,    -2,   -12,
-      -3,   -12,   -12,     2,     2,    -3,    18,    21,   -12,   -12,
-     -12,   -12,   -12,    18,   -12,   -12,    11,    -3,    -3,    -3,
-      -3,   -12,    21,    21,   -12,   -12
+      -6,     0,    -6,    -5,    10,    13,     2,    -6,    20,    -6,
+      13,    -6,    -6,     8,     8,    13,    18,    19,    -6,    -6,
+      -6,    -6,    -6,    18,    -6,    -6,     3,    13,    13,    13,
+      13,    -6,    19,    19,    -6,    -6
   };
 
   const unsigned char
   Parser::yydefact_[] =
   {
        2,     0,     1,     0,     0,     0,     0,     4,     0,     7,
-       0,    19,    20,     0,     0,     0,     9,    10,    13,    16,
-       3,     5,     6,     8,    17,    18,     0,     0,     0,     0,
-       0,    21,    11,    12,    14,    15
+       0,    20,    21,     0,     0,     0,     9,    11,    14,    17,
+       3,     5,     6,     8,    18,    19,     0,     0,     0,     0,
+       0,    22,    12,    13,    15,    16
   };
 
   const signed char
   Parser::yypgoto_[] =
   {
-     -12,   -12,   -12,    25,   -12,    13,    -1,     3,    22
+      -6,    -6,    -6,    30,    -6,    11,     4,     5,    16
   };
 
   const signed char
@@ -1024,22 +1024,22 @@ namespace calc {
       -1,     1,     6,     7,     8,    16,    17,    18,    19
   };
 
-  const unsigned char
+  const signed char
   Parser::yytable_[] =
   {
-      11,    12,     9,    13,    14,    11,    12,    15,    10,     2,
-       3,    22,    15,     4,     5,    20,     3,    27,    28,     4,
-       5,     0,    31,    23,    27,    28,    32,    33,    26,    29,
-      30,    21,    34,    35,     0,    24,    25
+       2,     3,    20,     3,     4,     5,     4,     5,     9,    27,
+      28,    11,    12,   -10,    31,   -10,    11,    12,    15,    13,
+      14,    23,    10,    15,    27,    28,    26,    29,    30,    24,
+      25,    32,    33,    22,    34,    35,    21
   };
 
-  const signed char
+  const unsigned char
   Parser::yycheck_[] =
   {
-       3,     4,    13,     6,     7,     3,     4,    10,    12,     0,
-       1,    13,    10,     4,     5,     0,     1,     6,     7,     4,
-       5,    -1,    11,    10,     6,     7,    27,    28,    15,     8,
-       9,     6,    29,    30,    -1,    13,    14
+       0,     1,     0,     1,     4,     5,     4,     5,    13,     6,
+       7,     3,     4,    13,    11,    13,     3,     4,    10,     6,
+       7,    10,    12,    10,     6,     7,    15,     8,     9,    13,
+      14,    27,    28,    13,    29,    30,     6
   };
 
   const unsigned char
@@ -1055,16 +1055,16 @@ namespace calc {
   Parser::yyr1_[] =
   {
        0,    14,    15,    15,    16,    16,    17,    17,    18,    18,
-      19,    19,    19,    20,    20,    20,    21,    21,    21,    22,
-      22,    22
+      18,    19,    19,    19,    20,    20,    20,    21,    21,    21,
+      22,    22,    22
   };
 
   const unsigned char
   Parser::yyr2_[] =
   {
        0,     2,     0,     3,     1,     2,     2,     2,     3,     2,
-       1,     3,     3,     1,     3,     3,     1,     2,     2,     1,
-       1,     3
+       0,     1,     3,     3,     1,     3,     3,     1,     2,     2,
+       1,     1,     3
   };
 
 
@@ -1086,8 +1086,8 @@ namespace calc {
   Parser::yyrline_[] =
   {
        0,    54,    54,    55,    58,    59,    62,    63,    66,    67,
-      70,    71,    72,    75,    76,    77,    80,    81,    82,    85,
-      86,    87
+      68,    71,    72,    73,    76,    77,    78,    81,    82,    83,
+      86,    87,    88
   };
 
   // Print the state stack on the debug stream.
@@ -1170,7 +1170,7 @@ namespace calc {
 #line 10 "Parser.y" // lalr1.cc:1167
 } // calc
 #line 1173 "Parser.cpp" // lalr1.cc:1167
-#line 90 "Parser.y" // lalr1.cc:1168
+#line 91 "Parser.y" // lalr1.cc:1168
 
 
 void calc::Parser::error (const calc::Parser::location_type& loc, const std::string& msg) 
