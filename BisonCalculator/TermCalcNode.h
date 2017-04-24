@@ -1,17 +1,15 @@
 #pragma once
-#include "CalcNode.h"
+#include "ICalcNode.h"
 
 namespace calc
 {
+	class TermCalcNode : public ICalcNode
+	{
+	public:
+		TermCalcNode(double value);
+		double Evaluate(CalcContext & context) const override;
 
-    class TermCalcNode : public CalcNode
-    {
-    public:
-        TermCalcNode(double value);
-        double Evaluate() const override;
-
-    private:
-        double m_value;
-    };
-
+	private:
+		double m_value;
+	};
 }

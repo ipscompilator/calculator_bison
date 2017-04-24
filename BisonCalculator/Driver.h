@@ -1,37 +1,33 @@
 #pragma once
-
-#include <memory>
+#include "StringPool.h"
+#include "CalcContext.h"
+#include "IOutputContext.h"
 #include "Scanner.h"
-#include "CalcNode.h"
-#include "IContext.h"
+#include "IStatementNode.h"
+#include "BlockNode.h"
 
 namespace calc
 {
+	class Driver
+	{
+	public:
+		using StatementPtr = std::unique_ptr<IStatementNode>;
+		using OutputContextPtr = std::shared_ptr<IOutputContext>;
 
-    class Driver
-    {
-    public:
-		Driver(std::shared_ptr<IContext> context);
-        ~Driver();
+		Driver(OutputContextPtr context);
+		~Driver();
 
-        double getResultValue() const;
+		Parser::token_type Advance(Parser::semantic_type *val, Parser::location_type *loc);
+		void AddStatement(StatementPtr && statementNode);
+		bool ParseStream(std::istream & inStream);
+		bool ParseString(const std::string & inString);
+		void Error(const std::string & msg, const location & location);
 
-        Scanner & getScanner() const;
-
-        CalcNode & getCalcNode() const;
-		void setCalcNode(std::unique_ptr<CalcNode> && calcNode);
-
-        bool parseStream(std::istream & inStream);
-        bool parseString(const std::string & inString);
-
-		void error(const std::string & msg, const location & location);
-
-        void printResult();
-
-    private:
-        std::unique_ptr<Scanner> m_scanner;
-        std::unique_ptr<CalcNode> m_calcNode;
-		std::shared_ptr<IContext> m_context;
-    };
-
+	private:
+		std::unique_ptr<Scanner> m_scanner;
+		CStringPool m_stringPool;
+		OutputContextPtr m_outputContext;
+		std::shared_ptr<CalcContext> m_calcContext;
+		//BlockNode m_program;
+	};
 }

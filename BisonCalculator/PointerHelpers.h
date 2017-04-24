@@ -1,6 +1,7 @@
 #pragma once
+#include <memory>
 
-namespace calc 
+namespace calc
 {
 	template<class T>
 	std::unique_ptr<T> Extract(T *& entry)
@@ -22,21 +23,5 @@ namespace calc
 		auto value = std::make_unique<T>(std::move(args)...);
 		entry = value.release();
 	}
-
-    enum class Operation
-    {
-        ADD, // +
-        SUB, // -
-        MUL, // *
-        DIV // /
-    };
-
-    class CalcNode
-    {
-    public:
-        CalcNode();
-        virtual ~CalcNode() = default;
-        virtual double Evaluate() const = 0;
-    };
 
 }

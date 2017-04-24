@@ -4,12 +4,13 @@
 using namespace calc;
 
 TermCalcNode::TermCalcNode(double value)
-:m_value(value)
+	: m_value(value)
 {
 }
 
-double TermCalcNode::Evaluate() const
+double TermCalcNode::Evaluate(CalcContext & context) const
 {
-    return m_value;
+	context;
+	return m_value;
 }
 

@@ -1,20 +1,22 @@
 #pragma once
 #include "Parser.hpp"
 #include "location.hh"
+#include "StringPool.h"
 
-namespace calc {
+namespace calc
+{
+	class Scanner
+	{
+	public:
+		Scanner(std::istream &inStream, CStringPool & stringPool);
+		~Scanner();
+		Parser::token_type Lex(Parser::semantic_type *val, Parser::location_type *loc);
 
-    class Scanner
-    {
-    public:
-        Scanner(std::istream &inStream);
-        ~Scanner();
-		Parser::token_type lex(Parser::semantic_type *val, Parser::location_type *loc);
-
-    private:
-		void Scanner::skipSpaces(Parser::location_type *loc);
-		double Scanner::parseDouble(Parser::location_type *loc);
-        std::istream &m_inStream;
-    };
-
+	private:
+		void Scanner::SkipSpaces(Parser::location_type *loc);
+		double Scanner::ParseDouble(Parser::location_type *loc);
+		std::string Scanner::ParseIdentifier(Parser::location_type *loc);
+		std::istream &m_inStream;
+		CStringPool & m_stringPool;
+	};
 }

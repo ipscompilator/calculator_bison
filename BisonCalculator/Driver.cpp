@@ -1,69 +1,52 @@
 #include "stdafx.h"
 #include "Driver.h"
 #include "Scanner.h"
-#include <sstream>
+#include "ICalcNode.h"
+#include "IStatementNode.h"
+#include "StringPool.h"
+#include "CalcContext.h"
 
 using namespace calc;
+using namespace std;
 
-Driver::Driver(std::shared_ptr<IContext> context)
-	: m_context(context)
+Driver::Driver(OutputContextPtr context)
+	: m_outputContext(context)
 {
+	m_calcContext = make_shared<CalcContext>(m_stringPool, context);
 }
 
 Driver::~Driver()
 {
 }
 
-double Driver::getResultValue() const
+bool Driver::ParseStream(istream & inStream)
 {
-	if (m_calcNode)
-	{
-		return m_calcNode->Evaluate();
-	}
-	else
-	{
-		return 0;
-	}
-}
-
-Scanner & Driver::getScanner() const
-{
-	return *m_scanner;
-}
-
-bool Driver::parseStream(std::istream & inStream)
-{
-	m_scanner = std::make_unique<Scanner>(inStream);
+	m_scanner = make_unique<Scanner>(inStream, m_stringPool);
 	Parser parser(*this);
 	return (parser.parse() == 0);
 }
 
-bool Driver::parseString(const std::string & inString)
+bool Driver::ParseString(const string & inString)
 {
-	std::istringstream iss(inString);
-	return parseStream(iss);
+	istringstream iss(inString);
+	return ParseStream(iss);
 }
 
-void Driver::error(const std::string & msg, const location & location)
+void Driver::Error(const string & msg, const location & location)
 {
-	m_context->ReportIssue(msg, location);
+	m_outputContext->ReportIssue(msg, location);
 }
 
-void Driver::printResult()
+Parser::token_type Driver::Advance(Parser::semantic_type * val, Parser::location_type * loc)
 {
-	if (m_calcNode)
+	return m_scanner->Lex(val, loc);
+}
+
+void Driver::AddStatement(StatementPtr && statementNode)
+{
+	if (statementNode)
 	{
-		m_context->PrintResult(m_calcNode->Evaluate());
+		//m_program.AddStatement(move(statementNode));
+		statementNode->Execute(*m_calcContext);
 	}
-}
-
-CalcNode & Driver::getCalcNode() const
-{
-	return *m_calcNode;
-}
-
-void Driver::setCalcNode(std::unique_ptr<CalcNode> && calcNode)
-{
-	m_calcNode = move(calcNode);
-	printResult();
 }

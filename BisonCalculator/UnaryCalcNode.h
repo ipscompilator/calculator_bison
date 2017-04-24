@@ -1,19 +1,16 @@
 #pragma once
-#include "CalcNode.h"
+#include "ICalcNode.h"
 
 namespace calc
 {
-
-    class UnaryCalcNode : public CalcNode
-    {
-    public:
-		UnaryCalcNode(std::unique_ptr<CalcNode> && node, Operation operation);
-        ~UnaryCalcNode();
-        double Evaluate() const override;
+	class UnaryCalcNode : public ICalcNode
+	{
+	public:
+		UnaryCalcNode(std::unique_ptr<ICalcNode> && node, Operation operation);
+		double Evaluate(CalcContext & context) const override;
 
 	private:
-		std::unique_ptr<CalcNode> m_node;
-        Operation m_operation;
-    };
-
+		std::unique_ptr<ICalcNode> m_node;
+		Operation m_operation;
+	};
 }
