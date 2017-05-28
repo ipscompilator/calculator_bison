@@ -141,11 +141,6 @@
     </ClCompile>
     <ClCompile Include="Tests.cpp" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\BisonCalculator.vcxproj">
-      <Project>{c8adb35b-6918-41c9-8f25-8bf1360f4e1e}</Project>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

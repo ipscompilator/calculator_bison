@@ -1,12 +1,13 @@
 #pragma once
+#include "INodeVisitor.h"
 
 namespace calc
 {
 	class INode
 	{
 	public:
-		INode() {};
 		virtual ~INode() = default;
+		virtual void Accept(INodeVisitor & visitor) = 0;
 	};
 }
 

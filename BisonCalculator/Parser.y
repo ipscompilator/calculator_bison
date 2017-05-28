@@ -52,7 +52,7 @@
 /* rules section */
 
 program: /* empty */
-	| program statement_line_list END
+	| program statement_line_list END { std::cout << "Try print" << std::endl; driver.PrintProgram(); }
 	;
 
 statement_line_list: statement_line

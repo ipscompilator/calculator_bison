@@ -103,6 +103,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="PrintNode.cpp" />
+    <ClCompile Include="PrintVisitor.cpp" />
     <ClCompile Include="Scanner.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
@@ -123,6 +124,7 @@
     <ClInclude Include="CalcContext.h" />
     <ClInclude Include="IBlockNode.h" />
     <ClInclude Include="ICalcNode.h" />
+    <ClInclude Include="INodeVisitor.h" />
     <ClInclude Include="OutputContext.h" />
     <ClInclude Include="Driver.h" />
     <ClInclude Include="IOutputContext.h" />
@@ -133,6 +135,7 @@
     <ClInclude Include="PointerHelpers.h" />
     <ClInclude Include="position.hh" />
     <ClInclude Include="PrintNode.h" />
+    <ClInclude Include="PrintVisitor.h" />
     <ClInclude Include="Scanner.h" />
     <ClInclude Include="stack.hh" />
     <ClInclude Include="IStatementNode.h" />

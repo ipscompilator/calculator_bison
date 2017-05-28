@@ -22,12 +22,13 @@ namespace calc
 		bool ParseStream(std::istream & inStream);
 		bool ParseString(const std::string & inString);
 		void Error(const std::string & msg, const location & location);
+		void PrintProgram();
 
 	private:
 		std::unique_ptr<Scanner> m_scanner;
 		CStringPool m_stringPool;
 		OutputContextPtr m_outputContext;
 		std::shared_ptr<CalcContext> m_calcContext;
-		//BlockNode m_program;
+		BlockNode m_program;
 	};
 }

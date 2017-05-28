@@ -8,3 +8,4 @@
 #include "PrintNode.h"
 #include "AssignNode.h"
 #include "VariableRefNode.h"
+#include "BlockNode.h"

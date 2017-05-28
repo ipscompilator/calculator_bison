@@ -14,3 +14,13 @@ double TermCalcNode::Evaluate(CalcContext & context) const
 	return m_value;
 }
 
+void TermCalcNode::Accept(INodeVisitor & visitor)
+{
+	visitor.Visit(*this);
+}
+
+double TermCalcNode::GetValue() const
+{
+	return m_value;
+}
+

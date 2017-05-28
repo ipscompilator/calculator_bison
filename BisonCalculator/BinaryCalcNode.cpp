@@ -28,4 +28,24 @@ double BinaryCalcNode::Evaluate(CalcContext & context) const
 	}
 }
 
+void BinaryCalcNode::Accept(INodeVisitor & visitor)
+{
+	visitor.Visit(*this);
+}
+
+ICalcNode & BinaryCalcNode::GetLeftNode()
+{
+	return *m_left;
+}
+
+ICalcNode & BinaryCalcNode::GetRightNode()
+{
+	return *m_right;
+}
+
+Operation BinaryCalcNode::GetOperation() const
+{
+	return m_operation;
+}
+
 

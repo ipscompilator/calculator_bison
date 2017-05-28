@@ -650,92 +650,98 @@ namespace calc {
         {
           switch (yyn)
             {
+  case 3:
+#line 55 "Parser.y" // lalr1.cc:859
+    { std::cout << "Try print" << std::endl; driver.PrintProgram(); }
+#line 657 "Parser.cpp" // lalr1.cc:859
+    break;
+
   case 8:
 #line 66 "Parser.y" // lalr1.cc:859
     { auto node = std::make_unique<AssignNode>((yystack_[2].value.stringId), Extract((yystack_[0].value.calcNode))); driver.AddStatement(std::move(node)); }
-#line 657 "Parser.cpp" // lalr1.cc:859
+#line 663 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 9:
 #line 67 "Parser.y" // lalr1.cc:859
     { auto node = std::make_unique<PrintNode>(Extract((yystack_[0].value.calcNode))); driver.AddStatement(std::move(node)); }
-#line 663 "Parser.cpp" // lalr1.cc:859
+#line 669 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 11:
 #line 71 "Parser.y" // lalr1.cc:859
     { std::swap((yylhs.value.calcNode), (yystack_[0].value.calcNode)); }
-#line 669 "Parser.cpp" // lalr1.cc:859
+#line 675 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 12:
 #line 72 "Parser.y" // lalr1.cc:859
     { Emplace<BinaryCalcNode>((yylhs.value.calcNode), Extract((yystack_[2].value.calcNode)), Extract((yystack_[0].value.calcNode)), Operation::ADD); }
-#line 675 "Parser.cpp" // lalr1.cc:859
+#line 681 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 13:
 #line 73 "Parser.y" // lalr1.cc:859
     { Emplace<BinaryCalcNode>((yylhs.value.calcNode), Extract((yystack_[2].value.calcNode)), Extract((yystack_[0].value.calcNode)), Operation::SUB); }
-#line 681 "Parser.cpp" // lalr1.cc:859
+#line 687 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 14:
 #line 76 "Parser.y" // lalr1.cc:859
     { std::swap((yylhs.value.calcNode), (yystack_[0].value.calcNode)); }
-#line 687 "Parser.cpp" // lalr1.cc:859
+#line 693 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 15:
 #line 77 "Parser.y" // lalr1.cc:859
     { Emplace<BinaryCalcNode>((yylhs.value.calcNode), Extract((yystack_[2].value.calcNode)), Extract((yystack_[0].value.calcNode)), Operation::MUL); }
-#line 693 "Parser.cpp" // lalr1.cc:859
+#line 699 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 16:
 #line 78 "Parser.y" // lalr1.cc:859
     { Emplace<BinaryCalcNode>((yylhs.value.calcNode), Extract((yystack_[2].value.calcNode)), Extract((yystack_[0].value.calcNode)), Operation::DIV); }
-#line 699 "Parser.cpp" // lalr1.cc:859
+#line 705 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 17:
 #line 81 "Parser.y" // lalr1.cc:859
     { std::swap((yylhs.value.calcNode), (yystack_[0].value.calcNode)); }
-#line 705 "Parser.cpp" // lalr1.cc:859
+#line 711 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 18:
 #line 82 "Parser.y" // lalr1.cc:859
     { Emplace<UnaryCalcNode>((yylhs.value.calcNode), Extract((yystack_[0].value.calcNode)), Operation::ADD); }
-#line 711 "Parser.cpp" // lalr1.cc:859
+#line 717 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 19:
 #line 83 "Parser.y" // lalr1.cc:859
     { Emplace<UnaryCalcNode>((yylhs.value.calcNode), Extract((yystack_[0].value.calcNode)), Operation::SUB); }
-#line 717 "Parser.cpp" // lalr1.cc:859
+#line 723 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 20:
 #line 86 "Parser.y" // lalr1.cc:859
     { (yylhs.value.calcNode) = new TermCalcNode((yystack_[0].value.doubleVal)); }
-#line 723 "Parser.cpp" // lalr1.cc:859
+#line 729 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 21:
 #line 87 "Parser.y" // lalr1.cc:859
     { (yylhs.value.calcNode) = new VariableRefNode((yystack_[0].value.stringId)); }
-#line 729 "Parser.cpp" // lalr1.cc:859
+#line 735 "Parser.cpp" // lalr1.cc:859
     break;
 
   case 22:
 #line 88 "Parser.y" // lalr1.cc:859
     { std::swap((yylhs.value.calcNode), (yystack_[1].value.calcNode)); }
-#line 735 "Parser.cpp" // lalr1.cc:859
+#line 741 "Parser.cpp" // lalr1.cc:859
     break;
 
 
-#line 739 "Parser.cpp" // lalr1.cc:859
+#line 745 "Parser.cpp" // lalr1.cc:859
             default:
               break;
             }
@@ -1169,7 +1175,7 @@ namespace calc {
 
 #line 10 "Parser.y" // lalr1.cc:1167
 } // calc
-#line 1173 "Parser.cpp" // lalr1.cc:1167
+#line 1179 "Parser.cpp" // lalr1.cc:1167
 #line 91 "Parser.y" // lalr1.cc:1168
 
 

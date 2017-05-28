@@ -13,3 +13,13 @@ void PrintNode::Execute(CalcContext & context) const
 {
 	context.PrintResult(m_node->Evaluate(context));
 }
+
+void PrintNode::Accept(INodeVisitor & visitor)
+{
+	visitor.Visit(*this);
+}
+
+ICalcNode & PrintNode::GetNode()
+{
+	return *m_node;
+}

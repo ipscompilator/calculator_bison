@@ -8,6 +8,10 @@ namespace calc
 	public:
 		UnaryCalcNode(std::unique_ptr<ICalcNode> && node, Operation operation);
 		double Evaluate(CalcContext & context) const override;
+		void Accept(INodeVisitor & visitor) override;
+
+		ICalcNode & GetNode();
+		Operation GetOperation() const;
 
 	private:
 		std::unique_ptr<ICalcNode> m_node;

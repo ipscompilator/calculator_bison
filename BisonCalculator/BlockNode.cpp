@@ -16,3 +16,18 @@ void BlockNode::ExecuteBlock(CalcContext & context) const
 		statement->Execute(context);
 	}
 }
+
+void BlockNode::Accept(INodeVisitor & visitor)
+{
+	visitor.Visit(*this);
+}
+
+size_t BlockNode::GetStatementsCount() const
+{
+	return m_statements.size();
+}
+
+IStatementNode & BlockNode::GetStatement(size_t index)
+{
+	return *m_statements.at(index);
+}

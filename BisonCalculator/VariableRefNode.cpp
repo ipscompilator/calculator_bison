@@ -13,4 +13,14 @@ double VariableRefNode::Evaluate(CalcContext & context) const
 	return context.GetVariableValue(m_stringId);
 }
 
+void VariableRefNode::Accept(INodeVisitor & visitor)
+{
+	visitor.Visit(*this);
+}
+
+unsigned VariableRefNode::GetStringId() const
+{
+	return m_stringId;
+}
+
 

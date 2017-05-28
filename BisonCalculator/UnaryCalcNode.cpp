@@ -20,3 +20,18 @@ double UnaryCalcNode::Evaluate(CalcContext & context) const
 		return -value;
 	}
 }
+
+void UnaryCalcNode::Accept(INodeVisitor & visitor)
+{
+	visitor.Visit(*this);
+}
+
+ICalcNode & UnaryCalcNode::GetNode()
+{
+	return *m_node;
+}
+
+Operation UnaryCalcNode::GetOperation() const
+{
+	return m_operation;
+}
