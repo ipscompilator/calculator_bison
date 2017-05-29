@@ -14,6 +14,8 @@ namespace calc
 		void Visit(VariableRefNode & node) override;
 		void Visit(AssignNode & node) override;
 		void Visit(PrintNode & node) override;
+		void Visit(IfStmtNode & node) override;
+		void Visit(ForStmtNode & node) override;
 		void Visit(BlockNode & node) override;
 	private:
 		void PrintOperation(Operation operation);

@@ -128,10 +128,12 @@ namespace calc {
 
 	class ICalcNode * calcNode;
 	class IStatementNode * statementNode;
+	class IBlockNode * blockNode;
+	std::vector<std::unique_ptr<IStatementNode>> * statementNodeList;
 	double doubleVal;
 	unsigned stringId;
 
-#line 135 "Parser.hpp" // lalr1.cc:377
+#line 137 "Parser.hpp" // lalr1.cc:377
     };
 #else
     typedef YYSTYPE semantic_type;
@@ -155,14 +157,18 @@ namespace calc {
         TOK_DOUBLE = 258,
         TOK_IDENTIFIER = 259,
         TOK_PRINT = 260,
-        TOK_PLUS = 261,
-        TOK_MINUS = 262,
-        TOK_MULTIPLY = 263,
-        TOK_DIVIDE = 264,
-        TOK_LEFT_P = 265,
-        TOK_RIGHT_P = 266,
-        TOK_ASSIGN = 267,
-        TOK_EOL = 268
+        TOK_FOR = 261,
+        TOK_IF = 262,
+        TOK_THEN = 263,
+        TOK_ELSE = 264,
+        TOK_PLUS = 265,
+        TOK_MINUS = 266,
+        TOK_MULTIPLY = 267,
+        TOK_DIVIDE = 268,
+        TOK_LEFT_P = 269,
+        TOK_RIGHT_P = 270,
+        TOK_ASSIGN = 271,
+        TOK_EOL = 272
       };
     };
 
@@ -350,7 +356,7 @@ namespace calc {
   // number is the opposite.  If YYTABLE_NINF, syntax error.
   static const signed char yytable_[];
 
-  static const unsigned char yycheck_[];
+  static const signed char yycheck_[];
 
   // YYSTOS[STATE-NUM] -- The (internal number of the) accessing
   // symbol of state STATE-NUM.
@@ -470,12 +476,12 @@ namespace calc {
     enum
     {
       yyeof_ = 0,
-      yylast_ = 36,     ///< Last index in yytable_.
-      yynnts_ = 9,  ///< Number of nonterminal symbols.
+      yylast_ = 72,     ///< Last index in yytable_.
+      yynnts_ = 14,  ///< Number of nonterminal symbols.
       yyfinal_ = 2, ///< Termination state number.
       yyterror_ = 1,
       yyerrcode_ = 256,
-      yyntokens_ = 14  ///< Number of tokens.
+      yyntokens_ = 20  ///< Number of tokens.
     };
 
 
@@ -486,7 +492,7 @@ namespace calc {
 
 #line 10 "Parser.y" // lalr1.cc:377
 } // calc
-#line 490 "Parser.hpp" // lalr1.cc:377
+#line 496 "Parser.hpp" // lalr1.cc:377
 
 
 

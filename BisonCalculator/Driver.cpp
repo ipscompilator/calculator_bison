@@ -38,8 +38,13 @@ void Driver::Error(const string & msg, const location & location)
 	m_outputContext->ReportIssue(msg, location);
 }
 
-void Driver::PrintProgram()
+void Driver::PrintProgram(std::vector<std::unique_ptr<IStatementNode>>& statements)
 {
+	for (int i = 0; i < statements.size(); i++)
+	{
+		m_program.AddStatement(std::move(statements.at(i)));
+	}
+
 	cout << endl << "--------- Check AST -----------" << endl;
 	if (m_program.GetStatementsCount() == 0)
 	{
@@ -49,20 +54,11 @@ void Driver::PrintProgram()
 	{
 		PrintVisitor visitor(cout, m_stringPool);
 		visitor.Visit(m_program);
-		cout << "-----------------------------------" << endl;
+		cout << "-------------------------------" << endl;
 	}
 }
 
 Parser::token_type Driver::Advance(Parser::semantic_type * val, Parser::location_type * loc)
 {
 	return m_scanner->Lex(val, loc);
-}
-
-void Driver::AddStatement(StatementPtr && statementNode)
-{
-	if (statementNode)
-	{
-		statementNode->Execute(*m_calcContext);
-		m_program.AddStatement(move(statementNode));
-	}
 }

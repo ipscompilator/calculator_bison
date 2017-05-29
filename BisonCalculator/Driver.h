@@ -18,11 +18,10 @@ namespace calc
 		~Driver();
 
 		Parser::token_type Advance(Parser::semantic_type *val, Parser::location_type *loc);
-		void AddStatement(StatementPtr && statementNode);
 		bool ParseStream(std::istream & inStream);
 		bool ParseString(const std::string & inString);
 		void Error(const std::string & msg, const location & location);
-		void PrintProgram();
+		void PrintProgram(std::vector<std::unique_ptr<IStatementNode>> & statements);
 
 	private:
 		std::unique_ptr<Scanner> m_scanner;

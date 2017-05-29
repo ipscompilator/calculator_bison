@@ -26,15 +26,17 @@
 %union {
 	class ICalcNode * calcNode;
 	class IStatementNode * statementNode;
+	class IBlockNode * blockNode;
+	std::vector<std::unique_ptr<IStatementNode>> * statementNodeList;
 	double doubleVal;
 	unsigned stringId;
 }
 
-%destructor { delete $$; } expr mul_expr unary_expr symbol
+%destructor { delete $$; } expr mul_expr unary_expr symbol statement statement_line statement_line_list assign_stmt print_stmt for_stmt if_stmt block
 
 %token<doubleVal> DOUBLE
 %token<stringId> IDENTIFIER
-%left PRINT
+%left PRINT FOR IF THEN ELSE
 %left PLUS MINUS
 %left MULTIPLY DIVIDE
 %left LEFT_P RIGHT_P
@@ -43,7 +45,9 @@
 %token EOL	"end of line"
 
 %type<calcNode> expr mul_expr unary_expr symbol 
-%type<statementNode> statement statement_line statement_line_list
+%type<statementNode> statement statement_line assign_stmt print_stmt for_stmt if_stmt
+%type<statementNodeList> statement_line_list
+%type<blockNode> block
 
 %start program
 
@@ -52,20 +56,43 @@
 /* rules section */
 
 program: /* empty */
-	| program statement_line_list END { std::cout << "Try print" << std::endl; driver.PrintProgram(); }
+	| program statement_line_list END { driver.PrintProgram(*$2); }
 	;
 
-statement_line_list: statement_line
-	| statement_line_list statement_line
+block: '{' EOL statement_line_list '}'	{ 
+		Emplace<BlockNode>($$); 
+		for (int i = 0; i < $3->size(); i++)
+		{
+			$$->AddStatement(std::move($3->at(i)));
+		} 
+	}
 	;
 
-statement_line: statement EOL
-	| error EOL
+statement_line_list: statement_line			{ $$ = new std::vector<std::unique_ptr<IStatementNode>>; $$->push_back(std::move(Extract($1))); }
+	| statement_line_list statement_line	{ $$->push_back(std::move(Extract($2))); }
 	;
 
-statement: IDENTIFIER ASSIGN expr	{ auto node = std::make_unique<AssignNode>($1, Extract($3)); driver.AddStatement(std::move(node)); }
-	| PRINT expr					{ auto node = std::make_unique<PrintNode>(Extract($2)); driver.AddStatement(std::move(node)); }
-	| /* empty */
+statement_line: statement EOL	{ std::swap($$, $1); }
+	| error EOL					
+	;
+
+statement: print_stmt	{ std::swap($$, $1); }
+	| assign_stmt		{ std::swap($$, $1); }
+	| for_stmt			{ std::swap($$, $1); }
+	| if_stmt			{ std::swap($$, $1); }
+	| /* empty */		
+	;
+
+assign_stmt: IDENTIFIER ASSIGN expr	{ Emplace<AssignNode>($$, $1, Extract($3)); }
+	;
+
+print_stmt: PRINT expr	{ Emplace<PrintNode>($$, Extract($2)); }
+	;
+
+for_stmt: FOR expr block	{ Emplace<ForStmtNode>($$, Extract($2), Extract($3)); }
+	;
+
+if_stmt: IF expr EOL THEN block ELSE block	{ Emplace<IfStmtNode>($$, Extract($2), Extract($5), Extract($7)); }
 	;
 
 expr: mul_expr				{ std::swap($$, $1); }

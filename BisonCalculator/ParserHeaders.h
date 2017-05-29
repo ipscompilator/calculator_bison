@@ -2,6 +2,7 @@
 #include "Driver.h"
 #include "ICalcNode.h"
 #include "IStatementNode.h"
+#include "IBlockNode.h"
 #include "UnaryCalcNode.h"
 #include "BinaryCalcNode.h"
 #include "TermCalcNode.h"
@@ -9,3 +10,5 @@
 #include "AssignNode.h"
 #include "VariableRefNode.h"
 #include "BlockNode.h"
+#include "IfStmtNode.h"
+#include "ForStmtNode.h"

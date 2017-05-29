@@ -89,6 +89,8 @@
     <ClCompile Include="AssignNode.cpp" />
     <ClCompile Include="BinaryCalcNode.cpp" />
     <ClCompile Include="CalcContext.cpp" />
+    <ClCompile Include="ForStmtNode.cpp" />
+    <ClCompile Include="IfStmtNode.cpp" />
     <ClCompile Include="OutputContext.cpp" />
     <ClCompile Include="Driver.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
@@ -122,8 +124,10 @@
     <ClInclude Include="AssignNode.h" />
     <ClInclude Include="BinaryCalcNode.h" />
     <ClInclude Include="CalcContext.h" />
+    <ClInclude Include="ForStmtNode.h" />
     <ClInclude Include="IBlockNode.h" />
     <ClInclude Include="ICalcNode.h" />
+    <ClInclude Include="IfStmtNode.h" />
     <ClInclude Include="INodeVisitor.h" />
     <ClInclude Include="OutputContext.h" />
     <ClInclude Include="Driver.h" />

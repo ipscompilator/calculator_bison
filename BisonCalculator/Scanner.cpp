@@ -42,9 +42,10 @@ namespace calc {
 		if (isalnum(m_inStream.peek()))
 		{
 			string identifier = ParseIdentifier(loc);
-			if (identifier == "print")
+			auto it = m_keywordMap.find(identifier);
+			if (it != m_keywordMap.end())
 			{
-				return Parser::token_type::TOK_PRINT;
+				return m_keywordMap.at(identifier);
 			}
 			else
 			{

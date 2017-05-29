@@ -49,6 +49,26 @@ void PrintVisitor::Visit(PrintNode & node)
 	m_out << ")";
 }
 
+void PrintVisitor::Visit(IfStmtNode & node)
+{
+	m_out << "If ";
+	node.GetConditionNode().Accept(*this);
+	m_out << "\nThen {\n";
+	node.GetThenBodyNode().Accept(*this);
+	m_out << "} Else {\n";
+	node.GetElseBodyNode().Accept(*this);
+	m_out << "}";
+}
+
+void PrintVisitor::Visit(ForStmtNode & node)
+{
+	m_out << "For ";
+	node.GetConditionNode().Accept(*this);
+	m_out << " {\n";
+	node.GetBodyNode().Accept(*this);
+	m_out << "}";
+}
+
 void PrintVisitor::Visit(BlockNode & node)
 {
 	for (int i = 0; i < node.GetStatementsCount(); i++)

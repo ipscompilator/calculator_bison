@@ -8,6 +8,8 @@ namespace calc
 	class VariableRefNode;
 	class AssignNode;
 	class PrintNode;
+	class IfStmtNode;
+	class ForStmtNode;
 	class BlockNode;
 
 	class INodeVisitor
@@ -20,6 +22,8 @@ namespace calc
 		virtual void Visit(VariableRefNode & node) = 0;
 		virtual void Visit(AssignNode & node) = 0;
 		virtual void Visit(PrintNode & node) = 0;
+		virtual void Visit(IfStmtNode & node) = 0;
+		virtual void Visit(ForStmtNode & node) = 0;
 		virtual void Visit(BlockNode & node) = 0;
 	};
 }
