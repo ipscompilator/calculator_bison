@@ -72,10 +72,10 @@ block: '{' EOL statement_line_list '}'	{
 	}
 	;
 
-statement_line_list: statement EOL			{ $$ = new std::vector<std::unique_ptr<IStatementNode>>; $$->push_back(std::move(Extract($1))); }
+statement_line_list: statement EOL			{ $$ = new std::vector<std::unique_ptr<IStatementNode>>; $$->push_back(std::move(Extract($statement))); }
 	| error EOL								{ $$ = new std::vector<std::unique_ptr<IStatementNode>>; }
 	| EOL									{ $$ = new std::vector<std::unique_ptr<IStatementNode>>; }
-	| statement_line_list statement EOL		{ $1->push_back(std::move(Extract($2))); std::swap($$, $1); }
+	| statement_line_list statement EOL		{ $1->push_back(std::move(Extract($statement))); std::swap($$, $1); }
 	| statement_line_list error EOL			{}
 	| statement_line_list EOL				{}
 	;
@@ -86,21 +86,21 @@ statement: print_stmt	{ std::swap($$, $1); }
 	| if_stmt			{ std::swap($$, $1); }
 	;
 
-assign_stmt: IDENTIFIER ASSIGN expr	{ Emplace<AssignNode>($$, $1, Extract($3)); }
+assign_stmt: IDENTIFIER ASSIGN expr	{ Emplace<AssignNode>($$, $1, Extract($expr)); }
 	;
 
-print_stmt: PRINT expr	{ Emplace<PrintNode>($$, Extract($2)); }
+print_stmt: PRINT expr	{ Emplace<PrintNode>($$, Extract($expr)); }
 	;
 
-for_stmt: FOR expr block	{ Emplace<ForStmtNode>($$, Extract($2), Extract($3)); }
+for_stmt: FOR expr[condition] block	{ Emplace<ForStmtNode>($$, Extract($condition), Extract($block)); }
 	;
 
-if_stmt[result]: IF expr[condition] block[ifBlock] ELSE block[thenBlock]	{ 
-		Emplace<IfStmtNode>($result, Extract($condition), Extract($ifBlock), Extract($thenBlock)); 
+if_stmt: IF expr[condition] block[ifBlock] ELSE block[thenBlock]	{ 
+		Emplace<IfStmtNode>($$, Extract($condition), Extract($ifBlock), Extract($thenBlock)); 
 		}
 	| IF expr[condition] block[ifBlock] {
 		auto emptyElseBlock = std::make_unique<BlockNode>();
-		Emplace<IfStmtNode>($result, Extract($condition), Extract($ifBlock), std::move(emptyElseBlock)); 
+		Emplace<IfStmtNode>($$, Extract($condition), Extract($ifBlock), std::move(emptyElseBlock)); 
 		}
 	;
 
@@ -121,7 +121,7 @@ unary_expr: symbol		{ std::swap($$, $1); }
   
 symbol: DOUBLE					{ $$ = new TermCalcNode($1); }
 	| IDENTIFIER				{ $$ = new VariableRefNode($1); }
-	| LEFT_P expr RIGHT_P		{ std::swap($$, $2); }
+	| LEFT_P expr RIGHT_P		{ std::swap($$, $expr); }
 	;
 
 %%
