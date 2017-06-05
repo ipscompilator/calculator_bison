@@ -98,6 +98,10 @@ for_stmt: FOR expr block	{ Emplace<ForStmtNode>($$, Extract($2), Extract($3)); }
 if_stmt[result]: IF expr[condition] block[ifBlock] ELSE block[thenBlock]	{ 
 		Emplace<IfStmtNode>($result, Extract($condition), Extract($ifBlock), Extract($thenBlock)); 
 		}
+	| IF expr[condition] block[ifBlock] {
+		auto emptyElseBlock = std::make_unique<BlockNode>();
+		Emplace<IfStmtNode>($result, Extract($condition), Extract($ifBlock), std::move(emptyElseBlock)); 
+		}
 	;
 
 expr: mul_expr				{ std::swap($$, $1); }
