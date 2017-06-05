@@ -40,7 +40,7 @@
 
 %token<doubleVal> DOUBLE
 %token<stringId> IDENTIFIER
-%left PRINT FOR IF THEN ELSE
+%left PRINT FOR IF ELSE
 %left PLUS MINUS
 %left MULTIPLY DIVIDE
 %left LEFT_P RIGHT_P
@@ -95,7 +95,9 @@ print_stmt: PRINT expr	{ Emplace<PrintNode>($$, Extract($2)); }
 for_stmt: FOR expr block	{ Emplace<ForStmtNode>($$, Extract($2), Extract($3)); }
 	;
 
-if_stmt: IF expr EOL THEN block ELSE block	{ Emplace<IfStmtNode>($$, Extract($2), Extract($5), Extract($7)); }
+if_stmt[result]: IF expr[condition] block[ifBlock] ELSE block[thenBlock]	{ 
+		Emplace<IfStmtNode>($result, Extract($condition), Extract($ifBlock), Extract($thenBlock)); 
+		}
 	;
 
 expr: mul_expr				{ std::swap($$, $1); }

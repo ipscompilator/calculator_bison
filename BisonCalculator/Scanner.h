@@ -23,7 +23,6 @@ namespace calc
 			{ "print", Parser::token_type::TOK_PRINT },
 			{ "for", Parser::token_type::TOK_FOR },
 			{ "if", Parser::token_type::TOK_IF },
-			{ "then", Parser::token_type::TOK_THEN },
 			{ "else", Parser::token_type::TOK_ELSE },
 		};
 	};

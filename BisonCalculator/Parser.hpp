@@ -159,16 +159,15 @@ namespace calc {
         TOK_PRINT = 260,
         TOK_FOR = 261,
         TOK_IF = 262,
-        TOK_THEN = 263,
-        TOK_ELSE = 264,
-        TOK_PLUS = 265,
-        TOK_MINUS = 266,
-        TOK_MULTIPLY = 267,
-        TOK_DIVIDE = 268,
-        TOK_LEFT_P = 269,
-        TOK_RIGHT_P = 270,
-        TOK_ASSIGN = 271,
-        TOK_EOL = 272
+        TOK_ELSE = 263,
+        TOK_PLUS = 264,
+        TOK_MINUS = 265,
+        TOK_MULTIPLY = 266,
+        TOK_DIVIDE = 267,
+        TOK_LEFT_P = 268,
+        TOK_RIGHT_P = 269,
+        TOK_ASSIGN = 270,
+        TOK_EOL = 271
       };
     };
 
@@ -356,7 +355,7 @@ namespace calc {
   // number is the opposite.  If YYTABLE_NINF, syntax error.
   static const unsigned char yytable_[];
 
-  static const signed char yycheck_[];
+  static const unsigned char yycheck_[];
 
   // YYSTOS[STATE-NUM] -- The (internal number of the) accessing
   // symbol of state STATE-NUM.
@@ -476,12 +475,12 @@ namespace calc {
     enum
     {
       yyeof_ = 0,
-      yylast_ = 72,     ///< Last index in yytable_.
+      yylast_ = 67,     ///< Last index in yytable_.
       yynnts_ = 13,  ///< Number of nonterminal symbols.
       yyfinal_ = 2, ///< Termination state number.
       yyterror_ = 1,
       yyerrcode_ = 256,
-      yyntokens_ = 20  ///< Number of tokens.
+      yyntokens_ = 19  ///< Number of tokens.
     };
 
 
@@ -492,7 +491,7 @@ namespace calc {
 
 #line 10 "Parser.y" // lalr1.cc:377
 } // calc
-#line 496 "Parser.hpp" // lalr1.cc:377
+#line 495 "Parser.hpp" // lalr1.cc:377
 
 
 
