@@ -36,7 +36,7 @@
 	unsigned stringId;
 }
 
-%destructor { delete $$; } expr mul_expr unary_expr symbol statement statement_line_list assign_stmt print_stmt for_stmt if_stmt block
+%destructor { delete $$; } expr mul_expr unary_expr symbol statement statement_line statement_line_list assign_stmt print_stmt for_stmt if_stmt block
 
 %token<doubleVal> DOUBLE
 %token<stringId> IDENTIFIER
@@ -49,7 +49,7 @@
 %token EOL	"end of line"
 
 %type<calcNode> expr mul_expr unary_expr symbol 
-%type<statementNode> statement assign_stmt print_stmt for_stmt if_stmt
+%type<statementNode> statement statement_line assign_stmt print_stmt for_stmt if_stmt
 %type<statementNodeList> statement_line_list
 %type<blockNode> block
 
@@ -64,20 +64,33 @@ program: %empty
 	;
 
 block: '{' EOL statement_line_list '}'	{ 
-		Emplace<BlockNode>($$); 
-		for (int i = 0; i < $3->size(); i++)
-		{
-			$$->AddStatement(std::move($3->at(i)));
-		} 
-	}
+			Emplace<BlockNode>($$); 
+			for (int i = 0; i < $3->size(); i++)
+			{
+				$$->AddStatement(std::move($3->at(i)));
+			} 
+		}
 	;
 
-statement_line_list: statement EOL			{ $$ = new std::vector<std::unique_ptr<IStatementNode>>; $$->push_back(std::move(Extract($statement))); }
-	| error EOL								{ $$ = new std::vector<std::unique_ptr<IStatementNode>>; }
-	| EOL									{ $$ = new std::vector<std::unique_ptr<IStatementNode>>; }
-	| statement_line_list statement EOL		{ $1->push_back(std::move(Extract($statement))); std::swap($$, $1); }
-	| statement_line_list error EOL			{}
-	| statement_line_list EOL				{}
+statement_line_list: statement_line			{ 
+			$$ = new std::vector<std::unique_ptr<IStatementNode>>; 
+			if ($statement_line != nullptr)
+			{
+				$$->push_back(std::move(Extract($statement_line)));
+			}
+		}
+	| statement_line_list statement_line	{ 
+			if ($statement_line != nullptr)
+			{
+				$1->push_back(std::move(Extract($statement_line))); 
+				std::swap($$, $1); 
+			}
+		}
+	;
+
+statement_line: statement EOL	{ std::swap($$, $1); }
+	| error EOL					{ $$ = nullptr; }
+	| EOL						{ $$ = nullptr; }
 	;
 
 statement: print_stmt	{ std::swap($$, $1); }
