@@ -40,7 +40,7 @@
 #ifndef YY_YY_PARSER_HPP_INCLUDED
 # define YY_YY_PARSER_HPP_INCLUDED
 
-
+# include <cassert>
 # include <cstdlib> // std::abort
 # include <iostream>
 # include <stdexcept>
@@ -105,7 +105,7 @@
 
 /* Debug traces.  */
 #ifndef YYDEBUG
-# define YYDEBUG 0
+# define YYDEBUG 1
 #endif
 
 #line 10 "Parser.y" // lalr1.cc:377
@@ -124,7 +124,7 @@ namespace calc {
     /// Symbol semantic values.
     union semantic_type
     {
-    #line 26 "Parser.y" // lalr1.cc:377
+    #line 30 "Parser.y" // lalr1.cc:377
 
 	class ICalcNode * calcNode;
 	class IStatementNode * statementNode;
@@ -354,7 +354,7 @@ namespace calc {
   // YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
   // positive, shift that token.  If negative, reduce the rule whose
   // number is the opposite.  If YYTABLE_NINF, syntax error.
-  static const signed char yytable_[];
+  static const unsigned char yytable_[];
 
   static const signed char yycheck_[];
 
@@ -477,7 +477,7 @@ namespace calc {
     {
       yyeof_ = 0,
       yylast_ = 72,     ///< Last index in yytable_.
-      yynnts_ = 14,  ///< Number of nonterminal symbols.
+      yynnts_ = 13,  ///< Number of nonterminal symbols.
       yyfinal_ = 2, ///< Termination state number.
       yyterror_ = 1,
       yyerrcode_ = 256,

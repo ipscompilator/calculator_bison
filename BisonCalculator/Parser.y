@@ -10,6 +10,9 @@
 %define api.namespace {calc}
 %define api.token.prefix {TOK_}
 
+%define parse.trace true
+%define parse.assert true
+
 %parse-param { class Driver& driver }
 
 /* verbose error messages */
@@ -21,6 +24,7 @@
 
 	#undef yylex
 	#define yylex driver.Advance
+	#define YYDEBUG 1
 %}
 
 %union {
@@ -32,7 +36,7 @@
 	unsigned stringId;
 }
 
-%destructor { delete $$; } expr mul_expr unary_expr symbol statement statement_line statement_line_list assign_stmt print_stmt for_stmt if_stmt block
+%destructor { delete $$; } expr mul_expr unary_expr symbol statement statement_line_list assign_stmt print_stmt for_stmt if_stmt block
 
 %token<doubleVal> DOUBLE
 %token<stringId> IDENTIFIER
@@ -45,7 +49,7 @@
 %token EOL	"end of line"
 
 %type<calcNode> expr mul_expr unary_expr symbol 
-%type<statementNode> statement statement_line assign_stmt print_stmt for_stmt if_stmt
+%type<statementNode> statement assign_stmt print_stmt for_stmt if_stmt
 %type<statementNodeList> statement_line_list
 %type<blockNode> block
 
@@ -55,7 +59,7 @@
 
 /* rules section */
 
-program: /* empty */
+program: %empty
 	| program statement_line_list END { driver.PrintProgram(*$2); }
 	;
 
@@ -68,19 +72,18 @@ block: '{' EOL statement_line_list '}'	{
 	}
 	;
 
-statement_line_list: statement_line			{ $$ = new std::vector<std::unique_ptr<IStatementNode>>; $$->push_back(std::move(Extract($1))); }
-	| statement_line_list statement_line	{ $$->push_back(std::move(Extract($2))); }
-	;
-
-statement_line: statement EOL	{ std::swap($$, $1); }
-	| error EOL					
+statement_line_list: statement EOL			{ $$ = new std::vector<std::unique_ptr<IStatementNode>>; $$->push_back(std::move(Extract($1))); }
+	| error EOL								{ $$ = new std::vector<std::unique_ptr<IStatementNode>>; }
+	| EOL									{ $$ = new std::vector<std::unique_ptr<IStatementNode>>; }
+	| statement_line_list statement EOL		{ $1->push_back(std::move(Extract($2))); std::swap($$, $1); }
+	| statement_line_list error EOL			{}
+	| statement_line_list EOL				{}
 	;
 
 statement: print_stmt	{ std::swap($$, $1); }
 	| assign_stmt		{ std::swap($$, $1); }
 	| for_stmt			{ std::swap($$, $1); }
 	| if_stmt			{ std::swap($$, $1); }
-	| /* empty */		
 	;
 
 assign_stmt: IDENTIFIER ASSIGN expr	{ Emplace<AssignNode>($$, $1, Extract($3)); }
