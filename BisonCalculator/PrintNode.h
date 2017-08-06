@@ -9,7 +9,7 @@ namespace calc
 	public:
 		PrintNode(std::unique_ptr<ICalcNode> && node);
 		void Execute(CalcContext & context)const override;
-		void Accept(INodeVisitor & visitor) override;
+		void Accept(INodeVisitor & visitor, unsigned level) override;
 
 		ICalcNode & GetNode();
 

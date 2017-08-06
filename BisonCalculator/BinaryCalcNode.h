@@ -8,7 +8,7 @@ namespace calc
 	public:
 		BinaryCalcNode(std::unique_ptr<ICalcNode> && left, std::unique_ptr<ICalcNode> && right, Operation operation);
 		double Evaluate(CalcContext & context) const override;
-		void Accept(INodeVisitor & visitor) override;
+		void Accept(INodeVisitor & visitor, unsigned level) override;
 
 		ICalcNode & GetLeftNode();
 		ICalcNode & GetRightNode();

@@ -8,7 +8,7 @@ namespace calc
 	public:
 		virtual void AddStatement(std::unique_ptr<IStatementNode> && statement) override;
 		void ExecuteBlock(CalcContext & context)const;
-		void Accept(INodeVisitor & visitor) override;
+		void Accept(INodeVisitor & visitor, unsigned level) override;
 
 		size_t GetStatementsCount() const;
 		IStatementNode & GetStatement(size_t index);

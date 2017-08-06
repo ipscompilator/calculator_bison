@@ -10,7 +10,7 @@ namespace calc
 	public:
 		ForStmtNode(std::unique_ptr<ICalcNode> && conditionNode, std::unique_ptr<IBlockNode> && bodyNode);
 		void Execute(CalcContext & context)const override;
-		void Accept(INodeVisitor & visitor) override;
+		void Accept(INodeVisitor & visitor, unsigned level) override;
 
 		ICalcNode & GetConditionNode();
 		IBlockNode & GetBodyNode();

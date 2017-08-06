@@ -17,9 +17,9 @@ void BlockNode::ExecuteBlock(CalcContext & context) const
 	}
 }
 
-void BlockNode::Accept(INodeVisitor & visitor)
+void BlockNode::Accept(INodeVisitor & visitor, unsigned level)
 {
-	visitor.Visit(*this);
+	visitor.Visit(*this, level);
 }
 
 size_t BlockNode::GetStatementsCount() const

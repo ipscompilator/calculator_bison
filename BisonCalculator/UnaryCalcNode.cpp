@@ -21,9 +21,9 @@ double UnaryCalcNode::Evaluate(CalcContext & context) const
 	}
 }
 
-void UnaryCalcNode::Accept(INodeVisitor & visitor)
+void UnaryCalcNode::Accept(INodeVisitor & visitor, unsigned level)
 {
-	visitor.Visit(*this);
+	visitor.Visit(*this, level);
 }
 
 ICalcNode & UnaryCalcNode::GetNode()

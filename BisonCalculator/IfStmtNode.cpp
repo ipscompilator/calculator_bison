@@ -15,9 +15,9 @@ void IfStmtNode::Execute(CalcContext & context) const
 {
 }
 
-void IfStmtNode::Accept(INodeVisitor & visitor)
+void IfStmtNode::Accept(INodeVisitor & visitor, unsigned level)
 {
-	visitor.Visit(*this);
+	visitor.Visit(*this, level);
 }
 
 ICalcNode & IfStmtNode::GetConditionNode()

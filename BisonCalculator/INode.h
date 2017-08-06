@@ -7,7 +7,7 @@ namespace calc
 	{
 	public:
 		virtual ~INode() = default;
-		virtual void Accept(INodeVisitor & visitor) = 0;
+		virtual void Accept(INodeVisitor & visitor, unsigned level) = 0;
 	};
 }
 

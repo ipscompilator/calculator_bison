@@ -14,9 +14,9 @@ double TermCalcNode::Evaluate(CalcContext & context) const
 	return m_value;
 }
 
-void TermCalcNode::Accept(INodeVisitor & visitor)
+void TermCalcNode::Accept(INodeVisitor & visitor, unsigned level)
 {
-	visitor.Visit(*this);
+	visitor.Visit(*this, level);
 }
 
 double TermCalcNode::GetValue() const

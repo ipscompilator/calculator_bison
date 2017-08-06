@@ -8,7 +8,7 @@ namespace calc
 	public:
 		VariableRefNode(unsigned stringId);
 		double Evaluate(CalcContext & context)const override;
-		void Accept(INodeVisitor & visitor) override;
+		void Accept(INodeVisitor & visitor, unsigned level) override;
 
 		unsigned GetStringId() const;
 

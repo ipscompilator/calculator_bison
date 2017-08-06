@@ -14,9 +14,9 @@ void PrintNode::Execute(CalcContext & context) const
 	context.PrintResult(m_node->Evaluate(context));
 }
 
-void PrintNode::Accept(INodeVisitor & visitor)
+void PrintNode::Accept(INodeVisitor & visitor, unsigned level)
 {
-	visitor.Visit(*this);
+	visitor.Visit(*this, level);
 }
 
 ICalcNode & PrintNode::GetNode()

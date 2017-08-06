@@ -28,9 +28,9 @@ double BinaryCalcNode::Evaluate(CalcContext & context) const
 	}
 }
 
-void BinaryCalcNode::Accept(INodeVisitor & visitor)
+void BinaryCalcNode::Accept(INodeVisitor & visitor, unsigned level)
 {
-	visitor.Visit(*this);
+	visitor.Visit(*this, level);
 }
 
 ICalcNode & BinaryCalcNode::GetLeftNode()

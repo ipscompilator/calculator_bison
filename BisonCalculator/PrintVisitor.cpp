@@ -11,69 +11,73 @@ PrintVisitor::PrintVisitor(std::ostream & out, CStringPool & stringPool)
 {
 }
 
-void PrintVisitor::Visit(BinaryCalcNode & node)
+void PrintVisitor::Visit(BinaryCalcNode & node, unsigned level)
 {
 	cout << "(";
-	node.GetLeftNode().Accept(*this);
+	node.GetLeftNode().Accept(*this, level);
 	PrintOperation(node.GetOperation());
-	node.GetRightNode().Accept(*this);
+	node.GetRightNode().Accept(*this, level);
 	cout << ")";
 }
 
-void PrintVisitor::Visit(UnaryCalcNode & node)
+void PrintVisitor::Visit(UnaryCalcNode & node, unsigned level)
 {	
 	PrintOperation(node.GetOperation());
-	node.GetNode().Accept(*this);
+	node.GetNode().Accept(*this, level);
 }
 
-void PrintVisitor::Visit(TermCalcNode & node)
+void PrintVisitor::Visit(TermCalcNode & node, unsigned level)
 {
 	m_out << node.GetValue();
 }
 
-void PrintVisitor::Visit(VariableRefNode & node)
+void PrintVisitor::Visit(VariableRefNode & node, unsigned level)
 {
 	m_out << m_stringPool.GetString(node.GetStringId());
 }
 
-void PrintVisitor::Visit(AssignNode & node)
+void PrintVisitor::Visit(AssignNode & node, unsigned level)
 {
 	m_out << m_stringPool.GetString(node.GetNameId()) << " = ";
-	node.GetNode().Accept(*this);
+	node.GetNode().Accept(*this, level);
 }
 
-void PrintVisitor::Visit(PrintNode & node)
+void PrintVisitor::Visit(PrintNode & node, unsigned level)
 {
-	m_out << "Print(";
-	node.GetNode().Accept(*this);
+	m_out << "print(";
+	node.GetNode().Accept(*this, level);
 	m_out << ")";
 }
 
-void PrintVisitor::Visit(IfStmtNode & node)
+void PrintVisitor::Visit(IfStmtNode & node, unsigned level)
 {
-	m_out << "If ";
-	node.GetConditionNode().Accept(*this);
-	m_out << "\nThen {\n";
-	node.GetThenBodyNode().Accept(*this);
-	m_out << "} Else {\n";
-	node.GetElseBodyNode().Accept(*this);
+	m_out << "if ";
+	node.GetConditionNode().Accept(*this, level);
+	m_out << " { \n";
+	node.GetThenBodyNode().Accept(*this, level + m_indentSize);
+	PrintIndent(level);
+	m_out << "} else {\n";
+	node.GetElseBodyNode().Accept(*this, level + m_indentSize);
+	PrintIndent(level);
 	m_out << "}";
 }
 
-void PrintVisitor::Visit(ForStmtNode & node)
+void PrintVisitor::Visit(ForStmtNode & node, unsigned level)
 {
-	m_out << "For ";
-	node.GetConditionNode().Accept(*this);
+	m_out << "for ";
+	node.GetConditionNode().Accept(*this, level);
 	m_out << " {\n";
-	node.GetBodyNode().Accept(*this);
+	node.GetBodyNode().Accept(*this, level + m_indentSize);
+	PrintIndent(level);
 	m_out << "}";
 }
 
-void PrintVisitor::Visit(BlockNode & node)
+void PrintVisitor::Visit(BlockNode & node, unsigned level)
 {
 	for (int i = 0; i < node.GetStatementsCount(); i++)
 	{
-		node.GetStatement(i).Accept(*this);
+		PrintIndent(level);
+		node.GetStatement(i).Accept(*this, level);
 		m_out << endl;
 	}
 }
@@ -94,5 +98,12 @@ void calc::PrintVisitor::PrintOperation(Operation operation)
 	case Operation::DIV:
 		m_out << "/";
 		break;
+	}
+}
+
+void PrintVisitor::PrintIndent(unsigned level)
+{
+	for (int i = 0; i < level; i++) {
+		m_out << " ";
 	}
 }

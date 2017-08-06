@@ -8,17 +8,19 @@ namespace calc
 	{
 	public:
 		PrintVisitor(std::ostream & out, CStringPool & stringPool);
-		void Visit(BinaryCalcNode & node) override;
-		void Visit(UnaryCalcNode & node) override;
-		void Visit(TermCalcNode & node) override;
-		void Visit(VariableRefNode & node) override;
-		void Visit(AssignNode & node) override;
-		void Visit(PrintNode & node) override;
-		void Visit(IfStmtNode & node) override;
-		void Visit(ForStmtNode & node) override;
-		void Visit(BlockNode & node) override;
+		void Visit(BinaryCalcNode & node, unsigned level) override;
+		void Visit(UnaryCalcNode & node, unsigned level) override;
+		void Visit(TermCalcNode & node, unsigned level) override;
+		void Visit(VariableRefNode & node, unsigned level) override;
+		void Visit(AssignNode & node, unsigned level) override;
+		void Visit(PrintNode & node, unsigned level) override;
+		void Visit(IfStmtNode & node, unsigned level) override;
+		void Visit(ForStmtNode & node, unsigned level) override;
+		void Visit(BlockNode & node, unsigned level) override;
 	private:
 		void PrintOperation(Operation operation);
+		void PrintIndent(unsigned level);
+		const unsigned m_indentSize = 2;
 		std::ostream & m_out;
 		CStringPool & m_stringPool;
 	};

@@ -53,7 +53,7 @@ void Driver::PrintProgram(std::vector<std::unique_ptr<IStatementNode>>& statemen
 	else
 	{
 		PrintVisitor visitor(cout, m_stringPool);
-		visitor.Visit(m_program);
+		visitor.Visit(m_program, 0);
 		cout << "-------------------------------" << endl;
 	}
 }

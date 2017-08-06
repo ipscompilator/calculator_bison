@@ -9,7 +9,7 @@ namespace calc
 	public:
 		AssignNode(unsigned nameId, std::unique_ptr<ICalcNode> && node);
 		void Execute(CalcContext & context)const override;
-		void Accept(INodeVisitor & visitor) override;
+		void Accept(INodeVisitor & visitor, unsigned level) override;
 
 		unsigned GetNameId() const;
 		ICalcNode & GetNode();

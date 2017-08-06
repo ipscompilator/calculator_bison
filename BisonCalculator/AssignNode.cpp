@@ -15,9 +15,9 @@ void AssignNode::Execute(CalcContext & context) const
 	context.AssignVariable(m_nameId, m_node->Evaluate(context));
 }
 
-void AssignNode::Accept(INodeVisitor & visitor)
+void AssignNode::Accept(INodeVisitor & visitor, unsigned level)
 {
-	visitor.Visit(*this);
+	visitor.Visit(*this, level);
 }
 
 unsigned AssignNode::GetNameId() const
