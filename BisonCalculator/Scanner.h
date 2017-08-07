@@ -14,8 +14,12 @@ namespace calc
 		Parser::token_type Lex(Parser::semantic_type *val, Parser::location_type *loc);
 
 	private:
-		void Scanner::SkipSpaces(Parser::location_type *loc);
-		double Scanner::ParseDouble(Parser::location_type *loc);
+		void SkipSpaces(Parser::location_type *loc);
+		void SkipTillSeparator(Parser::location_type *loc);
+		double ParseDouble(Parser::location_type *loc);
+		void CheckIfTokenIsReadToTheEnd(Parser::location_type * loc, std::string failureMessage);
+		bool IsSeparatorCharacter(char character);
+		bool IsKeyword(std::string identifier);
 		std::string Scanner::ParseIdentifier(Parser::location_type *loc);
 		std::istream &m_inStream;
 		CStringPool & m_stringPool;
@@ -25,5 +29,6 @@ namespace calc
 			{ "if", Parser::token_type::TOK_IF },
 			{ "else", Parser::token_type::TOK_ELSE },
 		};
+		const std::string m_supportedOperators[5] = {"+", "-", "*", "/", "="};
 	};
 }

@@ -43,7 +43,7 @@
 %left PRINT FOR IF ELSE
 %left PLUS MINUS
 %left MULTIPLY DIVIDE
-%left LEFT_P RIGHT_P
+%left LEFT_BRACKET RIGHT_BRACKET LEFT_BRACE RIGHT_BRACE
 %right ASSIGN
 %token END	 0	"end of file"
 %token EOL	"end of line"
@@ -63,7 +63,7 @@ program: %empty
 	| program statement_line_list END { driver.PrintProgram(*$2); }
 	;
 
-block: '{' EOL statement_line_list '}'	{ 
+block: LEFT_BRACE EOL statement_line_list RIGHT_BRACE	{ 
 			Emplace<BlockNode>($$); 
 			for (int i = 0; i < $3->size(); i++)
 			{
@@ -134,7 +134,7 @@ unary_expr: symbol		{ std::swap($$, $1); }
   
 symbol: DOUBLE					{ $$ = new TermCalcNode($1); }
 	| IDENTIFIER				{ $$ = new VariableRefNode($1); }
-	| LEFT_P expr RIGHT_P		{ std::swap($$, $expr); }
+	| LEFT_BRACKET expr RIGHT_BRACKET	{ std::swap($$, $expr); }
 	;
 
 %%

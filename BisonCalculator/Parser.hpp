@@ -164,10 +164,12 @@ namespace calc {
         TOK_MINUS = 265,
         TOK_MULTIPLY = 266,
         TOK_DIVIDE = 267,
-        TOK_LEFT_P = 268,
-        TOK_RIGHT_P = 269,
-        TOK_ASSIGN = 270,
-        TOK_EOL = 271
+        TOK_LEFT_BRACKET = 268,
+        TOK_RIGHT_BRACKET = 269,
+        TOK_LEFT_BRACE = 270,
+        TOK_RIGHT_BRACE = 271,
+        TOK_ASSIGN = 272,
+        TOK_EOL = 273
       };
     };
 
@@ -491,7 +493,7 @@ namespace calc {
 
 #line 10 "Parser.y" // lalr1.cc:377
 } // calc
-#line 495 "Parser.hpp" // lalr1.cc:377
+#line 497 "Parser.hpp" // lalr1.cc:377
 
 
 
