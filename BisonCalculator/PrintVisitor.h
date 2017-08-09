@@ -1,6 +1,6 @@
 #pragma once
 #include "INodeVisitor.h"
-#include "ICalcNode.h"
+#include "IExpressionNode.h"
 
 namespace calc
 {
@@ -8,9 +8,9 @@ namespace calc
 	{
 	public:
 		PrintVisitor(std::ostream & out, CStringPool & stringPool);
-		void Visit(BinaryCalcNode & node, unsigned level) override;
-		void Visit(UnaryCalcNode & node, unsigned level) override;
-		void Visit(TermCalcNode & node, unsigned level) override;
+		void Visit(BinaryExprNode & node, unsigned level) override;
+		void Visit(UnaryExprNode & node, unsigned level) override;
+		void Visit(LiteralNode & node, unsigned level) override;
 		void Visit(VariableRefNode & node, unsigned level) override;
 		void Visit(AssignNode & node, unsigned level) override;
 		void Visit(PrintNode & node, unsigned level) override;

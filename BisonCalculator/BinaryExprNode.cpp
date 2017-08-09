@@ -1,16 +1,16 @@
 #include "stdafx.h"
-#include "BinaryCalcNode.h"
+#include "BinaryExprNode.h"
 
 using namespace calc;
 
-BinaryCalcNode::BinaryCalcNode(std::unique_ptr<ICalcNode> && left, std::unique_ptr<ICalcNode> && right, Operation operation)
+BinaryExprNode::BinaryExprNode(std::unique_ptr<IExpressionNode> && left, std::unique_ptr<IExpressionNode> && right, Operation operation)
 	: m_left(move(left))
 	, m_right(move(right))
 	, m_operation(operation)
 {
 }
 
-double BinaryCalcNode::Evaluate(CalcContext & context) const
+double BinaryExprNode::Evaluate(CalcContext & context) const
 {
 	double left = m_left->Evaluate(context);
 	double right = m_right->Evaluate(context);
@@ -28,22 +28,22 @@ double BinaryCalcNode::Evaluate(CalcContext & context) const
 	}
 }
 
-void BinaryCalcNode::Accept(INodeVisitor & visitor, unsigned level)
+void BinaryExprNode::Accept(INodeVisitor & visitor, unsigned level)
 {
 	visitor.Visit(*this, level);
 }
 
-ICalcNode & BinaryCalcNode::GetLeftNode()
+IExpressionNode & BinaryExprNode::GetLeftNode()
 {
 	return *m_left;
 }
 
-ICalcNode & BinaryCalcNode::GetRightNode()
+IExpressionNode & BinaryExprNode::GetRightNode()
 {
 	return *m_right;
 }
 
-Operation BinaryCalcNode::GetOperation() const
+Operation BinaryExprNode::GetOperation() const
 {
 	return m_operation;
 }

@@ -126,7 +126,7 @@ namespace calc {
     {
     #line 30 "Parser.y" // lalr1.cc:377
 
-	class ICalcNode * calcNode;
+	class IExpressionNode * expressionNode;
 	class IStatementNode * statementNode;
 	class IBlockNode * blockNode;
 	std::vector<std::unique_ptr<IStatementNode>> * statementNodeList;

@@ -13,10 +13,10 @@ namespace calc
 		DIV // /
 	};
 
-	class ICalcNode : public INode
+	class IExpressionNode : public INode
 	{
 	public:
-		ICalcNode() {};
+		IExpressionNode() {};
 		virtual double Evaluate(CalcContext & context) const = 0;
 	};
 }

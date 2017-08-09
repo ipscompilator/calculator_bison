@@ -87,7 +87,7 @@
   <ItemGroup>
     <ClCompile Include="BlockNode.cpp" />
     <ClCompile Include="AssignNode.cpp" />
-    <ClCompile Include="BinaryCalcNode.cpp" />
+    <ClCompile Include="BinaryExprNode.cpp" />
     <ClCompile Include="CalcContext.cpp" />
     <ClCompile Include="ForStmtNode.cpp" />
     <ClCompile Include="IfStmtNode.cpp" />
@@ -115,18 +115,18 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="StringPool.cpp" />
-    <ClCompile Include="TermCalcNode.cpp" />
-    <ClCompile Include="UnaryCalcNode.cpp" />
+    <ClCompile Include="LiteralNode.cpp" />
+    <ClCompile Include="UnaryExprNode.cpp" />
     <ClCompile Include="VariableRefNode.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BlockNode.h" />
     <ClInclude Include="AssignNode.h" />
-    <ClInclude Include="BinaryCalcNode.h" />
+    <ClInclude Include="BinaryExprNode.h" />
     <ClInclude Include="CalcContext.h" />
     <ClInclude Include="ForStmtNode.h" />
     <ClInclude Include="IBlockNode.h" />
-    <ClInclude Include="ICalcNode.h" />
+    <ClInclude Include="IExpressionNode.h" />
     <ClInclude Include="IfStmtNode.h" />
     <ClInclude Include="INodeVisitor.h" />
     <ClInclude Include="OutputContext.h" />
@@ -145,8 +145,8 @@
     <ClInclude Include="IStatementNode.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="StringPool.h" />
-    <ClInclude Include="TermCalcNode.h" />
-    <ClInclude Include="UnaryCalcNode.h" />
+    <ClInclude Include="LiteralNode.h" />
+    <ClInclude Include="UnaryExprNode.h" />
     <ClInclude Include="VariableRefNode.h" />
   </ItemGroup>
   <ItemGroup>

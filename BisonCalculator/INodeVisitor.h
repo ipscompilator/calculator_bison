@@ -2,9 +2,9 @@
 
 namespace calc 
 {
-	class BinaryCalcNode;
-	class UnaryCalcNode;
-	class TermCalcNode;
+	class BinaryExprNode;
+	class UnaryExprNode;
+	class LiteralNode;
 	class VariableRefNode;
 	class AssignNode;
 	class PrintNode;
@@ -16,9 +16,9 @@ namespace calc
 	{
 	public:
 		virtual ~INodeVisitor() = default;
-		virtual void Visit(BinaryCalcNode & node, unsigned level) = 0;
-		virtual void Visit(UnaryCalcNode & node, unsigned level) = 0;
-		virtual void Visit(TermCalcNode & node, unsigned level) = 0;
+		virtual void Visit(BinaryExprNode & node, unsigned level) = 0;
+		virtual void Visit(UnaryExprNode & node, unsigned level) = 0;
+		virtual void Visit(LiteralNode & node, unsigned level) = 0;
 		virtual void Visit(VariableRefNode & node, unsigned level) = 0;
 		virtual void Visit(AssignNode & node, unsigned level) = 0;
 		virtual void Visit(PrintNode & node, unsigned level) = 0;

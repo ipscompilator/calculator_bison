@@ -4,7 +4,7 @@
 using namespace calc;
 using namespace std;
 
-IfStmtNode::IfStmtNode(unique_ptr<ICalcNode> && conditionNode, unique_ptr<IBlockNode> && thenBodyNode, unique_ptr<IBlockNode> && elseBodyNode)
+IfStmtNode::IfStmtNode(unique_ptr<IExpressionNode> && conditionNode, unique_ptr<IBlockNode> && thenBodyNode, unique_ptr<IBlockNode> && elseBodyNode)
 	: m_conditionNode(move(conditionNode))
 	, m_thenBodyNode(move(thenBodyNode))
 	, m_elseBodyNode(move(elseBodyNode))
@@ -20,7 +20,7 @@ void IfStmtNode::Accept(INodeVisitor & visitor, unsigned level)
 	visitor.Visit(*this, level);
 }
 
-ICalcNode & IfStmtNode::GetConditionNode()
+IExpressionNode & IfStmtNode::GetConditionNode()
 {
 	return *m_conditionNode;
 }

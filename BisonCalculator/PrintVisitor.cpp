@@ -11,7 +11,7 @@ PrintVisitor::PrintVisitor(std::ostream & out, CStringPool & stringPool)
 {
 }
 
-void PrintVisitor::Visit(BinaryCalcNode & node, unsigned level)
+void PrintVisitor::Visit(BinaryExprNode & node, unsigned level)
 {
 	cout << "(";
 	node.GetLeftNode().Accept(*this, level);
@@ -20,13 +20,13 @@ void PrintVisitor::Visit(BinaryCalcNode & node, unsigned level)
 	cout << ")";
 }
 
-void PrintVisitor::Visit(UnaryCalcNode & node, unsigned level)
+void PrintVisitor::Visit(UnaryExprNode & node, unsigned level)
 {	
 	PrintOperation(node.GetOperation());
 	node.GetNode().Accept(*this, level);
 }
 
-void PrintVisitor::Visit(TermCalcNode & node, unsigned level)
+void PrintVisitor::Visit(LiteralNode & node, unsigned level)
 {
 	m_out << node.GetValue();
 }

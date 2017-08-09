@@ -4,7 +4,7 @@
 using namespace calc;
 using namespace std;
 
-AssignNode::AssignNode(unsigned nameId, std::unique_ptr<ICalcNode> && node)
+AssignNode::AssignNode(unsigned nameId, std::unique_ptr<IExpressionNode> && node)
 	: m_nameId(nameId)
 	, m_node(move(node))
 {
@@ -25,7 +25,7 @@ unsigned AssignNode::GetNameId() const
 	return m_nameId;
 }
 
-ICalcNode & AssignNode::GetNode()
+IExpressionNode & AssignNode::GetNode()
 {
 	return *m_node;
 }

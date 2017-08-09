@@ -1,15 +1,15 @@
 #include "stdafx.h"
-#include "UnaryCalcNode.h"
+#include "UnaryExprNode.h"
 
 using namespace calc;
 
-UnaryCalcNode::UnaryCalcNode(std::unique_ptr<ICalcNode> && node, Operation operation)
+UnaryExprNode::UnaryExprNode(std::unique_ptr<IExpressionNode> && node, Operation operation)
 	: m_node(std::move(node))
 	, m_operation(operation)
 {
 }
 
-double UnaryCalcNode::Evaluate(CalcContext & context) const
+double UnaryExprNode::Evaluate(CalcContext & context) const
 {
 	double value = m_node->Evaluate(context);
 	switch (m_operation)
@@ -21,17 +21,17 @@ double UnaryCalcNode::Evaluate(CalcContext & context) const
 	}
 }
 
-void UnaryCalcNode::Accept(INodeVisitor & visitor, unsigned level)
+void UnaryExprNode::Accept(INodeVisitor & visitor, unsigned level)
 {
 	visitor.Visit(*this, level);
 }
 
-ICalcNode & UnaryCalcNode::GetNode()
+IExpressionNode & UnaryExprNode::GetNode()
 {
 	return *m_node;
 }
 
-Operation UnaryCalcNode::GetOperation() const
+Operation UnaryExprNode::GetOperation() const
 {
 	return m_operation;
 }

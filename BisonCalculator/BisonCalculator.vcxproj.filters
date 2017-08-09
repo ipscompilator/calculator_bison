@@ -48,15 +48,6 @@
     <ClCompile Include="BlockNode.cpp">
       <Filter>Source Files\AST\BlockNode</Filter>
     </ClCompile>
-    <ClCompile Include="BinaryCalcNode.cpp">
-      <Filter>Source Files\AST\CalcNode</Filter>
-    </ClCompile>
-    <ClCompile Include="TermCalcNode.cpp">
-      <Filter>Source Files\AST\CalcNode</Filter>
-    </ClCompile>
-    <ClCompile Include="UnaryCalcNode.cpp">
-      <Filter>Source Files\AST\CalcNode</Filter>
-    </ClCompile>
     <ClCompile Include="VariableRefNode.cpp">
       <Filter>Source Files\AST\CalcNode</Filter>
     </ClCompile>
@@ -96,17 +87,17 @@
     <ClCompile Include="IfStmtNode.cpp">
       <Filter>Source Files\AST\StatementNode</Filter>
     </ClCompile>
+    <ClCompile Include="BinaryExprNode.cpp">
+      <Filter>Source Files\AST\CalcNode</Filter>
+    </ClCompile>
+    <ClCompile Include="UnaryExprNode.cpp">
+      <Filter>Source Files\AST\CalcNode</Filter>
+    </ClCompile>
+    <ClCompile Include="LiteralNode.cpp">
+      <Filter>Source Files\AST\CalcNode</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BinaryCalcNode.h">
-      <Filter>Source Files\AST\CalcNode</Filter>
-    </ClInclude>
-    <ClInclude Include="TermCalcNode.h">
-      <Filter>Source Files\AST\CalcNode</Filter>
-    </ClInclude>
-    <ClInclude Include="UnaryCalcNode.h">
-      <Filter>Source Files\AST\CalcNode</Filter>
-    </ClInclude>
     <ClInclude Include="location.hh">
       <Filter>Source Files\Generated files</Filter>
     </ClInclude>
@@ -146,9 +137,6 @@
     <ClInclude Include="OutputContext.h">
       <Filter>Source Files\Context</Filter>
     </ClInclude>
-    <ClInclude Include="ICalcNode.h">
-      <Filter>Source Files\AST\CalcNode</Filter>
-    </ClInclude>
     <ClInclude Include="IStatementNode.h">
       <Filter>Source Files\AST\StatementNode</Filter>
     </ClInclude>
@@ -181,6 +169,18 @@
     </ClInclude>
     <ClInclude Include="IfStmtNode.h">
       <Filter>Source Files\AST\StatementNode</Filter>
+    </ClInclude>
+    <ClInclude Include="IExpressionNode.h">
+      <Filter>Source Files\AST\CalcNode</Filter>
+    </ClInclude>
+    <ClInclude Include="BinaryExprNode.h">
+      <Filter>Source Files\AST\CalcNode</Filter>
+    </ClInclude>
+    <ClInclude Include="UnaryExprNode.h">
+      <Filter>Source Files\AST\CalcNode</Filter>
+    </ClInclude>
+    <ClInclude Include="LiteralNode.h">
+      <Filter>Source Files\AST\CalcNode</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

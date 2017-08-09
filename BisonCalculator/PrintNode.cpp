@@ -4,7 +4,7 @@
 using namespace calc;
 using namespace std;
 
-PrintNode::PrintNode(std::unique_ptr<ICalcNode> && node)
+PrintNode::PrintNode(std::unique_ptr<IExpressionNode> && node)
 	: m_node(move(node))
 {
 }
@@ -19,7 +19,7 @@ void PrintNode::Accept(INodeVisitor & visitor, unsigned level)
 	visitor.Visit(*this, level);
 }
 
-ICalcNode & PrintNode::GetNode()
+IExpressionNode & PrintNode::GetNode()
 {
 	return *m_node;
 }

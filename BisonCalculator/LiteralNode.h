@@ -1,12 +1,12 @@
 #pragma once
-#include "ICalcNode.h"
+#include "IExpressionNode.h"
 
 namespace calc
 {
-	class TermCalcNode : public ICalcNode
+	class LiteralNode : public IExpressionNode
 	{
 	public:
-		TermCalcNode(double value);
+		LiteralNode(double value);
 		double Evaluate(CalcContext & context) const override;
 		void Accept(INodeVisitor & visitor, unsigned level) override;
 		double GetValue() const;

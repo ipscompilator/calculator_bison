@@ -28,7 +28,7 @@
 %}
 
 %union {
-	class ICalcNode * calcNode;
+	class IExpressionNode * expressionNode;
 	class IStatementNode * statementNode;
 	class IBlockNode * blockNode;
 	std::vector<std::unique_ptr<IStatementNode>> * statementNodeList;
@@ -48,7 +48,7 @@
 %token END	 0	"end of file"
 %token EOL	"end of line"
 
-%type<calcNode> expr mul_expr unary_expr symbol 
+%type<expressionNode> expr mul_expr unary_expr symbol 
 %type<statementNode> statement statement_line assign_stmt print_stmt for_stmt if_stmt
 %type<statementNodeList> statement_line_list
 %type<blockNode> block

@@ -1,20 +1,20 @@
 #pragma once
-#include "ICalcNode.h"
+#include "IExpressionNode.h"
 
 namespace calc
 {
-	class UnaryCalcNode : public ICalcNode
+	class UnaryExprNode : public IExpressionNode
 	{
 	public:
-		UnaryCalcNode(std::unique_ptr<ICalcNode> && node, Operation operation);
+		UnaryExprNode(std::unique_ptr<IExpressionNode> && node, Operation operation);
 		double Evaluate(CalcContext & context) const override;
 		void Accept(INodeVisitor & visitor, unsigned level) override;
 
-		ICalcNode & GetNode();
+		IExpressionNode & GetNode();
 		Operation GetOperation() const;
 
 	private:
-		std::unique_ptr<ICalcNode> m_node;
+		std::unique_ptr<IExpressionNode> m_node;
 		Operation m_operation;
 	};
 }
