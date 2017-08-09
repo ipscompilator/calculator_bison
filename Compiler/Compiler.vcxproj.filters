@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="AssignNode.cpp">
+      <Filter>Node\Statement</Filter>
+    </ClCompile>
+    <ClCompile Include="BinaryExprNode.cpp">
+      <Filter>Node\Expression</Filter>
+    </ClCompile>
+    <ClCompile Include="BlockNode.cpp">
+      <Filter>Node\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="IfStmtNode.cpp">
+      <Filter>Node\Statement</Filter>
+    </ClCompile>
+    <ClCompile Include="ForStmtNode.cpp">
+      <Filter>Node\Statement</Filter>
+    </ClCompile>
+    <ClCompile Include="LiteralNode.cpp">
+      <Filter>Node\Expression</Filter>
+    </ClCompile>
+    <ClCompile Include="UnaryExprNode.cpp">
+      <Filter>Node\Expression</Filter>
+    </ClCompile>
+    <ClCompile Include="VariableRefNode.cpp">
+      <Filter>Node\Expression</Filter>
+    </ClCompile>
+    <ClCompile Include="Scanner.cpp">
+      <Filter>Scanner</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Support files</Filter>
+    </ClCompile>
+    <ClCompile Include="Parser.cpp">
+      <Filter>Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="PrintNode.cpp">
+      <Filter>Node\Statement</Filter>
+    </ClCompile>
+    <ClCompile Include="PrintVisitor.cpp">
+      <Filter>Visitors</Filter>
+    </ClCompile>
+    <ClCompile Include="Driver.cpp">
+      <Filter>Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="OutputContext.cpp">
+      <Filter>Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="StringPool.cpp">
+      <Filter>Driver</Filter>
+    </ClCompile>
+    <ClCompile Include="DriverContext.cpp">
+      <Filter>Driver</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="INode.h">
+      <Filter>Node</Filter>
+    </ClInclude>
+    <ClInclude Include="AssignNode.h">
+      <Filter>Node\Statement</Filter>
+    </ClInclude>
+    <ClInclude Include="BinaryExprNode.h">
+      <Filter>Node\Expression</Filter>
+    </ClInclude>
+    <ClInclude Include="BlockNode.h">
+      <Filter>Node\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="IBlockNode.h">
+      <Filter>Node\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="LiteralNode.h">
+      <Filter>Node\Expression</Filter>
+    </ClInclude>
+    <ClInclude Include="IfStmtNode.h">
+      <Filter>Node\Statement</Filter>
+    </ClInclude>
+    <ClInclude Include="IExpressionNode.h">
+      <Filter>Node\Expression</Filter>
+    </ClInclude>
+    <ClInclude Include="ForStmtNode.h">
+      <Filter>Node\Statement</Filter>
+    </ClInclude>
+    <ClInclude Include="location.hh">
+      <Filter>Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="IStatementNode.h">
+      <Filter>Node\Statement</Filter>
+    </ClInclude>
+    <ClInclude Include="UnaryExprNode.h">
+      <Filter>Node\Expression</Filter>
+    </ClInclude>
+    <ClInclude Include="VariableRefNode.h">
+      <Filter>Node\Expression</Filter>
+    </ClInclude>
+    <ClInclude Include="Scanner.h">
+      <Filter>Scanner</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Support files</Filter>
+    </ClInclude>
+    <ClInclude Include="position.hh">
+      <Filter>Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="Parser.hpp">
+      <Filter>Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="ParserHeaders.h">
+      <Filter>Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="PointerHelpers.h">
+      <Filter>Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="stack.hh">
+      <Filter>Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="PrintNode.h">
+      <Filter>Node\Statement</Filter>
+    </ClInclude>
+    <ClInclude Include="INodeVisitor.h">
+      <Filter>Visitors</Filter>
+    </ClInclude>
+    <ClInclude Include="PrintVisitor.h">
+      <Filter>Visitors</Filter>
+    </ClInclude>
+    <ClInclude Include="IOutputContext.h">
+      <Filter>Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="Driver.h">
+      <Filter>Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="OutputContext.h">
+      <Filter>Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="StringPool.h">
+      <Filter>Driver</Filter>
+    </ClInclude>
+    <ClInclude Include="DriverContext.h">
+      <Filter>Driver</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Node">
+      <UniqueIdentifier>{499fadf5-26f1-428a-a252-c9f24c874561}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Node\Expression">
+      <UniqueIdentifier>{642a725b-30d1-476a-a3b2-3bc594e04c56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Node\Statement">
+      <UniqueIdentifier>{ee18d506-40e8-4dfc-80b5-71da8f80d9df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Node\Block">
+      <UniqueIdentifier>{1d1dcc16-b28d-4e2c-9e17-13380de96c91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scanner">
+      <UniqueIdentifier>{8a99d7ab-ca95-4140-871f-dca7a606ba3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Parser">
+      <UniqueIdentifier>{1d209678-5772-4be6-bd8e-bd2eda97d2e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Support files">
+      <UniqueIdentifier>{296a1b93-1da5-4cce-8eb5-ed6bc3cfde66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Visitors">
+      <UniqueIdentifier>{82dfdff8-828f-4999-baf4-4e8f08ba7f35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Driver">
+      <UniqueIdentifier>{917e019e-0c0a-4720-86a1-0b2f950e7532}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="Parser.y">
+      <Filter>Parser</Filter>
+    </CustomBuild>
+  </ItemGroup>
+</Project>
